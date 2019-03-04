@@ -45,10 +45,14 @@
           let input = document.createElement('input');
           let inputButton = document.createElement('input');
           let amount = document.createTextNode(' kg   ');
+
           input.setAttribute('type', 'text');
           input.setAttribute('name', 'amount');
+
           inputButton.setAttribute('type', 'submit');
           inputButton.setAttribute('value', 'siirrä ostoskoriin');
+          inputButton.setAttribute('style', 'float: right;')
+
           choose.appendChild(input);
           choose.appendChild(amount);
           choose.appendChild(inputButton);
