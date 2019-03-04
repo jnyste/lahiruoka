@@ -3,6 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  state = {};
+
+  componentDidMount() {
+      setInterval(this.hello, 250);
+  }
+
+  hello = () => {
+      fetch('/api/hello')
+          .then(response => response.text())
+          .then(message => {
+              this.setState({msg: message});
+              console.log(this.state.msg);
+          });
+  };
   render() {
     return (
       <div className="App">
@@ -11,14 +26,7 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <h3>{this.state.msg}</h3>
         </header>
       </div>
     );
