@@ -3,6 +3,7 @@
   <head>
       <meta charset="UTF-8">
       <title>Lähiruoka</title>
+      <link rel="stylesheet" type="text/css" href="css/index2css.css" />
       <style media="screen">
         div{
           overflow: auto;
@@ -36,7 +37,6 @@
           float: right;
         }
 
-
       </style>
       <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
       <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
@@ -44,6 +44,14 @@
   </head>
   <body>
       <h1>Lähiruokaprojekti</h1>
+
+      <nav>
+          <a href="#">SIVUN LOGO</a>
+          <a href="#">Hae tästä</a>
+          <a href="#">Hei, Käyttäjä!</a>
+          <a href="#">Kirjaudu ulos</a>
+      </nav>
+
       <div id="root">
           <p class="date">04.03.2019</p>
         <h1>Porkkana</h1>
@@ -56,6 +64,8 @@
           <button id="buttonBuy" class="buttonBuy">Osta</button>
         </p>
 
+        <p id="chooseAmount"></p>
+
       </div>
       <button id="butt">Next</button>
       <script>
@@ -63,8 +73,24 @@
           window.location.href = 'index2.html';
         }
 
+        function chooseAmount() {
+          document.querySelector('#buttonBuy').remove();
+          let choose = document.querySelector('#chooseAmount');
+          let input = document.createElement('input');
+          let inputButton = document.createElement('input');
+          let amount = document.createTextNode(' kg   ');
+          input.setAttribute('type', 'text');
+          input.setAttribute('name', 'amount');
+          inputButton.setAttribute('type', 'submit');
+          inputButton.setAttribute('value', 'siirrä ostoskoriin');
+          choose.appendChild(input);
+          choose.appendChild(amount);
+          choose.appendChild(inputButton);
+        }
+
         function ready() {
           document.querySelector('#butt').addEventListener('click', changePage);
+          document.querySelector('#buttonBuy').addEventListener('click', chooseAmount);
         }
 
         ready();
