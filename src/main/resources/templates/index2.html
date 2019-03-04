@@ -3,13 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Lähiruoka</title>
+    <link rel="stylesheet" type="text/css" href="css/index2css.css" />
     <style media="screen"></style>
     <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
     <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
+
     <h1>Lähiruokaprojekti</h1>
+
+    <nav>
+        <a href="#">SIVUN LOGO</a>
+        <a href="#">Hae tästä</a>
+        <a href="#">Hei, Käyttäjä!</a>
+        <a href="#">Kirjaudu ulos</a>
+    </nav>
+
+
+    <div class="profile_container">
+        <div class="producer info">
+            <div class="content">
+                <img class="profile_pic" src="./css/pictures/farmer.jpg" alt="Farmer profile pic">
+                <h3>Lähiruokatuottajan nimi</h3>
+                <p>Käyttäjän osoite</p>
+                <p>Käyttäjän numero</p>
+                <p><a class="cta" href="">Muokkaa tietoja</a></p>
+            </div>
+        </div>
+        <div class="producer products">
+            <div class="content">
+                <img class="calendar_pic" src="./css/pictures/kalenteri.jpg" alt="Calendar pic">
+                <h3>Tuotteet</h3>
+                <p>Peruna 500kg</p>
+                <p>Porkkana 150kg</p>
+                <p><a class="cta" href="">Lisää tuote</a></p>
+            </div>
+        </div>
+        <div class="clear-fix"></div>
+    </div>
+
     <div id="root"></div>
     <button id="butt">Back</button>
     <script>
