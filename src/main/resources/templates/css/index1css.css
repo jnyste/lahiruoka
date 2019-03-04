@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+div{
+    overflow: auto;
+    margin: 5px;
+    padding: 5px;
+    border-style: solid;
+    border-width: 2px;
+    width: 90%;
+  }
+
+  .productTitle{
+    line-height: 10px;
+  }
+
+  .date{
+    font-size: 14px;
+    float: right;
+    line-height: 0px;
+  }
+
+  .productInfo, .productPrice, .productAmount, .productPackage{
+    line-height: 5px;
+  }
+
+  .productInfo, .productPackage, .productTags{
+    color: gray;
+  }
+
+  .buttonBuy{
+    position: relative;
+    float: right;
+  }
