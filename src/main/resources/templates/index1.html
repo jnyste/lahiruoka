@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lähiruoka</title>
+    <style media="screen"></style>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <h1>Lähiruokaprojekti</h1>
+    <div id="root"></div>
+    <button id="butt">Next</button>
+    <script>
+      function changePage() {
+        window.location.href = 'index2.html';
+      }
+
+      function ready() {
+        document.querySelector('#butt').addEventListener('click', changePage);
+      }
+
+      ready();
+    </script>
+</body>
+</html>
