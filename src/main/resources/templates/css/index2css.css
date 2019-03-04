@@ -58,6 +58,13 @@ img.calendar_pic {
 	margin-left: 100px;
 }
 
+.producer_products p {
+}
+
+.producer_products img {
+	width: 18px;
+}
+
 .topnav {
   overflow: hidden;
   background-color: #e9e9e9;
