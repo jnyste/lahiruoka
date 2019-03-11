@@ -88,4 +88,17 @@ public class Product {
     public void setAvailableTo(LocalDate availableTo) {
         this.availableTo = availableTo;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "product_id=" + product_id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", units=" + units +
+                ", unitSize=" + unitSize +
+                ", availableFrom=" + availableFrom +
+                ", availableTo=" + availableTo +
+                '}';
+    }
 }
