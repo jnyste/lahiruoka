@@ -34,6 +34,19 @@ public class Product {
         this.availableTo = availableTo;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "product_id=" + product_id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", units=" + units +
+                ", unitSize=" + unitSize +
+                ", availableFrom=" + availableFrom +
+                ", availableTo=" + availableTo +
+                '}';
+    }
+
     public int getProduct_id() {
         return product_id;
     }
@@ -90,16 +103,4 @@ public class Product {
         this.availableTo = availableTo;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "product_id=" + product_id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", units=" + units +
-                ", unitSize=" + unitSize +
-                ", availableFrom=" + availableFrom +
-                ", availableTo=" + availableTo +
-                '}';
-    }
 }

@@ -2,6 +2,7 @@ package fi.tuni.lahiruoka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
@@ -29,8 +30,8 @@ public class HelloController {
         userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
     }
 
-    @GetMapping("/api/hello")
+    @RequestMapping ("/api/hello")
     public String hello() {
-        return "User repo on " + userRepository.findAll() + "\n" + ", product repo on " + productRepository.findAll() + "\n";
+        return "User repo on " + userRepository.findAll() + "\n\n, product repo on " + productRepository.findAll() + "\n";
     }
 }
