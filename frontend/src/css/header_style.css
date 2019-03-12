@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+body {
+	font-family: Arial;
+}
+
+nav {
+	width: 100%;
+	display: block;
+	position: relative;
+	background-color: #ACFA58;
+	top: 0px;
+	height: 50px;
+	padding-left: 20px;
+}
+
+nav a {
+	margin: 20px 20px 20px 0px;
+	color: #9A2EFE;
+	text-transform: uppercase;
+	text-decoration: none;
+	display: inline-block;
+	font-weight: bold;
+	font-size: .9em;
+}
+
+img.profile_pic { 
+	width: 300px;
+	display: block;
+}
+
+img.calendar_pic {
+	width: 400px;
+	display:block;
+}
+
+a.right_float {
+    float: right;
+}
+
+.profile_container {
+	margin-left: 50px;
+}
+
+.profile_container p {
+	margin-left: 20px;
+}
+
+.producer_pics {
+	float: right;
+}
+
+.producer_pics img {
+	padding: 5px 10px 0px 10px;
+}
+
+.producer_pics p {
+	margin-left: 30px;
+}
+
+.profilepic_container {
+	margin-left: 100px;
+}
+
+.producer_products p {
+}
+
+.producer_products img {
+	width: 18px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+}
