@@ -5,6 +5,11 @@ img {
     margin: 0% 10% 0% 10%;
 }
 
+.carousel-caption {
+    color: #ffffff;
+    text-shadow: 0 0 3px #000000;
+}
+
 h2 {
     text-align: center;
 }
