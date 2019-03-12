@@ -25,8 +25,8 @@ public class HelloController {
         productRepository.save(new Product("Porkkana", 2.3, 10, 1.0, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6)));
         productRepository.save(new Product("Peruna", 1.3, 15, 2.0, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24)));
         //String username, String password, LocalDate lastLogin, String address, String phone, boolean active
-        userRepository.save(new User("henkilo", "salasana", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true));
-        userRepository.save(new User("ukkeli", "salasana", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
+        userRepository.save(new User(UserType.FARM, "henkilo", "salasana", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true));
+        userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
     }
 
     @GetMapping("/api/hello")
