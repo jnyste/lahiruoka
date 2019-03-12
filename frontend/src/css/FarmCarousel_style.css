@@ -1,0 +1,14 @@
+img {
+    width: 100%;
+}
+.carousel.slide {
+    margin: 0% 10% 0% 10%;
+}
+
+h2 {
+    text-align: center;
+}
+
+.item {
+    height: 500px;
+}
