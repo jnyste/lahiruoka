@@ -19,7 +19,7 @@ class FarmCarousel extends Component {
 
                     <div className="carousel-inner">
                         <div className="item active">
-                            <img src="https://static-sls.smf.aws.sanomacloud.net/etlehti.fi/s3fs-public/styles/large_main_image/public/main_media/istock-492528035.jpg" alt="Los Angeles" />
+                            <img src="https://static-sls.smf.aws.sanomacloud.net/etlehti.fi/s3fs-public/styles/large_main_image/public/main_media/istock-492528035.jpg" alt="Porkkana" />
                             <div className="carousel-caption">
                                 <h3>Esimerkki tila</h3>
                                 <p>Täällä on tuotteita, esim.</p>
@@ -27,7 +27,7 @@ class FarmCarousel extends Component {
                         </div>
 
                         <div className="item">
-                            <img src="https://im.mtv.fi/image/6543764/landscape16_9/1024/576/524dd1d3d4112469b607331c06a01027/ih/porkkana.jpg" alt="Chicago"/>
+                            <img src="https://im.mtv.fi/image/6543764/landscape16_9/1024/576/524dd1d3d4112469b607331c06a01027/ih/porkkana.jpg" alt="Punajuuri"/>
                             <div className="carousel-caption">
                                 <h3>Mummolan tila</h3>
                                 <p>Täällä on tuotteita, esim.</p>
@@ -35,7 +35,7 @@ class FarmCarousel extends Component {
                         </div>
 
                         <div className="item">
-                            <img src="http://www.satokausikalenteri.fi/files/viikon-kasvikset/peruna2.jpg" alt="New york"/>
+                            <img src="http://www.satokausikalenteri.fi/files/viikon-kasvikset/peruna2.jpg" alt="Peruna"/>
                             <div className="carousel-caption">
                                 <h3>Mielen tila</h3>
                                 <p>Täällä on tuotteita, esim.</p>
