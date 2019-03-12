@@ -7,7 +7,8 @@ import java.time.LocalDate;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(generator="product_seq")
+    @SequenceGenerator(name="product_seq",sequenceName="PRODUCT_SEQ", allocationSize=1)
     int product_id;
     @Column(nullable = false)
     String name;
