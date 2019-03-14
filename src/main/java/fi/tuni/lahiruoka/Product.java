@@ -2,6 +2,9 @@ package fi.tuni.lahiruoka;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -22,6 +25,9 @@ public class Product {
     LocalDate availableFrom;
     @Column(nullable = false)
     LocalDate availableTo;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "product_tags", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
+    Set<Tag> tags = new HashSet<>();
 
     public Product() {}
 
@@ -90,10 +96,19 @@ public class Product {
         this.availableTo = availableTo;
     }
 
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "product_id=" + product_id +
+                ", tags='" + tags.toString() + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", units=" + units +
