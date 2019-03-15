@@ -122,11 +122,17 @@ a.right_float {
 
 .footer {
   height: 50px;
+  line-height: 50px;
   width: 100%;
   padding-left: 20px;
-  padding-top: 15px;
   display: block;
   position: fixed;
   bottom: 0;
   background-color: #ACFA58;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }

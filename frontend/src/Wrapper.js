@@ -31,7 +31,7 @@ function Wrapper() {
         <Route path="/user/" component={User} />
         <Route path="/logout/" component={LogOut} />
 
-        <div className="footer">This is a footer</div>
+        <div className="footer"><span>This footer can now hold several (or at least two) lines of text.</span></div>
       </div>
     </Router>
   );
