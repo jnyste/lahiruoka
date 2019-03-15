@@ -29,7 +29,8 @@ function Wrapper() {
           <input type="text" placeholder="Hae tuotetta tai tuottajaa.." name="search" />
           <button type="submit">Hae</button>
           <Link to="/tuotteet">Tuotteet</Link>
-          <Link to="/ostoskori/" className="right_float">Ostoskori (0)</Link>
+          <Link to="/ostoskori/" className="right_float">Ostoskori (0) <span
+              className="glyphicon glyphicon-shopping-cart shoppingcart"></span></Link>
           <Link to="/profiili/" className="right_float">Oma tili</Link>
         </nav>
 
