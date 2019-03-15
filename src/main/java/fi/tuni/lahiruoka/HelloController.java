@@ -39,4 +39,9 @@ public class HelloController {
     public Iterable<User> hello() {
         return userRepository.findAll();
     }
+
+    @GetMapping("/products")
+    public Iterable<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }

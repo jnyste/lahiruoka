@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tags")
@@ -26,6 +27,7 @@ public class Tag {
                     CascadeType.MERGE
             },
             mappedBy = "tags")
+    @JsonIgnore
     private Set<Product> products = new HashSet<>();
 
     public Tag() {
