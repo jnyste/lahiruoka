@@ -28,8 +28,8 @@ function Wrapper() {
           <input type="text" placeholder="Hae tuotetta tai tuottajaa.." name="search" />
           <button type="submit">Hae</button>
           <Link to="/products">Tuotteet</Link>
-          <Link to="/logout/" className="right_float">Kirjaudu ulos</Link>
-          <Link to="/user/" className="right_float">Hei, Käyttäjä!</Link>
+          <Link to="/logout/" className="right_float">Ostoskori (0)</Link>
+          <Link to="/user/" className="right_float">Oma tili</Link>
         </nav>
 
         <Route path="/" exact component={Index} />
