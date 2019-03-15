@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import './css/header_style.css';
+import './css/frontpage_style.css';
 import FarmCarousel from './FarmCarousel';
 
 function Index() {
