@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './css/frontpage_style.css';
 import FarmCarousel from './FarmCarousel';
+import ProductPage from './ProductPage';
 
 function Index() {
   return <FarmCarousel />;
@@ -12,7 +13,7 @@ function Profile() {
 }
 
 function Products() {
-  return <h2>Kaikki tuotteet</h2>;
+  return <ProductPage/>;
 }
 
 function ShoppingCart() {
@@ -33,7 +34,7 @@ function Wrapper() {
         </nav>
 
         <Route path="/" exact component={Index} />
-        <Route path="/tuotteet/" component={Products} />
+        <Route path="/tuotteet/" component={ProductPage} />
         <Route path="/ostoskori/" component={ShoppingCart} />
         <Route path="/profiili/" component={Profile} />
 
