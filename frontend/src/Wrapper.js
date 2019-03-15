@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import './css/header_style.css'
+import './css/header_style.css';
+import FarmCarousel from './FarmCarousel';
 
 function Index() {
-  return <h2>Home</h2>;
+  return <FarmCarousel />;
 }
 
 function User() {
@@ -29,6 +30,8 @@ function Wrapper() {
         <Route path="/" exact component={Index} />
         <Route path="/user/" component={User} />
         <Route path="/logout/" component={LogOut} />
+
+        <div className="footer">This is a footer</div>
       </div>
     </Router>
   );
