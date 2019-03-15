@@ -10,11 +10,8 @@ class FarmCarousel extends Component {
         fetch('/api/hello')
             .then(response => response.json())
             .then(user => {
-                console.log(user);
                 let farmOne = user[0];
-                console.log(farmOne);
                 let farmUsername = farmOne.companyName;
-                console.log(farmUsername);
                 this.setState({farmOne: farmUsername});
             });
     }
