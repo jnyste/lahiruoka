@@ -4,7 +4,7 @@ body {
 	font-family: Arial;
 }
 
-nav {
+nav.header {
 	width: 100%;
 	display: block;
 	position: relative;
@@ -14,7 +14,7 @@ nav {
 	padding-left: 20px;
 }
 
-nav a {
+nav.header a {
 	margin: 20px 20px 20px 0px;
 	color: #9A2EFE;
 	text-transform: uppercase;
