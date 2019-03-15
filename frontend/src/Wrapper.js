@@ -7,16 +7,16 @@ function Index() {
   return <FarmCarousel />;
 }
 
-function User() {
-  return <h2>User</h2>;
+function Profile() {
+  return <h2>Oma tili</h2>;
 }
 
 function Products() {
-  return <h2>All products</h2>;
+  return <h2>Kaikki tuotteet</h2>;
 }
 
-function LogOut() {
-  return <h2>Log out</h2>;
+function ShoppingCart() {
+  return <h2>Ostoskori</h2>;
 }
 
 function Wrapper() {
@@ -27,17 +27,17 @@ function Wrapper() {
           <Link to="/">Sivun logo</Link>
           <input type="text" placeholder="Hae tuotetta tai tuottajaa.." name="search" />
           <button type="submit">Hae</button>
-          <Link to="/products">Tuotteet</Link>
-          <Link to="/logout/" className="right_float">Ostoskori (0)</Link>
-          <Link to="/user/" className="right_float">Oma tili</Link>
+          <Link to="/tuotteet">Tuotteet</Link>
+          <Link to="/ostoskori/" className="right_float">Ostoskori (0)</Link>
+          <Link to="/profiili/" className="right_float">Oma tili</Link>
         </nav>
 
         <Route path="/" exact component={Index} />
-        <Route path="/user/" component={User} />
-        <Route path="/products/" component={Products} />
-        <Route path="/logout/" component={LogOut} />
+        <Route path="/tuotteet/" component={Products} />
+        <Route path="/ostoskori/" component={ShoppingCart} />
+        <Route path="/profiili/" component={Profile} />
 
-        <div className="footer"><span>This footer can now hold several (or at least two) lines of text.</span></div>
+        <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
     </Router>
   );
