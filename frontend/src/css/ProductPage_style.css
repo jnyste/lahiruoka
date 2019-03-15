@@ -9,6 +9,11 @@
 
 .productbox {
     margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10px;
+    border: 5px solid green;
+    overflow: hidden;
+    padding: 0px 5px 0px 5px;
 }
 
 .floatTis {
@@ -17,22 +22,31 @@
     height: 50px;
 }
 
-select {
-    height: 26px;
-}
-
 input {
     height: 26px;
 }
 
-.kplBox {
+.kgBox {
     width: 50px;
 }
 
-.kplText {
+.kgText {
     padding-top: 3px;
 }
 
 .total {
+    font-size: 11px;
+}
+
+.price {
+    float: right;
+}
+
+.productExtraInfo {
+    margin-right: 200px;
     font-size: 12px;
+}
+
+.cart {
+    float: right;
 }
