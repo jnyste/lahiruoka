@@ -28,16 +28,15 @@ public class HelloController {
         p.getTags().add(new Tag("porkkana"));
         p.getTags().add(new Tag("vihannes"));
 
-        //String name, double price, int units, double unitSize, LocalDate availableFrom, LocalDate availableTo
         productRepository.save(p);
         productRepository.save(new Product("Peruna", 1.3, 15, 2.0, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24)));
-        //String username, String password, LocalDate lastLogin, String address, String phone, boolean active
-        userRepository.save(new User(UserType.FARM, "henkilo", "salasana", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true));
-        userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
+
+        userRepository.save(new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true));
+        userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
     }
 
-    @RequestMapping ("/api/hello")
-    public String hello() {
-        return "User repo on " + userRepository.findAll() + "\n\n, product repo on " + productRepository.findAll() + "\n";
+    @GetMapping("/api/hello")
+    public Iterable<User> hello() {
+        return userRepository.findAll();
     }
 }

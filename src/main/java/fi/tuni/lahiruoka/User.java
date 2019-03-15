@@ -23,16 +23,19 @@ public class User {
     boolean active;
     @Column(nullable = false)
     UserType userType;
+    @Column(nullable = false)
+    String companyName;
 
     /**
      * Default constructor.
      */
     public User(){}
 
-    public User(UserType userType, String username, String password, LocalDate lastLogin, String address, String phone, boolean active) {
+    public User(UserType userType, String username, String password, String companyName,  LocalDate lastLogin, String address, String phone, boolean active) {
         this.userType = userType;
         this.username = username;
         this.password = password;
+        this.companyName = companyName;
         this.lastLogin = lastLogin;
         this.address = address;
         this.phone = phone;
@@ -43,6 +46,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", company name=" + companyName +
                 ", user type=" + userType +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
@@ -55,6 +59,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public UserType getUserType() {

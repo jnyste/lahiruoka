@@ -4,7 +4,7 @@ body {
 	font-family: Arial;
 }
 
-nav {
+nav.header {
 	width: 100%;
 	display: block;
 	position: relative;
@@ -14,7 +14,7 @@ nav {
 	padding-left: 20px;
 }
 
-nav a {
+nav.header a {
 	margin: 20px 20px 20px 0px;
 	color: #9A2EFE;
 	text-transform: uppercase;
@@ -118,4 +118,21 @@ a.right_float {
 
 .topnav .search-container button:hover {
   background: #ccc;
+}
+
+.footer {
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  padding-left: 20px;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  background-color: #ACFA58;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import Header from './Header';
+import Wrapper from './Wrapper';
 
 class App extends Component {
 
-  state = {};
-
   render() {
     return (
-        <Header />
+        <Wrapper />
     );
   }
 }

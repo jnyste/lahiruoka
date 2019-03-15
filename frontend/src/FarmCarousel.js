@@ -6,6 +6,19 @@ class FarmCarousel extends Component {
 
     state = {};
 
+    componentDidMount() {
+        fetch('/api/hello')
+            .then(response => response.json())
+            .then(user => {
+                console.log(user);
+                let farmOne = user[0];
+                console.log(farmOne);
+                let farmUsername = farmOne.companyName;
+                console.log(farmUsername);
+                this.setState({farmOne: farmUsername});
+            });
+    }
+
     render() {
         return (
             <div className="container">
@@ -23,7 +36,7 @@ class FarmCarousel extends Component {
                                 <img src="https://static-sls.smf.aws.sanomacloud.net/etlehti.fi/s3fs-public/styles/large_main_image/public/main_media/istock-492528035.jpg" alt="Porkkana" />
                             </a>
                             <div className="carousel-caption">
-                                <h3>Esimerkki tila</h3>
+                                <h3>{this.state.farmOne}</h3>
                                 <p>Täällä on tuotteita, esim.</p>
                             </div>
                         </div>
