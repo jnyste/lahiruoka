@@ -2,12 +2,14 @@ package fi.tuni.lahiruoka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 // Example class.
 @RestController
@@ -43,5 +45,10 @@ public class HelloController {
     @GetMapping("/products")
     public Iterable<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @GetMapping("/products/{productId}")
+    public Optional<Product> getProductById(@PathVariable int productId) {
+        return productRepository.findById(productId);
     }
 }
