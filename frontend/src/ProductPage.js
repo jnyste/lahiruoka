@@ -31,14 +31,11 @@ class ProductPage extends Component {
                     <div className="floatTis kgText">
                         <p>Kg</p>
                     </div>
-                    <div className="floatTis">
-                        <input type="date" name="deliverydate" id="deliverypicker"/>
-                    </div>
-                    <div className="floatTis total">
-                        <p>Tilattu yht. 0kg<br/>Hinta: 0€</p>
-                    </div>
                     <div className= "floatTis cart">
                         <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
+                    </div>
+                    <div className="floatTis total">
+                        <p>Veroton hinta: 1€<br/>Verollinen hinta: 100000€</p>
                     </div>
                 </div>
             </div>

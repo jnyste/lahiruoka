@@ -28,6 +28,7 @@ input {
 
 .kgBox {
     width: 50px;
+    margin-left: 20px;
 }
 
 .kgText {
@@ -36,6 +37,7 @@ input {
 
 .total {
     font-size: 11px;
+    float: right;
 }
 
 .price {
