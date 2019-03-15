@@ -96,6 +96,8 @@ public class Product {
         this.availableTo = availableTo;
     }
 
+<<<<<<< HEAD
+=======
     public Set<Tag> getTags() {
         return tags;
     }
@@ -117,4 +119,5 @@ public class Product {
                 ", availableTo=" + availableTo +
                 '}';
     }
+>>>>>>> dev
 }
