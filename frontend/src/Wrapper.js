@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './css/frontpage_style.css';
 import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
+import UserProfile from './UserProfile';
 
 function Index() {
   return <FarmCarousel />;
 }
 
 function Profile() {
-  return <h2>Oma tili</h2>;
+  return <UserProfile/>;
 }
 
 function Products() {
