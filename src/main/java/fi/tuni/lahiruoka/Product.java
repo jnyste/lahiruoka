@@ -23,18 +23,21 @@ public class Product {
     LocalDate availableFrom;
     @Column(nullable = false)
     LocalDate availableTo;
+    @Column(nullable = false)
+    String info;
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "product_tags", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     Set<Tag> tags = new HashSet<>();
 
     public Product() {}
 
-    public Product(String name, double price, double amount, LocalDate availableFrom, LocalDate availableTo) {
+    public Product(String name, double price, double amount, LocalDate availableFrom, LocalDate availableTo, String info) {
         this.name = name;
         this.price = price;
         this.amount = amount;
         this.availableFrom = availableFrom;
         this.availableTo = availableTo;
+        this.info = info;
     }
 
     public int getProduct_id() {
@@ -83,6 +86,14 @@ public class Product {
 
     public void setAvailableTo(LocalDate availableTo) {
         this.availableTo = availableTo;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Set<Tag> getTags() {
