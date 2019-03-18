@@ -2,14 +2,12 @@ package fi.tuni.lahiruoka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.Optional;
 
 // Example class.
 @RestController
@@ -25,13 +23,13 @@ public class HelloController {
     @PostConstruct
     public void init() {
 
-        Product p = new Product("Porkkana", 2.3, 10, 1.0, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6));
+        Product p = new Product("Porkkana", 2.3, 100, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
 
         p.getTags().add(new Tag("porkkana"));
         p.getTags().add(new Tag("vihannes"));
 
         productRepository.save(p);
-        productRepository.save(new Product("Peruna", 1.3, 15, 2.0, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24)));
+        productRepository.save(new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24), "herkkuperunaa"));
 
         userRepository.save(new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true));
         userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
@@ -42,13 +40,8 @@ public class HelloController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/products")
-    public Iterable<Product> getAllProducts() {
+    @GetMapping("/api/products")
+    public Iterable<Product> products() {
         return productRepository.findAll();
-    }
-
-    @GetMapping("/products/{productId}")
-    public Optional<Product> getProductById(@PathVariable int productId) {
-        return productRepository.findById(productId);
     }
 }

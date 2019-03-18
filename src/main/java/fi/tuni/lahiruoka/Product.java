@@ -18,26 +18,26 @@ public class Product {
     @Column(nullable = false)
     double price;
     @Column(nullable = false)
-    int units;
-    @Column(nullable = false)
-    double unitSize;
+    double amount;
     @Column(nullable = false)
     LocalDate availableFrom;
     @Column(nullable = false)
     LocalDate availableTo;
+    @Column(nullable = false)
+    String info;
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "product_tags", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     Set<Tag> tags = new HashSet<>();
 
     public Product() {}
 
-    public Product(String name, double price, int units, double unitSize, LocalDate availableFrom, LocalDate availableTo) {
+    public Product(String name, double price, double amount, LocalDate availableFrom, LocalDate availableTo, String info) {
         this.name = name;
         this.price = price;
-        this.units = units;
-        this.unitSize = unitSize;
+        this.amount = amount;
         this.availableFrom = availableFrom;
         this.availableTo = availableTo;
+        this.info = info;
     }
 
     public int getProduct_id() {
@@ -64,20 +64,12 @@ public class Product {
         this.price = price;
     }
 
-    public int getUnits() {
-        return units;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setUnits(int units) {
-        this.units = units;
-    }
-
-    public double getUnitSize() {
-        return unitSize;
-    }
-
-    public void setUnitSize(double unitSize) {
-        this.unitSize = unitSize;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public LocalDate getAvailableFrom() {
@@ -96,6 +88,14 @@ public class Product {
         this.availableTo = availableTo;
     }
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public Set<Tag> getTags() {
         return tags;
     }
@@ -111,8 +111,7 @@ public class Product {
                 ", tags='" + tags.toString() + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", units=" + units +
-                ", unitSize=" + unitSize +
+                ", amount=" + amount +
                 ", availableFrom=" + availableFrom +
                 ", availableTo=" + availableTo +
                 '}';
