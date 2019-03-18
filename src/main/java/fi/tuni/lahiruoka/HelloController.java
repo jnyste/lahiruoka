@@ -2,12 +2,14 @@ package fi.tuni.lahiruoka;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 // Example class.
 @RestController
@@ -24,12 +26,14 @@ public class HelloController {
     public void init() {
 
         Product p = new Product("Porkkana", 2.3, 100, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
+        Product k = new Product("Kaali", 2.3, 10, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
 
         p.getTags().add(new Tag("porkkana"));
         p.getTags().add(new Tag("vihannes"));
 
         User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true);
-        userHenkilo.addProducts(p);
+        userHenkilo.addProducts(p, k);
+
 
         userRepository.save(userHenkilo);
         userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
@@ -46,5 +50,17 @@ public class HelloController {
     @GetMapping("/api/products")
     public Iterable<Product> products() {
         return productRepository.findAll();
+    }
+
+    @GetMapping("/api/products/{farmerid}")
+    public Iterable<Product> productsByFarmer(@PathVariable int farmerid) {
+        Optional<User> u = userRepository.findById(farmerid);
+        User findThis;
+        if(u.isPresent()) {
+            findThis = u.get();
+        } else {
+            findThis = null;
+        }
+        return productRepository.findByFarm(findThis);
     }
 }
