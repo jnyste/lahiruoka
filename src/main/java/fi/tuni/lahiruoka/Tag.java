@@ -29,7 +29,6 @@ public class Tag {
                     CascadeType.MERGE
             },
             mappedBy = "tags")
-    @JsonIgnore
     private Set<Product> products = new HashSet<>();
 
     public Tag() {
