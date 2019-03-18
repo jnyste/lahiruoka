@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './css/FarmCarousel_style.css';
+import './css/UserProfile_style.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class UserProfile extends Component {
