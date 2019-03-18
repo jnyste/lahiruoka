@@ -18,9 +18,7 @@ public class Product {
     @Column(nullable = false)
     double price;
     @Column(nullable = false)
-    int units;
-    @Column(nullable = false)
-    double unitSize;
+    double amount;
     @Column(nullable = false)
     LocalDate availableFrom;
     @Column(nullable = false)
@@ -31,11 +29,10 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, double price, int units, double unitSize, LocalDate availableFrom, LocalDate availableTo) {
+    public Product(String name, double price, double amount, LocalDate availableFrom, LocalDate availableTo) {
         this.name = name;
         this.price = price;
-        this.units = units;
-        this.unitSize = unitSize;
+        this.amount = amount;
         this.availableFrom = availableFrom;
         this.availableTo = availableTo;
     }
@@ -64,20 +61,12 @@ public class Product {
         this.price = price;
     }
 
-    public int getUnits() {
-        return units;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setUnits(int units) {
-        this.units = units;
-    }
-
-    public double getUnitSize() {
-        return unitSize;
-    }
-
-    public void setUnitSize(double unitSize) {
-        this.unitSize = unitSize;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public LocalDate getAvailableFrom() {
@@ -111,8 +100,7 @@ public class Product {
                 ", tags='" + tags.toString() + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", units=" + units +
-                ", unitSize=" + unitSize +
+                ", amount=" + amount +
                 ", availableFrom=" + availableFrom +
                 ", availableTo=" + availableTo +
                 '}';
