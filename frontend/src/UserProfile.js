@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class UserProfile extends Component {
 
-    state = {productNames: 'Tähän tulee tuotteita.'};
+    state = {productNames: ["Tähän tulee tuotteita"]};
 
     componentDidMount() {
         fetch('/api/products')
