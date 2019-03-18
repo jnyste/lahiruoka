@@ -21,18 +21,21 @@ class ProductPage extends Component {
                     let productfrom = product.availableFrom;
                     let productto = product.availableTo;
                     let productinfo = product.info;
-                    let stateName = 'product' + i;
-                    let price = stateName + 'price';
-                    let amount = stateName + 'price';
-                    let from = stateName + 'price';
-                    let to = stateName + 'price';
-                    let info = stateName + 'info';
-                    this.setState({stateName: productname});
-                    this.setState({price: productprice});
-                    this.setState({amount: productamount});
-                    this.setState({from: productfrom});
-                    this.setState({to: productto});
-                    this.setState({info: productinfo});
+                    let stateNamee = "product" + i;
+                    console.log(stateNamee);
+                    let price = stateNamee + "price";
+                    let amount = stateNamee + "amount";
+                    let from = stateNamee + "from";
+                    let to = stateNamee + "to";
+                    let info = stateNamee + "info";
+                    console.log(info);
+                    this.setState({[stateNamee]: productname});
+                    this.setState({[price]: productprice});
+                    this.setState({[amount]: productamount});
+                    this.setState({[from]: productfrom});
+                    this.setState({[to]: productto});
+                    this.setState({[info]: productinfo});
+                    console.log(this.state.info);
                 }
             });
     }
