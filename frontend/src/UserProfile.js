@@ -12,7 +12,11 @@ class UserProfile extends Component {
 
     render() {
         return (
-            <h1>Profiili</h1>
+            <div className="profilecontainer">
+                <h1>Farmarin profiili</h1>
+                <p>Joku osoite tähän, Tampere 22304<br/> Puhelinnumero on 20002222</p>
+                <p>Kuvaus teksti! Meillä on kyl paljon kaikkee, ihan et voi pojat sentään.</p>
+            </div>
             )
     }
 }
