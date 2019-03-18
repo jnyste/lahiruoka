@@ -3,14 +3,12 @@ import './css/UserProfile_style.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
-
-
 class UserProfile extends Component {
 
     state = {productNames: ["Tähän tulee tuotteita"]};
 
     componentDidMount() {
-        fetch('/api/products')
+        fetch('/api/products/1')
             .then(response => response.json())
             .then(products => {
                 var array = [];
