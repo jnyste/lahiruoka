@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import './css/FarmCarousel_style.css';
+import logo1 from './carrot.jpeg';
+import logo2 from './tomato.jpeg';
+import logo3 from './wheat.jpeg';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class FarmCarousel extends Component {
@@ -30,7 +33,7 @@ class FarmCarousel extends Component {
                     <div className="carousel-inner">
                         <div className="item active">
                             <a href="http://www.google.com">
-                                <img src="https://static-sls.smf.aws.sanomacloud.net/etlehti.fi/s3fs-public/styles/large_main_image/public/main_media/istock-492528035.jpg" alt="Porkkana" />
+                                <img src={logo1} alt="Porkkana" />
                             </a>
                             <div className="carousel-caption">
                                 <h3>{this.state.farmOne}</h3>
@@ -40,7 +43,7 @@ class FarmCarousel extends Component {
 
                         <div className="item">
                             <a href="http://www.bing.com">
-                                <img src="https://im.mtv.fi/image/6543764/landscape16_9/1024/576/524dd1d3d4112469b607331c06a01027/ih/porkkana.jpg" alt="Punajuuri"/>
+                                <img src={logo2} alt="Tomaatti"/>
                             </a>
                             <div className="carousel-caption">
                                 <h3>Mummolan tila</h3>
@@ -50,7 +53,7 @@ class FarmCarousel extends Component {
 
                         <div className="item">
                             <a href="http://www.duckduckgo.com">
-                                <img src="http://www.satokausikalenteri.fi/files/viikon-kasvikset/peruna2.jpg" alt="Peruna"/>
+                                <img src={logo3} alt="Vehnä"/>
                             </a>
                             <div className="carousel-caption">
                                 <h3>Mielen tila</h3>
