@@ -13,18 +13,29 @@ public class Product {
     @GeneratedValue(generator="product_seq")
     @SequenceGenerator(name="product_seq",sequenceName="PRODUCT_SEQ", allocationSize=1)
     int product_id;
+
     @Column(nullable = false)
     String name;
+
     @Column(nullable = false)
     double price;
+
     @Column(nullable = false)
     double amount;
+
     @Column(nullable = false)
     LocalDate availableFrom;
+
     @Column(nullable = false)
     LocalDate availableTo;
+
     @Column(nullable = false)
     String info;
+
+    @ManyToOne
+    @JoinColumn
+    User farm;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "product_tags", joinColumns = { @JoinColumn(name = "product_id") }, inverseJoinColumns = { @JoinColumn(name = "tag_id") })
     Set<Tag> tags = new HashSet<>();
@@ -94,6 +105,14 @@ public class Product {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public User getFarm() {
+        return farm;
+    }
+
+    public void setFarm(User farm) {
+        this.farm = farm;
     }
 
     public Set<Tag> getTags() {
