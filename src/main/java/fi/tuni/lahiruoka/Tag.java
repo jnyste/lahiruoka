@@ -19,7 +19,6 @@ public class Tag {
 
     @NotNull
     @Size(max = 100)
-    @NaturalId
     private String name;
 
     @JsonIgnore

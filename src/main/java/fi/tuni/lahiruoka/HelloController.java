@@ -29,6 +29,7 @@ public class HelloController {
         Product k = new Product("Kaali", 2.3, 10, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
 
         p.getTags().add(new Tag("porkkana"));
+        p.getTags().add(new Tag("porkkana"));
         p.getTags().add(new Tag("vihannes"));
 
         User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true);
