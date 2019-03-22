@@ -51,12 +51,12 @@ class UserProfile extends Component {
             <div className="profilecontainer">
                 <img src={pic} alt="profile pic"></img>
                 <div className="userInfo">
-                    <h1>{this.state.farm}</h1>
-                    <p>{this.state.address}<br/>{this.state.phone}</p>
+                    <h5>{this.state.farm}</h5>
                     <p>{this.state.info}</p>
+                    <p>{this.state.address}<br/>{this.state.phone}</p>
                 </div>
                 <div className="userproducts">
-                    <h3>Tuotteet</h3>
+                    <h5>Tuotteet</h5>
                     {this.getProductList()}
                 </div>
             </div>

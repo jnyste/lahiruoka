@@ -8,6 +8,16 @@
     padding: 0px 10px 0px 10px;
 }
 
+.profilecontainer h5 {
+    border-bottom: 2px double;
+    font-size: 40px;
+}
+
+.userproducts h5 {
+    border-bottom: 2px double;
+    font-size: 25px;
+}
+
 .userproducts {
     border: 5px solid green;
     padding: 0px 10px 0px 10px;
@@ -15,9 +25,10 @@
     width: 400px;
 }
 
-img {
+.profilecontainer img {
     float: right;
     width: 200px;
     margin-right: 10%;
     border: 5px solid green;
+    padding: 5px
 }

@@ -1,4 +1,3 @@
-
 .product {
     font-weight: bold;
 }
@@ -22,7 +21,7 @@
     height: 50px;
 }
 
-input {
+.productbox input {
     height: 26px;
 }
 

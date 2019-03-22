@@ -21,7 +21,7 @@ class FarmCarousel extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="carouselcontainer">
                 <h2>Tuottajat</h2>
                 <div id="myCarousel" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
