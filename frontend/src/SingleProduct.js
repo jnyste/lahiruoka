@@ -3,11 +3,6 @@ import Collapsible from 'react-collapsible';
 
 class SingleProduct extends Component {
 
-    //String name, double price, double amount, LocalDate availableFrom, LocalDate availableTo, String info
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -15,7 +10,7 @@ class SingleProduct extends Component {
                     <div className="productinfo">
                         <h1 className="price">{this.props.id.price} €/kg</h1>
                         <h3 className="product title">{this.props.id.name}</h3>
-                        <p className="product owner">Esimerkin tila</p>
+                        <p className="product owner">{this.props.id.farm.companyName}</p>
                         <p className="productAmount">Saatavilla yht. {this.props.id.amount} kg</p>
                         <p className="productExtraInfo">Lisätiedot: {this.props.id.info}</p>
                         <p className="tags">#tag #porkkana #epic</p>
