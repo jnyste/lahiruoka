@@ -1,4 +1,4 @@
-img {
+.carousel.slide img {
     width: 100%;
 }
 .carousel.slide {
@@ -10,7 +10,7 @@ img {
     text-shadow: 0 0 3px #000000;
 }
 
-h2 {
+.carouselcontainer h2 {
     text-align: center;
 }
 
