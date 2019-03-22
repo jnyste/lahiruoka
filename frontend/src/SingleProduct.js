@@ -3,6 +3,30 @@ import Collapsible from 'react-collapsible';
 
 class SingleProduct extends Component {
 
+    constructor(properites) {
+        super(properites);
+        this.state = {amount: 0};
+
+        this.updateListener = this.updateListener.bind(this);
+        this.addListener = this.addListener.bind(this);
+    }
+
+    updateListener(event) {
+        this.state.amount = Number(event.target.value);
+        this.addListener(event);
+    }
+
+    addListener(event) {
+        let result = this.props.id.price * this.state.amount;
+        result = parseFloat(Math.round(result * 1000) / 1000);
+        let taxResult = parseFloat(Math.round(result * 1.14 * 1000) / 1000);
+        this.setState({total:result});
+        this.setState({totalTax:taxResult});
+        
+        event.preventDefault();
+      }
+
+
     render() {
         return (
             <div>
@@ -18,7 +42,7 @@ class SingleProduct extends Component {
                     <div className="order">
                         <div className="floatTis">
                             <form>
-                                <input type="text" name="kg" className="kgBox"/>
+                                <input type="text" name="kg" className="kgBox" onChange={this.updateListener}/>
                             </form>
                         </div>
                         <div className="floatTis kgText">
@@ -28,7 +52,7 @@ class SingleProduct extends Component {
                             <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
                         </div>
                         <div className="floatTis total">
-                            <p>Veroton hinta: {this.props.id.price}€<br/>Verollinen hinta: {this.props.id.price* 1.14}€</p>
+                            <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
                         </div>
                     </div>
                 </Collapsible>
