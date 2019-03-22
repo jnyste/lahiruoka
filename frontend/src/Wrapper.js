@@ -36,7 +36,7 @@ function Wrapper() {
         </nav>
 
         <Route path="/" exact component={Index} />
-        <Route path="/tuotteet/" component={ProductPage} />
+        <Route path="/tuotteet/" component={Products} />
         <Route path="/ostoskori/" component={ShoppingCart} />
         <Route path="/profiili/" component={Profile} />
 
