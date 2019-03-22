@@ -49,7 +49,9 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="profilecontainer">
-                <img src={pic} alt="profile pic"></img>
+                <div className="imagecontainer">
+                    <img src={pic} alt="profile pic"></img>
+                </div>
                 <div className="userInfo">
                     <h5>{this.state.farm}</h5>
                     <p>{this.state.info}</p>
@@ -81,7 +83,7 @@ class List extends Component {
         return (
             <ul>
                 {productNames.map(function(name, index){
-                    return <li key={ index }>{name}</li>;
+                    return <a href=""><li key={ index }>{name}</li></a>;
                 })}
             </ul>
         )

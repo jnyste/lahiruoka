@@ -3,6 +3,7 @@
 }
 .carousel.slide {
     margin: 0% 10% 0% 10%;
+    border: 5px solid green;
 }
 
 .carousel-caption {

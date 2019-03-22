@@ -6,15 +6,16 @@
     width: 400px;
     border: 5px solid green;
     padding: 0px 10px 0px 10px;
+    background-color: #EFFBEF;
 }
 
 .profilecontainer h5 {
-    border-bottom: 2px double;
+    border-bottom: 3px double;
     font-size: 40px;
 }
 
 .userproducts h5 {
-    border-bottom: 2px double;
+    border-bottom: 3px double;
     font-size: 25px;
 }
 
@@ -23,12 +24,33 @@
     padding: 0px 10px 0px 10px;
     margin-top: 30px;
     width: 400px;
+    background-color: #EFFBEF;
 }
 
-.profilecontainer img {
-    float: right;
+.imagecontainer img {
     width: 200px;
-    margin-right: 10%;
     border: 5px solid green;
-    padding: 5px
+    float: right;
+    margin-right: 10%;
+    padding: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    .imagecontainer img {
+        margin-right: 5%;
+    }
+
+    .profilecontainer {
+        margin-left: 5%;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .imagecontainer img {
+        margin-right: 40px;
+    }
+
+    .profilecontainer {
+        margin-left: 10px;
+    }
 }
