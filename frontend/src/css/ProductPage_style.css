@@ -52,3 +52,26 @@
 .cart {
     float: right;
 }
+
+.listTitle {
+    text-align: center;
+}
+.Collapsible {
+    padding: 2px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.Collapsible__trigger {
+    padding: 15px;
+}
+.producttitletrigger {
+    background: #78ae5b;
+    width: 100%;
+    content: "\2212";
+}
+.productopenedtrigger{
+    background: #5a813e;
+    width: 100%;
+    content: "\2212";
+}
