@@ -1,4 +1,3 @@
-
 .product {
     font-weight: bold;
 }
@@ -14,6 +13,7 @@
     border: 5px solid green;
     overflow: hidden;
     padding: 0px 5px 0px 5px;
+    background-color: #EFFBEF;
 }
 
 .floatTis {
@@ -22,7 +22,7 @@
     height: 50px;
 }
 
-input {
+.productbox input {
     height: 26px;
 }
 
@@ -64,14 +64,35 @@ input {
 
 .Collapsible__trigger {
     padding: 15px;
+    cursor: pointer;
 }
 .producttitletrigger {
     background: #78ae5b;
     width: 100%;
-    content: "\2212";
 }
+
+.producttitletrigger:hover {
+    background: #aaae3c;
+}
+
+.producttitletrigger:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
 .productopenedtrigger{
-    background: #5a813e;
-    width: 100%;
+    content: '\002B';
+     background: #5a813e;
+     width: 100%;
+ }
+
+.productopenedtrigger:after {
     content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
 }

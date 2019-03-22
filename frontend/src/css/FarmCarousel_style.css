@@ -1,8 +1,9 @@
-img {
+.carousel.slide img {
     width: 100%;
 }
 .carousel.slide {
     margin: 0% 10% 0% 10%;
+    border: 5px solid green;
 }
 
 .carousel-caption {
@@ -10,7 +11,7 @@ img {
     text-shadow: 0 0 3px #000000;
 }
 
-h2 {
+.carouselcontainer h2 {
     text-align: center;
 }
 
