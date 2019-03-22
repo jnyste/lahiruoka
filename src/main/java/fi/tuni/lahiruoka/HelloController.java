@@ -26,20 +26,24 @@ public class HelloController {
     public void init() {
 
         Product p = new Product("Porkkana", 2.3, 100, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
-        Product k = new Product("Kaali", 2.3, 10, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
+        Product k = new Product("Kaali", 3.5, 150, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "rouskuu mukavasti hampaissa");
+        Product pe = new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24), "herkkuperunaa");
 
-        p.getTags().add(new Tag("porkkana"));
+        p.getTags().add(new Tag("peruna"));
         p.getTags().add(new Tag("porkkana"));
         p.getTags().add(new Tag("vihannes"));
 
         User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
         userHenkilo.addProducts(p, k);
-
         userRepository.save(userHenkilo);
-        userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13)));
+
+        User user2 = new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13));
+        user2.addProducts(pe);
+        userRepository.save(user2);
 
         productRepository.save(p);
-        productRepository.save(new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24), "herkkuperunaa"));
+        productRepository.save(k);
+        productRepository.save(pe);
     }
 
     @GetMapping("/api/hello")
