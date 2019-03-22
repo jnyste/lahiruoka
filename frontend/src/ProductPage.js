@@ -27,7 +27,7 @@ class ProductPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="product-list-container">
                 <h3 className="listTitle">Tuotteet</h3>
                 {this.state.productList}
             </div>
