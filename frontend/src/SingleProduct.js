@@ -28,7 +28,7 @@ class SingleProduct extends Component {
                             <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
                         </div>
                         <div className="floatTis total">
-                            <p>Veroton hinta: 1€<br/>Verollinen hinta: 100000€</p>
+                            <p>Veroton hinta: {this.props.id.price}€<br/>Verollinen hinta: {this.props.id.price* 1.14}€</p>
                         </div>
                     </div>
                 </Collapsible>
