@@ -23,17 +23,15 @@ class ProductPage extends Component {
         }
 
         this.setState({productList: helperArray});
-
     }
 
     render() {
         return (
-        <div>
-            <h3 className="listTitle">Tuotteet</h3>
-            {this.state.productList}
-        </div>
-
-        );
+            <div className="product-list-container">
+                <h3 className="listTitle">Tuotteet</h3>
+                {this.state.productList}
+            </div>
+        )
     }
 }
 
