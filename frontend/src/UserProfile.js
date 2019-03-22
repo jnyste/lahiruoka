@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import './css/UserProfile_style.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import pic from './farmer.jpg';
 
 
 class UserProfile extends Component {
@@ -8,10 +8,23 @@ class UserProfile extends Component {
     state = {productNames: ["Tähän tulee tuotteita"]};
 
     componentDidMount() {
+        fetch('/api/hello')
+            .then(response => response.json())
+            .then(user => {
+                let farm = user[0];
+                let farmUsername = farm.companyName;
+                let farmAddress = farm.address;
+                let farmPhone = farm.phone;
+                let farmInfo = farm.info;
+                this.setState({farm: farmUsername});
+                this.setState({address: farmAddress});
+                this.setState({phone: farmPhone});
+                this.setState({info: farmInfo});
+            });
         fetch('/api/products/1')
             .then(response => response.json())
             .then(products => {
-                var array = [];
+                let array = [];
                 for (let i = 0; i < products.length; i++) {
                     let product = products[i];
                     let productName = product.name;
@@ -20,6 +33,7 @@ class UserProfile extends Component {
                 this.setState({productNames: array});
 
             });
+
     }
 
     getProductList() {
@@ -35,10 +49,11 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="profilecontainer">
-                <div>
-                    <h1>Farmarin profiili</h1>
-                    <p>Joku osoite tähän, Tampere 22304<br/> Puhelinnumero on 20002222</p>
-                    <p>Kuvaus teksti! Meillä on kyl paljon kaikkee, ihan et voi pojat sentään.</p>
+                <img src={pic} alt="profile pic"></img>
+                <div className="userInfo">
+                    <h1>{this.state.farm}</h1>
+                    <p>{this.state.address}<br/>{this.state.phone}</p>
+                    <p>{this.state.info}</p>
                 </div>
                 <div className="userproducts">
                     <h3>Tuotteet</h3>

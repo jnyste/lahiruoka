@@ -122,6 +122,10 @@ public class User {
         return active;
     }
 
+    public String getInfo() {
+        return info;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -148,5 +152,9 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }

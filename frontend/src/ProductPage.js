@@ -13,6 +13,9 @@ class ProductPage extends Component {
         fetch('/api/products')
             .then(response => response.json())
             .then(products => {
+                let a = products.length
+                this.setState({'allofthem': products});
+
                 for (let i=0; i<products.length; i++) {
                     let product = products[i];
                     let productname = product.name;
@@ -22,20 +25,17 @@ class ProductPage extends Component {
                     let productto = product.availableTo;
                     let productinfo = product.info;
                     let stateNamee = "product" + i;
-                    console.log(stateNamee);
                     let price = stateNamee + "price";
                     let amount = stateNamee + "amount";
                     let from = stateNamee + "from";
                     let to = stateNamee + "to";
                     let info = stateNamee + "info";
-                    console.log(info);
                     this.setState({[stateNamee]: productname});
                     this.setState({[price]: productprice});
                     this.setState({[amount]: productamount});
                     this.setState({[from]: productfrom});
                     this.setState({[to]: productto});
                     this.setState({[info]: productinfo});
-                    console.log(this.state.info);
                 }
             });
     }
@@ -58,17 +58,18 @@ class ProductPage extends Component {
                         </form>
                     </div>
                     <div className="floatTis kgText">
-                        <p>Kg</p>
+                        <p>kg</p>
                     </div>
-                    <div className= "floatTis cart">
+                    <div className="floatTis cart">
                         <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
                     </div>
                     <div className="floatTis total">
-                        <p>Veroton hinta: 1€<br/>Verollinen hinta: 100000€</p>
+                        <p>Veroton hinta: {this.state.product0price}€<br/>Verollinen
+                            hinta: {this.state.product0price + this.state.product0price * 0.14}€</p>
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
 
