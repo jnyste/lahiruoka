@@ -31,13 +31,16 @@ public class User {
     String phone;
 
     @Column(nullable = false)
-    boolean active;
+    boolean active = true;
 
     @Column(nullable = false)
     UserType userType;
 
     @Column(nullable = false)
     String companyName;
+
+    @Column(nullable = false)
+    String info = "";
 
     @OneToMany(mappedBy="farm", cascade = CascadeType.ALL)
     Set<Product> products = new HashSet<>();
@@ -48,15 +51,15 @@ public class User {
      */
     public User(){}
 
-    public User(UserType userType, String username, String password, String companyName,  LocalDate lastLogin, String address, String phone, boolean active) {
+    public User(UserType userType, String username, String password, String companyName, String address, String phone, String info, LocalDate lastLogin) {
         this.userType = userType;
         this.username = username;
         this.password = password;
         this.companyName = companyName;
-        this.lastLogin = lastLogin;
         this.address = address;
         this.phone = phone;
-        this.active = active;
+        this.info = info;
+        this.lastLogin = lastLogin;
     }
 
     public void addProducts(Product... products) {

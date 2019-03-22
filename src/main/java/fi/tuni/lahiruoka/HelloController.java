@@ -32,12 +32,11 @@ public class HelloController {
         p.getTags().add(new Tag("porkkana"));
         p.getTags().add(new Tag("vihannes"));
 
-        User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", LocalDate.of(2019,03,12), "joku osoite 450", "049857", true);
+        User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", "joku osoite 450", "049857", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
         userHenkilo.addProducts(p, k);
-
-
+        
         userRepository.save(userHenkilo);
-        userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", LocalDate.of(2019,03,13), "toinen osote 444", "546224", true));
+        userRepository.save(new User(UserType.KITCHEN, "ukkeli", "salasana","Mummolan tila", "toinen osote 444", "546224", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13)));
 
         productRepository.save(p);
         productRepository.save(new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24), "herkkuperunaa"));
