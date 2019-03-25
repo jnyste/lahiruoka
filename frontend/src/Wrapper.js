@@ -4,6 +4,7 @@ import './css/frontpage_style.css';
 import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
 import UserProfile from './UserProfile';
+import AddProduct from './AddProduct';
 
 function Index() {
   return <FarmCarousel />;
@@ -19,6 +20,10 @@ function Products() {
 
 function ShoppingCart() {
   return <h2>Ostoskori</h2>;
+}
+
+function AddNewProduct() {
+    return <AddProduct/>;
 }
 
 function Wrapper() {
@@ -39,6 +44,7 @@ function Wrapper() {
         <Route path="/tuotteet/" component={Products} />
         <Route path="/ostoskori/" component={ShoppingCart} />
         <Route path="/profiili/" component={Profile} />
+        <Route path="/tuotelisays/" component={AddNewProduct} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>

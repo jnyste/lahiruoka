@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './css/UserProfile_style.css';
 import pic from './farmer.jpg';
+import {Link} from "react-router-dom";
 
 
 class UserProfile extends Component {
@@ -60,6 +61,8 @@ class UserProfile extends Component {
                 <div className="userproducts">
                     <h5>Tuotteet</h5>
                     {this.getProductList()}
+
+                    <Link to="/tuotelisays">Lisää tuote....</Link>
                 </div>
             </div>
             )
