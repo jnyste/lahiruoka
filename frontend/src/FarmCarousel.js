@@ -3,17 +3,17 @@ import './css/FarmCarousel_style.css';
 import logo1 from './carrot.jpeg';
 import logo2 from './tomato.jpeg';
 import logo3 from './wheat.jpeg';
+import {Link} from "react-router-dom";
 
 class CarouselItem extends Component {
     render() {
         return (
             <div className="item">
-                <a href="http://www.bing.com">
-                    <img src={logo3} alt="Vehnä"/>
-                </a>
+                <Link to="/profiili"><img src={logo3} alt="Vehnä"/></Link>
+
                 <div className="carousel-caption">
                     <h3>{this.props.item.companyName}</h3>
-                    <p>Täällä on tuotteita, esim.</p>
+                    <p>{this.props.item.info}</p>
                 </div>
             </div>
         )
@@ -32,8 +32,9 @@ class FarmCarousel extends Component {
 
                 for (let i = 0; i < 2; i++) {
                     let obj = user[i];
-                    console.log(obj);
-                    helperArray.push(<CarouselItem key={obj.id} item={obj}/>);
+                    if(obj.userType === 'FARM') {
+                        helperArray.push(<CarouselItem key={obj.id} item={obj}/>);
+                    }
                 }
 
                 this.setState({carouselItemList: helperArray});
@@ -54,9 +55,9 @@ class FarmCarousel extends Component {
 
                     <div className="carousel-inner">
                         <div className="item active">
-                            <a href="http://www.google.com">
+                            <Link to="/">
                                 <img src={logo1} alt="Porkkana" />
-                            </a>
+                            </Link>
                             <div className="carousel-caption">
                                 <h3>Tervetuloa lähiruokasivulle</h3>
                                 <p>On aika siistii et löysit tänne. Tervetuloa!</p>
