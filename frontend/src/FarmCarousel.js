@@ -10,7 +10,7 @@ class FarmCarousel extends Component {
     state = {};
 
     componentDidMount() {
-        fetch('/api/hello')
+        fetch('/api/users')
             .then(response => response.json())
             .then(user => {
                 let farmOne = user[0];

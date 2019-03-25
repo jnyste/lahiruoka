@@ -8,7 +8,7 @@ class UserProfile extends Component {
     state = {productNames: ["Tähän tulee tuotteita"]};
 
     componentDidMount() {
-        fetch('/api/hello')
+        fetch('/api/users')
             .then(response => response.json())
             .then(user => {
                 let farm = user[0];

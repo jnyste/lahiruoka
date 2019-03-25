@@ -46,7 +46,7 @@ public class HelloController {
         productRepository.save(pe);
     }
 
-    @GetMapping("/api/hello")
+    @GetMapping("/api/users")
     public Iterable<User> hello() {
         return userRepository.findAll();
     }
