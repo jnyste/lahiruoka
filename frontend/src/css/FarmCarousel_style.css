@@ -2,8 +2,10 @@
     width: 100%;
 }
 .carousel.slide {
-    margin: 0% 10% 0% 10%;
     border: 5px solid green;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto
 }
 
 .carousel-caption {
@@ -15,5 +17,6 @@
     text-align: center;
 }
 
-.item {
+.carouselcontainer {
+    margin-bottom: 60px;
 }
