@@ -8,10 +8,10 @@ import {Link} from "react-router-dom";
 class CarouselItem extends Component {
     render() {
         return (
-            <div className="item">
+            <div className="carousel-item">
                 <Link to="/profiili"><img src={logo3} alt="Vehnä"/></Link>
 
-                <div className="carousel-caption">
+                <div className="carousel-caption d-none d-md-block">
                     <h3>{this.props.item.companyName}</h3>
                     <p>{this.props.item.info}</p>
                 </div>
@@ -47,13 +47,12 @@ class FarmCarousel extends Component {
             <div className="carouselcontainer">
                 <h2>Tuottajat</h2>
                 <div id="myCarousel" className="carousel slide" data-ride="carousel">
-
                     <div className="carousel-inner">
-                        <div className="item active">
+                        <div className="carousel-item active">
                             <Link to="/">
                                 <img src={logo1} alt="Porkkana" />
                             </Link>
-                            <div className="carousel-caption">
+                            <div className="carousel-caption d-none d-md-block">
                                 <h3>Tervetuloa lähiruokasivulle</h3>
                                 <p>On aika siistii et löysit tänne. Tervetuloa!</p>
                             </div>
@@ -62,12 +61,12 @@ class FarmCarousel extends Component {
                         {this.state.carouselItemList}
                     </div>
 
-                    <a className="left carousel-control" href="#myCarousel" data-slide="prev">
-                        <span className="glyphicon glyphicon-chevron-left"></span>
+                    <a className="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span className="sr-only">Previous</span>
                     </a>
-                    <a className="right carousel-control" href="#myCarousel" data-slide="next">
-                        <span className="glyphicon glyphicon-chevron-right"></span>
+                    <a className="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="sr-only">Next</span>
                     </a>
                 </div>
