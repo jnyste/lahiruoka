@@ -1,10 +1,7 @@
 package fi.tuni.lahiruoka;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
@@ -44,6 +41,11 @@ public class HelloController {
         productRepository.save(p);
         productRepository.save(k);
         productRepository.save(pe);
+    }
+
+    @PostMapping(value = "/api/products")
+    public void saveBlogPost(@RequestBody Product product) {
+        productRepository.save(product);
     }
 
     @GetMapping("/api/users")
