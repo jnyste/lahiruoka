@@ -6,6 +6,7 @@ class AddProduct extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
         this.state = {
             name: ''
@@ -28,12 +29,32 @@ class AddProduct extends Component {
 
     }
 
+    handleSubmit(event) {
+        const name = this.state.name;
+        const price = this.state.price;
+        const amount = this.state.amount;
+        const availableFrom = this.state.availableFrom;
+        const availableTo = this.state.availableTo;
+
+        if (availableFrom > availableTo) {
+            alert('Tarkista "Saatavilla"-päivämäärät!');
+        } else {
+            if (name.length <= 0 || price.length <= 0 || amount.length <= 0 || availableFrom.length <= 0 || availableTo.length <= 0) {
+                alert('Täytä kaikki tähdellä merkityt kentät!');
+            } else {
+                console.log('Success');
+            }
+        }
+
+        event.preventDefault();
+    }
+
     render() {
         return (
             <div className="product-add-form">
                 <h2>Lisää tuote</h2>
                 <p>Tähdellä merkityt kohdat ovat pakollisia.</p>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="form-group required">
                         <label htmlFor="exampleProductName">Tuotteen nimi:</label>
                         <input type="text" className="form-control" id="exampleProductName" value={this.state.name} onChange={this.handleChange}
