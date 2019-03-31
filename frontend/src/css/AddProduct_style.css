@@ -7,3 +7,12 @@
 h2 {
     margin-top: 15px;
 }
+
+.required label {
+    font-weight: bold;
+}
+.required label:before {
+    color: red;
+    content: '* ';
+    display: inline;
+}
