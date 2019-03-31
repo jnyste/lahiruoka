@@ -7,6 +7,7 @@ class AddProduct extends Component {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.postNewProduct = this.postNewProduct.bind(this);
 
         this.state = {
             name: ''
@@ -43,10 +44,33 @@ class AddProduct extends Component {
                 alert('Täytä kaikki tähdellä merkityt kentät!');
             } else {
                 console.log('Success');
+                this.postNewProduct();
             }
         }
 
         event.preventDefault();
+    }
+
+    async postNewProduct() {
+        const newProduct = {
+            name: this.state.name
+            , price: this.state.price
+            , amount: this.state.amount
+            , availableFrom: this.state.availableFrom
+            , availableTo: this.state.availableTo
+            , info: this.state.info
+        };
+
+        await fetch('/api/products/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newProduct)
+        }).then(() => {
+            console.log("Should be posted");
+        })
     }
 
     render() {
