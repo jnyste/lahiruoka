@@ -18,17 +18,29 @@ public class HelloController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TagRepository tagRepository;
+
     // To see table description, use SHOW COLUMNS from PRODUCT; in h2.
     @PostConstruct
     public void init() {
+
+        Tag porkkanaTag = new Tag("porkkana");
+        Tag perunaTag = new Tag("peruna");
+        Tag vihannesTag = new Tag("vihannes");
 
         Product p = new Product("Porkkana", 2.3, 100, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
         Product k = new Product("Kaali", 3.5, 150, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "rouskuu mukavasti hampaissa");
         Product pe = new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24), "herkkuperunaa");
 
-        p.getTags().add(new Tag("peruna"));
-        p.getTags().add(new Tag("porkkana"));
-        p.getTags().add(new Tag("vihannes"));
+        pe.getTags().add(perunaTag);
+        pe.getTags().add(vihannesTag);
+        p.getTags().add(porkkanaTag);
+        p.getTags().add(vihannesTag);
+
+        tagRepository.save(porkkanaTag);
+        tagRepository.save(perunaTag);
+        tagRepository.save(vihannesTag);
 
         User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
         userHenkilo.addProducts(p, k);

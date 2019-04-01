@@ -21,13 +21,8 @@ public class Tag {
     @Size(max = 100)
     private String name;
 
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
-            mappedBy = "tags")
     private Set<Product> products = new HashSet<>();
 
     public Tag() {
