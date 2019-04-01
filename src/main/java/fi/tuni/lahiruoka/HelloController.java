@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Optional;
 
 // Example class.
@@ -56,7 +57,7 @@ public class HelloController {
     }
 
     @PostMapping(value = "/api/products")
-    public void saveBlogPost(@RequestBody Product product) {
+    public void saveProduct(@RequestBody Product product) {
         productRepository.save(product);
     }
 
@@ -80,5 +81,31 @@ public class HelloController {
             findThis = null;
         }
         return productRepository.findByFarm(findThis);
+    }
+
+    @DeleteMapping("/api/products/{productId}")
+    public void removeProductById(@PathVariable int productId) {
+        Product product = productRepository.findById(productId).get();
+        LinkedList<Tag> tagsToBeRemoved = new LinkedList<>();
+
+        for (Tag t : product.getTags()) {
+            if (t.getProducts().size() > 1) {
+                // If the tag has other products than the one to be deleted, only remove product from tags.
+                t.getProducts().remove(product);
+            } else {
+                // Remove tag from repository (to be done)
+                tagsToBeRemoved.add(t);
+            }
+        }
+
+        if (tagsToBeRemoved.size() > 0) {
+            for (Tag t : tagsToBeRemoved) {
+                product.getTags().remove(t);
+            }
+
+            tagRepository.deleteAll(tagsToBeRemoved);
+        }
+
+        productRepository.deleteById(productId);
     }
 }
