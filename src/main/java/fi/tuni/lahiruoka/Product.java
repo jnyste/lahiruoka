@@ -1,5 +1,7 @@
 package fi.tuni.lahiruoka;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -34,6 +36,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     User farm;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
