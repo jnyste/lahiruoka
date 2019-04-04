@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 // Example class.
@@ -36,6 +37,7 @@ public class HelloController {
 
         pe.getTags().add(perunaTag);
         pe.getTags().add(vihannesTag);
+        k.getTags().add(vihannesTag);
         p.getTags().add(porkkanaTag);
         p.getTags().add(vihannesTag);
 
@@ -81,6 +83,17 @@ public class HelloController {
             findThis = null;
         }
         return productRepository.findByFarm(findThis);
+    }
+
+    @GetMapping("/api/products/tag/{tagName}")
+    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
+        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
+
+        if (tagOptional.isPresent()) {
+            return tagOptional.get().getProducts();
+        } else {
+            return new LinkedList<Product>();
+        }
     }
 
     @DeleteMapping("/api/products/{productId}")
