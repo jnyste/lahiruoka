@@ -12,7 +12,7 @@ import java.util.Optional;
 
 // Example class.
 @RestController
-public class HelloController {
+public class LahiruokaController {
 
     @Autowired
     ProductRepository productRepository;
