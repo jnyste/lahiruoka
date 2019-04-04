@@ -120,13 +120,11 @@ public class LahiruokaController {
     @GetMapping("/api/farm/{farmerId}/products")
     public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
         Optional<User> u = userRepository.findById(farmerId);
-        User findThis;
         if(u.isPresent()) {
-            findThis = u.get();
+            return u.get().getProducts();
         } else {
-            findThis = null;
+            return new LinkedList<Product>();
         }
-        return productRepository.findByFarm(findThis);
     }
 
     @GetMapping("/api/products/tag/{tagName}")
