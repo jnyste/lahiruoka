@@ -30,7 +30,7 @@ class SingleProduct extends Component {
     render() {
         return (
             <div>
-                <Collapsible trigger={this.props.id.name} triggerClassName="producttitletrigger" triggerOpenedClassName="productopenedtrigger" >
+                <Collapsible trigger={this.props.id.name + ' - ' + this.props.id.farm.companyName + ' - ' + this.props.id.price + ' €/kg'} triggerClassName="producttitletrigger" triggerOpenedClassName="productopenedtrigger" >
                     <div className="productinfo">
                         <h1 className="price">{this.props.id.price} €/kg</h1>
                         <h3 className="product title">{this.props.id.name}</h3>
