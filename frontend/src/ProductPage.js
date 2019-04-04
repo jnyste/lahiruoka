@@ -18,7 +18,6 @@ class ProductPage extends Component {
         let helperArray = [];
 
         for (let obj of jsonObject) {
-            console.log(obj);
             helperArray.push(<SingleProduct key={obj.product_id} id={obj}/>);
         }
 

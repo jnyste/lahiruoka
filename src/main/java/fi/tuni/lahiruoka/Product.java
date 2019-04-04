@@ -36,7 +36,6 @@ public class Product {
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
     User farm;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
