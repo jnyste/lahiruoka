@@ -133,7 +133,6 @@ class AddUser extends Component {
                         <input type="text" className="form-control" id="examplePhone" value={this.state.address} onChange={this.handleChange}
                                placeholder="Anna puhelinnumero, esim. 050-5050505" name="phone"/>
                     </div>
-                    <br />
                     <div className="form-group">
                         <label htmlFor="exampleInfo">Lisätiedot:</label>
                         <textarea className="form-control" id="exampleInfo" value={this.state.info} onChange={this.handleChange} name="info" rows="3"></textarea>
