@@ -1,5 +1,7 @@
 package fi.tuni.lahiruoka;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -43,6 +45,7 @@ public class User {
     String info = "";
 
     @OneToMany(mappedBy="farm", cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<Product> products = new HashSet<>();
 
 
