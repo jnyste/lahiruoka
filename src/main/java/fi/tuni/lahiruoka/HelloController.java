@@ -60,6 +60,7 @@ public class HelloController {
 
     @PostMapping(value = "/api/products")
     public void saveProduct(@RequestBody Product product) {
+        product.getTags().clear();
         productRepository.save(product);
     }
 
