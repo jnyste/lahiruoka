@@ -65,6 +65,29 @@ public class HelloController {
         return product.getProduct_id();
     }
 
+    @PostMapping("/api/products/{productId}/tag")
+    public void saveTagsForProduct(@PathVariable int productId, @RequestBody List<String> tagNames) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            for (String tagName : tagNames) {
+                Optional<Tag> tag = tagRepository.findByNameIgnoreCase(tagName);
+
+                if (tag.isPresent()) {
+                    product.getTags().add(tag.get());
+                } else {
+                    Tag newTag = new Tag(tagName.toLowerCase());
+                    tagRepository.save(newTag);
+                    product.getTags().add(newTag);
+                }
+            }
+
+            productRepository.save(product);
+        }
+    }
+
     @GetMapping("/api/users")
     public Iterable<User> hello() {
         return userRepository.findAll();
