@@ -157,4 +157,8 @@ public class User {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
 }
