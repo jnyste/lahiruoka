@@ -129,7 +129,7 @@ class AddUser extends Component {
                                placeholder="Anna osoite, esim Kukkakuja 6, 33330 Mikkeli" name="address"/>
                     </div>
                     <div className="form-group  required">
-                        <label htmlFor="examplePhone">Osoite:</label>
+                        <label htmlFor="examplePhone">Puhelinnumero:</label>
                         <input type="text" className="form-control" id="examplePhone" value={this.state.address} onChange={this.handleChange}
                                placeholder="Anna puhelinnumero, esim. 050-5050505" name="phone"/>
                     </div>
