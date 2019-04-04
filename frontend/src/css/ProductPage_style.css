@@ -49,6 +49,10 @@
     font-size: 12px;
 }
 
+.productinfo {
+    padding-top: 10px
+}
+
 .cart {
     float: right;
 }
