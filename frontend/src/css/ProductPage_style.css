@@ -46,11 +46,20 @@
 
 .productExtraInfo {
     margin-right: 200px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .productinfo {
-    padding-top: 10px
+    padding-top: 10px;
+}
+
+.productinfo p {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.product-list-container{
+    margin-top: 10px;
 }
 
 .cart {
@@ -71,7 +80,7 @@
     cursor: pointer;
 }
 .producttitletrigger {
-    background: #78ae5b;
+    background: #7ace6b;
     width: 100%;
 }
 
@@ -89,7 +98,7 @@
 
 .productopenedtrigger{
     content: '\002B';
-     background: #5a813e;
+     background: #4f9e40;
      width: 100%;
  }
 
