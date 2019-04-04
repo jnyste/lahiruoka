@@ -90,6 +90,13 @@ public class LahiruokaController {
         }
     }
 
+    @PostMapping("/api/user")
+    public int saveUser(@RequestBody User user) {
+        user.getProducts().clear();
+        userRepository.save(user);
+        return user.getId();
+    }
+
     @GetMapping("/api/users")
     public Iterable<User> hello() {
         return userRepository.findAll();
@@ -113,7 +120,7 @@ public class LahiruokaController {
             if (userOptional.get().getUserType() == UserType.FARM) {
                 return userOptional;
             } else {
-                return Optional.ofNullable(null);
+                return Optional.empty();
             }
         }
 
