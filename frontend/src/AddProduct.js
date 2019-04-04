@@ -130,7 +130,7 @@ class AddProduct extends Component {
                     </div>
                     <div className="form-group  required">
                         <label htmlFor="examplePrice">Veroton hinta per kg:</label>
-                        <input type="number" className="form-control" id="examplePrice" value={this.state.price} onChange={this.handleChange} placeholder="Veroton hinta (kg)" name="price"/>
+                        <input type="number" className="form-control" id="examplePrice" value={this.state.price} onChange={this.handleChange} placeholder="Veroton hinta (€/kg)" name="price"/>
                         <small id="priceHelp" className="form-text text-muted">Hintaan lisätään 14% ALV oston yhteydessä.
                         </small>
                     </div>
