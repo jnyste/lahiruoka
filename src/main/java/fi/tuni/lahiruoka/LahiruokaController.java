@@ -1,6 +1,7 @@
 package fi.tuni.lahiruoka;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +22,9 @@ public class LahiruokaController {
 
     @Autowired
     TagRepository tagRepository;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     // To see table description, use SHOW COLUMNS from PRODUCT; in h2.
     @PostConstruct
@@ -46,10 +50,12 @@ public class LahiruokaController {
 
         User userHenkilo = new User(UserType.FARM, "henkilo", "salasana", "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
         userHenkilo.addProducts(p, k);
+        userHenkilo.setEncryptedPassword(bCryptPasswordEncoder.encode(userHenkilo.getPassword()));
         userRepository.save(userHenkilo);
 
         User user2 = new User(UserType.FARM, "ukkeli", "salasana","Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13));
         user2.addProducts(pe);
+        user2.setEncryptedPassword(bCryptPasswordEncoder.encode(user2.getPassword()));
         userRepository.save(user2);
 
         userRepository.save(new User(UserType.KITCHEN, "keitto", "salasana","Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,03,13)));
@@ -93,6 +99,10 @@ public class LahiruokaController {
     @PostMapping("/api/user")
     public int saveUser(@RequestBody User user) {
         user.getProducts().clear();
+
+        // Generate secure password
+        user.setEncryptedPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
         return user.getId();
     }

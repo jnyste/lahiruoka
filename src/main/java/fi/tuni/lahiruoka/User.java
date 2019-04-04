@@ -22,6 +22,9 @@ public class User {
     String password;
 
     @Column(nullable = false)
+    String encryptedPassword;
+
+    @Column(nullable = false)
     LocalDate lastLogin;
 
     @Column(nullable = false)
@@ -60,6 +63,8 @@ public class User {
         this.phone = phone;
         this.info = info;
         this.lastLogin = lastLogin;
+        this.encryptedPassword = password;
+
     }
 
     public void addProducts(Product... products) {
@@ -160,5 +165,18 @@ public class User {
 
     public Set<Product> getProducts() {
         return products;
+    }
+
+    /**
+     * @return the encryptedPassword
+     */
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+    /**
+     * @param encryptedPassword the encryptedPassword to set
+     */
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 }
