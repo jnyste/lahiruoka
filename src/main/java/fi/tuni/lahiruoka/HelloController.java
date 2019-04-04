@@ -59,9 +59,10 @@ public class HelloController {
     }
 
     @PostMapping(value = "/api/products")
-    public void saveProduct(@RequestBody Product product) {
+    public int saveProduct(@RequestBody Product product) {
         product.getTags().clear();
         productRepository.save(product);
+        return product.getProduct_id();
     }
 
     @GetMapping("/api/users")
