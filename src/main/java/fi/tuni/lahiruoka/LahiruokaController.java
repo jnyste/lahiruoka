@@ -103,9 +103,9 @@ public class LahiruokaController {
         return productRepository.findById(productId);
     }
 
-    @GetMapping("/api/products/farmer/{farmerid}")
-    public Iterable<Product> productsByFarmer(@PathVariable int farmerid) {
-        Optional<User> u = userRepository.findById(farmerid);
+    @GetMapping("/api/farmer/{farmerId}/products")
+    public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
+        Optional<User> u = userRepository.findById(farmerId);
         User findThis;
         if(u.isPresent()) {
             findThis = u.get();
