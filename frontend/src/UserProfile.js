@@ -22,7 +22,7 @@ class UserProfile extends Component {
                 this.setState({phone: farmPhone});
                 this.setState({info: farmInfo});
             });
-        fetch('/api/products/1')
+        fetch('/api/farm/1/products')
             .then(response => response.json())
             .then(products => {
                 let array = [];
