@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
 import './css/AddProduct_style.css';
 
 class AddProduct extends Component {
@@ -23,23 +24,27 @@ class AddProduct extends Component {
         if (this.props.match.params.id === 'uusi') {
             this.setState({modifying: false})
         } else {
-            /*fetch('/api/blogposts/' + this.props.match.params.id)
+            fetch('/api/products/' + this.props.match.params.id)
                 .then((httpResponse) => httpResponse.json())
-                .then((post) => {
+                .then((product) => {
+
                     let tags = '';
-                    for (let t of post.tags) {
-                        tags += t.tagName;
+                    for (let t of product.tags) {
+                        tags += t.name;
                         tags += ',';
                     }
                     tags = tags.slice(0, -1);
                     this.setState({
-                        author: post.author
-                        , title: post.title
-                        , content: post.content
+                        name: product.name
+                        , price: product.price
+                        , amount: product.amount
+                        , availableFrom: product.availableFrom
+                        , availableTo: product.availableTo
+                        , info: product.info
                         , tags: tags
                         , modifying: true
                     });
-                });*/
+                });
         }
     }
 
@@ -108,6 +113,7 @@ class AddProduct extends Component {
             body: JSON.stringify(newProduct)
         }).then(() => {
             console.log("Should be posted");
+            this.props.history.push("/profiili/");
         })
     }
 
@@ -152,7 +158,7 @@ class AddProduct extends Component {
                     <div className="form-group">
                         <label htmlFor="exampleTags">Avainsanat:</label>
                         <input type="text" className="form-control" id="exampleTags" value={this.state.tags} onChange={this.handleChange}
-                               name="name" placeholder="Esimerkiksi peruna, harjattu"/>
+                               name="tags" placeholder="Esimerkiksi peruna, harjattu"/>
                         <small>Erottele avainsanat pilkulla.</small>
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
@@ -162,4 +168,4 @@ class AddProduct extends Component {
     }
 }
 
-export default AddProduct;
+export default withRouter(AddProduct);
