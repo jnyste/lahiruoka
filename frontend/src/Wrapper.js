@@ -34,7 +34,7 @@ function Wrapper() {
           <Link to="/">Sivun logo</Link>
           <input type="text" placeholder="Hae tuotetta tai tuottajaa.." name="search" />
           <button type="submit">Hae</button>
-          <Link to="/tuotteet">Tuotteet</Link>
+          <Link to="/tuotteet/">Tuotteet</Link>
           <Link to="/ostoskori/" className="right_float">Ostoskori (0) <span
               className="glyphicon glyphicon-shopping-cart shoppingcart"></span></Link>
           <Link to="/profiili/" className="right_float">Oma tili</Link>
@@ -44,7 +44,7 @@ function Wrapper() {
         <Route path="/tuotteet/" component={Products} />
         <Route path="/ostoskori/" component={ShoppingCart} />
         <Route path="/profiili/" component={Profile} />
-        <Route path="/tuotelisays/" component={AddNewProduct} />
+        <Route path="/tuotelisays/:id" component={AddProduct} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>

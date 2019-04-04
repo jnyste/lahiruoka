@@ -16,7 +16,31 @@ class AddProduct extends Component {
             , availableFrom: ''
             , availableTo: ''
             , info: ''
+            , tags: ''
         };
+    }
+    componentDidMount() {
+        if (this.props.match.params.id === 'uusi') {
+            this.setState({modifying: false})
+        } else {
+            /*fetch('/api/blogposts/' + this.props.match.params.id)
+                .then((httpResponse) => httpResponse.json())
+                .then((post) => {
+                    let tags = '';
+                    for (let t of post.tags) {
+                        tags += t.tagName;
+                        tags += ',';
+                    }
+                    tags = tags.slice(0, -1);
+                    this.setState({
+                        author: post.author
+                        , title: post.title
+                        , content: post.content
+                        , tags: tags
+                        , modifying: true
+                    });
+                });*/
+        }
     }
 
     handleChange(event) {
@@ -43,7 +67,6 @@ class AddProduct extends Component {
             if (name.length <= 0 || price.length <= 0 || amount.length <= 0 || availableFrom.length <= 0 || availableTo.length <= 0) {
                 alert('Täytä kaikki tähdellä merkityt kentät!');
             } else {
-                console.log('Success');
                 this.postNewProduct();
             }
         }
@@ -52,6 +75,20 @@ class AddProduct extends Component {
     }
 
     async postNewProduct() {
+
+        let tagArray = this.state.tags.split(',');
+
+        for (let i in tagArray) {
+            let tag = tagArray[i];
+            tagArray[i] = tag.trim();
+        }
+
+        let filtered = tagArray.filter(function (el) {
+            return el != '';
+        });
+
+        tagArray = filtered;
+
         const newProduct = {
             name: this.state.name
             , price: this.state.price
@@ -59,6 +96,7 @@ class AddProduct extends Component {
             , availableFrom: this.state.availableFrom
             , availableTo: this.state.availableTo
             , info: this.state.info
+            , tags: tagArray
         };
 
         await fetch('/api/products/', {
@@ -110,6 +148,12 @@ class AddProduct extends Component {
                     <div className="form-group">
                         <label htmlFor="exampleInfo">Lisätiedot:</label>
                         <textarea className="form-control" id="exampleInfo" value={this.state.info} onChange={this.handleChange} name="info" rows="3"></textarea>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="exampleTags">Avainsanat:</label>
+                        <input type="text" className="form-control" id="exampleTags" value={this.state.tags} onChange={this.handleChange}
+                               name="name" placeholder="Esimerkiksi peruna, harjattu"/>
+                        <small>Erottele avainsanat pilkulla.</small>
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
                 </form>
