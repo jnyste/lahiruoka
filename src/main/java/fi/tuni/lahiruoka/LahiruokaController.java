@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -103,7 +102,22 @@ public class LahiruokaController {
         return productRepository.findById(productId);
     }
 
-    @GetMapping("/api/farmer/{farmerId}/products")
+    @GetMapping("/api/farm/{farmerId}")
+    public Optional<User> getFarmerById(@PathVariable int farmerId) {
+        Optional<User> userOptional = userRepository.findById(farmerId);
+
+        if (userOptional.isPresent()) {
+            if (userOptional.get().getUserType() == UserType.FARM) {
+                return userOptional;
+            } else {
+                return Optional.ofNullable(null);
+            }
+        }
+
+        return userOptional;
+    }
+
+    @GetMapping("/api/farm/{farmerId}/products")
     public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
         Optional<User> u = userRepository.findById(farmerId);
         User findThis;
