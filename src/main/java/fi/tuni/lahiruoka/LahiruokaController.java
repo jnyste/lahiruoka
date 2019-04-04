@@ -5,14 +5,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 // Example class.
 @RestController
-public class HelloController {
+public class LahiruokaController {
 
     @Autowired
     ProductRepository productRepository;
@@ -101,9 +100,29 @@ public class HelloController {
         return productRepository.findAll();
     }
 
-    @GetMapping("/api/products/{farmerid}")
-    public Iterable<Product> productsByFarmer(@PathVariable int farmerid) {
-        Optional<User> u = userRepository.findById(farmerid);
+    @GetMapping("/api/products/{productId}")
+    public Optional<Product> getProductById(@PathVariable int productId) {
+        return productRepository.findById(productId);
+    }
+
+    @GetMapping("/api/farm/{farmerId}")
+    public Optional<User> getFarmerById(@PathVariable int farmerId) {
+        Optional<User> userOptional = userRepository.findById(farmerId);
+
+        if (userOptional.isPresent()) {
+            if (userOptional.get().getUserType() == UserType.FARM) {
+                return userOptional;
+            } else {
+                return Optional.ofNullable(null);
+            }
+        }
+
+        return userOptional;
+    }
+
+    @GetMapping("/api/farm/{farmerId}/products")
+    public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
+        Optional<User> u = userRepository.findById(farmerId);
         User findThis;
         if(u.isPresent()) {
             findThis = u.get();
