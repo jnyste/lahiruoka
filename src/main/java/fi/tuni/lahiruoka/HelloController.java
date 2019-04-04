@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 // Example class.
@@ -36,6 +37,7 @@ public class HelloController {
 
         pe.getTags().add(perunaTag);
         pe.getTags().add(vihannesTag);
+        k.getTags().add(vihannesTag);
         p.getTags().add(porkkanaTag);
         p.getTags().add(vihannesTag);
 
@@ -60,8 +62,33 @@ public class HelloController {
     }
 
     @PostMapping(value = "/api/products")
-    public void saveProduct(@RequestBody Product product) {
+    public int saveProduct(@RequestBody Product product) {
+        product.getTags().clear();
         productRepository.save(product);
+        return product.getProduct_id();
+    }
+
+    @PostMapping("/api/products/{productId}/tag")
+    public void saveTagsForProduct(@PathVariable int productId, @RequestBody List<String> tagNames) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            for (String tagName : tagNames) {
+                Optional<Tag> tag = tagRepository.findByNameIgnoreCase(tagName);
+
+                if (tag.isPresent()) {
+                    product.getTags().add(tag.get());
+                } else {
+                    Tag newTag = new Tag(tagName.toLowerCase());
+                    tagRepository.save(newTag);
+                    product.getTags().add(newTag);
+                }
+            }
+
+            productRepository.save(product);
+        }
     }
 
     @GetMapping("/api/users")
@@ -84,6 +111,17 @@ public class HelloController {
             findThis = null;
         }
         return productRepository.findByFarm(findThis);
+    }
+
+    @GetMapping("/api/products/tag/{tagName}")
+    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
+        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
+
+        if (tagOptional.isPresent()) {
+            return tagOptional.get().getProducts();
+        } else {
+            return new LinkedList<Product>();
+        }
     }
 
     @DeleteMapping("/api/products/{productId}")

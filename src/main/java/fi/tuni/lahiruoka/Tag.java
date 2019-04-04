@@ -19,6 +19,7 @@ public class Tag {
 
     @NotNull
     @Size(max = 100)
+    @NaturalId
     private String name;
 
     @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)

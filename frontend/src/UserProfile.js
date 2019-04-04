@@ -62,7 +62,7 @@ class UserProfile extends Component {
                     <h5>Tuotteet</h5>
                     {this.getProductList()}
 
-                    <Link to="/tuotelisays">Lisää tuote....</Link>
+                    <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
                 </div>
             </div>
             )
