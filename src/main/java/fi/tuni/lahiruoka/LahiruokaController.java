@@ -49,7 +49,6 @@ public class LahiruokaController {
         userRepository.save(userHenkilo);
 
         User user2 = new User(UserType.FARM, "ukkeli", "salasana","Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13));
-        user2.addProducts(pe);
         userRepository.save(user2);
 
         userRepository.save(new User(UserType.KITCHEN, "keitto", "salasana","Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,03,13)));
@@ -87,6 +86,18 @@ public class LahiruokaController {
             }
 
             productRepository.save(product);
+        }
+    }
+
+    @PostMapping("/api/products/{productId}/farm")
+    public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+        Optional<User> farmOptional = getFarmerById(farmId);
+
+        if (productOptional.isPresent() && farmOptional.isPresent()) {
+            farmOptional.get().addProducts(productOptional.get());
+            userRepository.save(farmOptional.get());
+            productRepository.save(productOptional.get());
         }
     }
 
