@@ -125,7 +125,19 @@ class AddProduct extends Component {
                       body: JSON.stringify(tagArray),
                   }).then(() => {
                       console.log("tags added to " + value);
-                  })
+                  }).then(
+                        fetch('/api/products/' + value + '/farm', {
+                            method: 'POST',
+                            headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(1),
+                         }).then(() => {
+                            console.log("farm added to " + value);
+                        })
+                  )
+              }
         }).finally(() => this.props.history.push("/profiili/"))
     }
 
