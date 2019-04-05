@@ -111,7 +111,19 @@ public class LahiruokaController {
         }
 
         if (productOpt.isPresent()) {
+            Product product = productOpt.get();
 
+            if (!name.equals(product.getName()) || !info.equals(product.getInfo())) {
+                // updateProductTexts(product, name, info);
+            } else if (!availableFrom.equals(product.getAvailableFrom()) || !availableTo.equals(product.getAvailableTo())) {
+                // updateProductDates(product, availableFrom, availableTo);
+            } else if (price != product.getPrice() || amount != product.getAmount()) {
+                // updateProductPriceAndAmount(product, price, amount);
+            }
+
+            // updateProductTags(product, tags);
+
+            // productRepository.save(product);
         }
     }
 
