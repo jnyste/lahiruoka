@@ -7,7 +7,11 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
-        this.state = {loggedin: false};
+        var loggedin = false;
+        if(localStorage.getItem('loggedin') === 'true') {
+            loggedin = true;
+        }
+        this.state = {loggedin: loggedin};
     }
 
     logout() {
@@ -19,9 +23,15 @@ class Login extends Component {
     render() {
 
         const responseGoogle = (response) => {
-            this.setState({loggedin: true});
-            localStorage.setItem('loggedin', 'true');
-            console.log(response);
+            console.log(response.profileObj);
+            if (response.profileObj === undefined) {
+                console.log('Login failed');
+            } else {
+                this.setState({loggedin: true});
+                localStorage.setItem('loggedin', 'true');
+                console.log(response);
+            }
+
         }
 
         return (
@@ -31,17 +41,21 @@ class Login extends Component {
                 <br />
                 <br />
 
-                {this.state.loggedin ? <GoogleLogout
-                    buttonText="Logout"
-                    onLogoutSuccess={this.logout}
-                >
-                </GoogleLogout>
-                     : <GoogleLogin
+                {this.state.loggedin ?
+                    <GoogleLogout
+                        buttonText="Logout"
+                        onLogoutSuccess={this.logout}
+                        clientId="881986225908-hio6su37v6pit5c8s527krgho65evc5u.apps.googleusercontent.com"
+                    >
+                    </GoogleLogout>
+                     :
+                    <GoogleLogin
                         clientId="881986225908-hio6su37v6pit5c8s527krgho65evc5u.apps.googleusercontent.com"
                         buttonText="LOGIN WITH GOOGLE"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
-                    />}
+                    />
+                }
 
 
 

@@ -28,6 +28,9 @@ function AddNewProduct() {
 }
 
 function Wrapper() {
+  if(localStorage.getItem('loggedin') === null) {
+    localStorage.setItem('loggedin', 'false');
+  }
   return (
     <Router>
       <div>

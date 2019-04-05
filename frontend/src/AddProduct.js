@@ -89,7 +89,7 @@ class AddProduct extends Component {
         }
 
         let filtered = tagArray.filter(function (el) {
-            return el != '';
+            return el !== '';
         });
 
         tagArray = filtered;
@@ -142,7 +142,6 @@ class AddProduct extends Component {
     }
 
     render() {
-        console.log(localStorage.getItem('loggedin'));
 
         return (
             <div className="product-add-form">
