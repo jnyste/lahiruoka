@@ -120,13 +120,35 @@ public class LahiruokaController {
             product.setAvailableTo(availableTo);
             product.setInfo(info);
 
-            // updateProductTags(product, tags);
+            updateProductTags(product, tags);
 
-            // productRepository.save(product);
+            productRepository.save(product);
         }
     }
 
     //              ---    METHODS TO HELP POSTMAPPING    ---
+
+    public void updateProductTags(Product product, List<String> tags) {
+        LinkedList<Tag> tagsToBeRemoved = new LinkedList<>();
+
+        for (Tag t : product.getTags()) {
+            if (t.getProducts().size() > 1) {
+                t.getProducts().remove(product);
+            } else {
+                tagsToBeRemoved.add(t);
+            }
+        }
+
+        if (tagsToBeRemoved.size() > 0) {
+            for (Tag t : tagsToBeRemoved) {
+                product.getTags().remove(t);
+            }
+
+            tagRepository.deleteAll(tagsToBeRemoved);
+        }
+
+        saveTagsForProduct(product.getProduct_id(), tags);
+    }
 
     //           ---    END OF METHODS TO HELP POSTMAPPING    ---
 
