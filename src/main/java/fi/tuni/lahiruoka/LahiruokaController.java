@@ -126,8 +126,6 @@ public class LahiruokaController {
         }
     }
 
-    //              ---    METHODS TO HELP POSTMAPPING    ---
-
     public void updateProductTags(Product product, List<String> tags) {
         LinkedList<Tag> tagsToBeRemoved = new LinkedList<>();
 
@@ -150,7 +148,26 @@ public class LahiruokaController {
         saveTagsForProduct(product.getProduct_id(), tags);
     }
 
-    //           ---    END OF METHODS TO HELP POSTMAPPING    ---
+    @PutMapping("/api/user/{userId}")
+    public void modifyUser(@PathVariable int userId, @RequestBody ObjectNode updatedUser) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        String companyName = updatedUser.get("companyName").asText();
+        String address = updatedUser.get("address").asText();
+        String phone = updatedUser.get("phone").asText();
+        String info = updatedUser.get("info").asText();
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            user.setCompanyName(companyName);
+            user.setAddress(address);
+            user.setPhone(phone);
+            user.setInfo(info);
+
+            userRepository.save(user);
+        }
+    }
 
     @PostMapping("/api/products/{productId}/farm")
     public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
