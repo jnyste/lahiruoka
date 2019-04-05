@@ -113,7 +113,12 @@ public class LahiruokaController {
         if (productOpt.isPresent()) {
             Product product = productOpt.get();
 
-
+            product.setName(name);
+            product.setPrice(price);
+            product.setAmount(amount);
+            product.setAvailableFrom(availableFrom);
+            product.setAvailableTo(availableTo);
+            product.setInfo(info);
 
             // updateProductTags(product, tags);
 
