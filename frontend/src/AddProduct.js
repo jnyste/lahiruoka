@@ -101,7 +101,6 @@ class AddProduct extends Component {
             , availableFrom: this.state.availableFrom
             , availableTo: this.state.availableTo
             , info: this.state.info
-            , tags: tagArray
         };
 
         await fetch('/api/products/', {
@@ -111,10 +110,35 @@ class AddProduct extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newProduct)
-        }).then(() => {
-            console.log("Should be posted");
-            this.props.history.push("/profiili/");
-        })
+        }).then((response) => {
+            return response.json();
+        }).then((value) => {
+              console.log(value);
+
+              if (tagArray.length > 0) {
+                  fetch('/api/products/' + value + '/tag', {
+                      method: 'POST',
+                      headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(tagArray),
+                  }).then(() => {
+                      console.log("tags added to " + value);
+                  }).then(
+                        fetch('/api/products/' + value + '/farm', {
+                            method: 'POST',
+                            headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(1),
+                         }).then(() => {
+                            console.log("farm added to " + value);
+                        })
+                  )
+              }
+        }).finally(() => this.props.history.push("/profiili/"))
     }
 
     render() {
