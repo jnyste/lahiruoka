@@ -23,12 +23,8 @@ function ShoppingCart() {
   return <Login/>;
 }
 
-function AddNewProduct() {
-    return <AddProduct/>;
-}
-
 function Wrapper() {
-  if(localStorage.getItem('loggedin') === null) {
+  if (localStorage.getItem('loggedin') === null) {
     localStorage.setItem('loggedin', 'false');
   }
   return (
