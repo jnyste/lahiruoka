@@ -7,15 +7,18 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
+        this.state = {loggedin: false};
     }
 
     logout() {
         console.log('Logged out');
+        this.setState({loggedin: false});
     }
 
     render() {
 
         const responseGoogle = (response) => {
+            this.setState({loggedin: true});
             console.log(response);
         }
 
@@ -26,18 +29,19 @@ class Login extends Component {
                 <br />
                 <br />
 
-
-                <GoogleLogin
-                    clientId="881986225908-hio6su37v6pit5c8s527krgho65evc5u.apps.googleusercontent.com"
-                    buttonText="LOGIN WITH GOOGLE"
-                    onSuccess={responseGoogle}
-                    onFailure={responseGoogle}
-                />
-                <GoogleLogout
+                {this.state.loggedin ? <GoogleLogout
                     buttonText="Logout"
                     onLogoutSuccess={this.logout}
                 >
                 </GoogleLogout>
+                     : <GoogleLogin
+                        clientId="881986225908-hio6su37v6pit5c8s527krgho65evc5u.apps.googleusercontent.com"
+                        buttonText="LOGIN WITH GOOGLE"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                    />}
+
+
 
             </div>
         );
