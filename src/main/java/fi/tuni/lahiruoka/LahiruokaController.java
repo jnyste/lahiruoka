@@ -101,7 +101,7 @@ public class LahiruokaController {
         double amount = updatedProduct.get("amount").asDouble();;
         LocalDate availableFrom = LocalDate.parse(updatedProduct.get("availableFrom").asText());
         LocalDate availableTo = LocalDate.parse(updatedProduct.get("availableTo").asText());;
-        String info = updatedProduct.get("price").asText();
+        String info = updatedProduct.get("info").asText();
 
         ArrayNode tagArray = (ArrayNode) updatedProduct.get("tags");
         LinkedList<String> tags = new LinkedList<>();
