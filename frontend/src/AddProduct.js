@@ -118,6 +118,8 @@ class AddProduct extends Component {
     }
 
     render() {
+        console.log(localStorage.getItem('loggedin'));
+
         return (
             <div className="product-add-form">
                 <h2>Lisää tuote</h2>

@@ -13,12 +13,14 @@ class Login extends Component {
     logout() {
         console.log('Logged out');
         this.setState({loggedin: false});
+        localStorage.setItem('loggedin', 'false');
     }
 
     render() {
 
         const responseGoogle = (response) => {
             this.setState({loggedin: true});
+            localStorage.setItem('loggedin', 'true');
             console.log(response);
         }
 
