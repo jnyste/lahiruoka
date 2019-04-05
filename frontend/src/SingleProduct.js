@@ -5,10 +5,19 @@ class SingleProduct extends Component {
 
     constructor(properites) {
         super(properites);
-        this.state = {amount: 0};
+
+        let productTags = '';
+
+        for (let tag of this.props.id.tags) {
+            productTags = productTags + " #" + tag.name;
+        }
+
+        this.state = {amount: 0
+                    , tags: productTags};
 
         this.updateListener = this.updateListener.bind(this);
         this.addListener = this.addListener.bind(this);
+
     }
 
     updateListener(event) {
@@ -37,7 +46,7 @@ class SingleProduct extends Component {
                         <p className="product owner">{this.props.id.farm.companyName}</p>
                         <p className="productAmount">Saatavilla yht. {this.props.id.amount} kg</p>
                         <p className="productExtraInfo">Lisätiedot: {this.props.id.info}</p>
-                        <p className="tags">#tag #porkkana #epic</p>
+                        <p className="tags">{this.state.tags}</p>
                     </div>
                     <div className="order">
                         <div className="floatTis">
