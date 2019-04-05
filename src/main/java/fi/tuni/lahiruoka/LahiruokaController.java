@@ -1,5 +1,6 @@
 package fi.tuni.lahiruoka;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -92,8 +93,22 @@ public class LahiruokaController {
     }
 
     @PutMapping("/api/products/{productId}")
-    public void modifyProduct(@PathVariable int productId, @RequestBody ObjectNode UpdatedProduct) {
+    public void modifyProduct(@PathVariable int productId, @RequestBody ObjectNode updatedProduct) {
         Optional<Product> productOpt = productRepository.findById(productId);
+
+        String name = updatedProduct.get("name").asText();
+        double price = updatedProduct.get("price").asDouble();
+        double amount = updatedProduct.get("amount").asDouble();;
+        LocalDate availableFrom = LocalDate.parse(updatedProduct.get("availableFrom").asText());
+        LocalDate availableTo = LocalDate.parse(updatedProduct.get("availableTo").asText());;
+        String info = updatedProduct.get("price").asText();
+
+        ArrayNode tagArray = (ArrayNode) updatedProduct.get("tags");
+        LinkedList<String> tags = new LinkedList<>();
+
+        for (int i = 0; i < tagArray.size(); i++) {
+            tags.add(tagArray.get(i).asText());
+        }
 
         if (productOpt.isPresent()) {
 
