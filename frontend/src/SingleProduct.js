@@ -13,7 +13,9 @@ class SingleProduct extends Component {
         }
 
         this.state = {amount: 0
-                    , tags: productTags};
+                    , tags: productTags
+                    , total: 0
+                    , totalTax: 0};
 
         this.updateListener = this.updateListener.bind(this);
         this.addListener = this.addListener.bind(this);
