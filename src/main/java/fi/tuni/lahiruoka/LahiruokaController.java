@@ -1,5 +1,6 @@
 package fi.tuni.lahiruoka;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -87,6 +88,15 @@ public class LahiruokaController {
             }
 
             productRepository.save(product);
+        }
+    }
+
+    @PutMapping("/api/products/{productId}")
+    public void modifyProduct(@PathVariable int productId, @RequestBody ObjectNode UpdatedProduct) {
+        Optional<Product> productOpt = productRepository.findById(productId);
+
+        if (productOpt.isPresent()) {
+
         }
     }
 
