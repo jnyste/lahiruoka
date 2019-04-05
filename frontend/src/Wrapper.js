@@ -5,6 +5,7 @@ import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
 import UserProfile from './UserProfile';
 import AddProduct from './AddProduct';
+import Login from './Login';
 
 function Index() {
   return <FarmCarousel />;
@@ -19,7 +20,7 @@ function Products() {
 }
 
 function ShoppingCart() {
-  return <h2>Ostoskori</h2>;
+  return <Login/>;
 }
 
 function AddNewProduct() {
