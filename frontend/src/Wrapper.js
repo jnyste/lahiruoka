@@ -5,6 +5,7 @@ import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
 import UserProfile from './UserProfile';
 import AddProduct from './AddProduct';
+import Login from './Login';
 
 function Index() {
   return <FarmCarousel />;
@@ -19,14 +20,13 @@ function Products() {
 }
 
 function ShoppingCart() {
-  return <h2>Ostoskori</h2>;
-}
-
-function AddNewProduct() {
-    return <AddProduct/>;
+  return <Login/>;
 }
 
 function Wrapper() {
+  if (localStorage.getItem('loggedin') === null) {
+    localStorage.setItem('loggedin', 'false');
+  }
   return (
     <Router>
       <div>

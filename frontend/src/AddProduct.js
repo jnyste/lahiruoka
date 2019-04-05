@@ -89,7 +89,7 @@ class AddProduct extends Component {
         }
 
         let filtered = tagArray.filter(function (el) {
-            return el != '';
+            return el !== '';
         });
 
         tagArray = filtered;
@@ -142,6 +142,7 @@ class AddProduct extends Component {
     }
 
     render() {
+
         return (
             <div className="product-add-form">
                 <h2>Lisää tuote</h2>
