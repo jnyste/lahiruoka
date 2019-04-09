@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
 import GoogleLogin from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
 
@@ -18,6 +19,7 @@ class Login extends Component {
         console.log('Logged out');
         this.setState({loggedin: false});
         localStorage.setItem('loggedin', 'false');
+        localStorage.setItem('userId', 'none');
     }
 
     render() {
@@ -28,8 +30,11 @@ class Login extends Component {
                 console.log('Login failed');
             } else {
                 this.setState({loggedin: true});
+                let userId = response.profileObj.googleId;
                 localStorage.setItem('loggedin', 'true');
+                localStorage.setItem('userId', userId);
                 console.log(response);
+                this.props.history.push("/muokkaaprofiilia/uusi");
             }
 
         }
@@ -64,4 +69,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
