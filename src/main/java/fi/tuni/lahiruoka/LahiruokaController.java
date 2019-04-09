@@ -183,6 +183,7 @@ public class LahiruokaController {
 
     @PostMapping("/api/user")
     public int saveUser(@RequestBody User user) {
+        user.setLastLogin(LocalDate.now());
         user.getProducts().clear();
         userRepository.save(user);
         return user.getId();
