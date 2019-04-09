@@ -52,14 +52,14 @@ public class User {
      */
     public User(){}
 
-    public User(String googleId, UserType userType, String companyName, String address, String phone, String info) {
+    public User(String googleId, UserType userType, String companyName, String address, String phone, String info, LocalDate lastLogin) {
         this.googleId = googleId;
         this.userType = userType;
         this.companyName = companyName;
         this.address = address;
         this.phone = phone;
         this.info = info;
-        this.lastLogin = LocalDate.now();
+        this.lastLogin = lastLogin;
     }
 
     public void addProducts(Product... products) {

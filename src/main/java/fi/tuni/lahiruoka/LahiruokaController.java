@@ -2,6 +2,7 @@ package fi.tuni.lahiruoka;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jdk.vm.ci.meta.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,16 +47,16 @@ public class LahiruokaController {
         tagRepository.save(perunaTag);
         tagRepository.save(vihannesTag);
 
-        User userHenkilo = new User("googleId1", UserType.FARM, "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä");
+        User userHenkilo = new User("googleId1", UserType.FARM, "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,3,3));
         userHenkilo.addProducts(p, k);
         userRepository.save(userHenkilo);
 
-        User user2 = new User("googleId2", UserType.FARM, "Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää");
+        User user2 = new User("googleId2", UserType.FARM, "Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,4,3));
         user2.addProducts(pe);
         userRepository.save(user2);
 
-        userRepository.save(new User("googleId3", UserType.KITCHEN, "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä"));
-        userRepository.save(new User("googleId4", UserType.KITCHEN, "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla"));
+        userRepository.save(new User("googleId3", UserType.KITCHEN, "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,3,2)));
+        userRepository.save(new User("googleId4", UserType.KITCHEN, "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,4,7)));
         
         productRepository.save(p);
         productRepository.save(k);
@@ -184,6 +185,7 @@ public class LahiruokaController {
     @PostMapping("/api/users")
     public int saveUser(@RequestBody User user) {
         user.getProducts().clear();
+        user.setLastLogin(LocalDate.now());
         userRepository.save(user);
         return user.getId();
     }
