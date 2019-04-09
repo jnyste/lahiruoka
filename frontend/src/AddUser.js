@@ -105,9 +105,17 @@ class AddUser extends Component {
     render() {
         return (
             <div className="user-add-form">
-                <h2>Lisää käyttäjä</h2>
+                <h2>Käyttäjätiedot</h2>
                 <p>Tähdellä merkityt kohdat ovat pakollisia.</p>
                 <form onSubmit={this.handleSubmit}>
+                    <div className="form-group required">
+                        <label htmlFor="exampleUserTypee">Käyttäjätyyppi:</label>
+                        <br/>
+                        <small>Lähiruokatuottaja voi lisätä tuotteita myyntiin, keittiö on ostajaosapuoli.</small>
+                        <br/>
+                        <input type="radio" name="usertype" value="farm"/> Lähiruokatuottaja
+                            <input type="radio" name="usertype" value="kitchen"/> Keittiö<br/>
+                    </div>
                     <div className="form-group required">
                         <label htmlFor="exampleUserCompanyName">Tilan / keittiön nimi:</label>
                         <input type="text" className="form-control" id="exampleUserCompanyName" value={this.state.name} onChange={this.handleChange}
