@@ -21,11 +21,7 @@ function Products() {
 }
 
 function ShoppingCart() {
-  return <AddUser/>;
-}
-
-function AddNewProduct() {
-  return <Login/>;
+  return <UserProfile/>;
 }
 
 function Wrapper() {
@@ -50,6 +46,7 @@ function Wrapper() {
         <Route path="/ostoskori/" component={ShoppingCart} />
         <Route path="/profiili/" component={Profile} />
         <Route path="/tuotelisays/:id" component={AddProduct} />
+        <Route path="/muokkaaprofiilia/:id" component={AddUser} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
