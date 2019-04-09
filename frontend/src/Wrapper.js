@@ -5,6 +5,7 @@ import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
 import UserProfile from './UserProfile';
 import AddProduct from './AddProduct';
+import AddUser from './AddUser'
 import Login from './Login';
 
 function Index() {
@@ -12,7 +13,7 @@ function Index() {
 }
 
 function Profile() {
-  return <UserProfile/>;
+  return <Login/>;
 }
 
 function Products() {

@@ -1,6 +1,7 @@
 package fi.tuni.lahiruoka;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,11 +18,11 @@ public class User {
     @SequenceGenerator(name="user_seq",sequenceName="USER_SEQ", allocationSize=1)
     int id;
 
-    @Column(nullable = false)
-    String username;
+    @Column(nullable=false)
+    String googleId;
 
     @Column(nullable = false)
-    String password;
+    String username;
 
     @Column(nullable = false)
     LocalDate lastLogin;
@@ -54,10 +55,10 @@ public class User {
      */
     public User(){}
 
-    public User(UserType userType, String username, String password, String companyName, String address, String phone, String info, LocalDate lastLogin) {
+    public User(String googleId, UserType userType, String username, String companyName, String address, String phone, String info, LocalDate lastLogin) {
+        this.googleId = googleId;
         this.userType = userType;
         this.username = username;
-        this.password = password;
         this.companyName = companyName;
         this.address = address;
         this.phone = phone;
@@ -74,10 +75,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", googleId=" + googleId +
                 ", company name=" + companyName +
                 ", user type=" + userType +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", lastLogin=" + lastLogin +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
@@ -87,6 +88,14 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getGoogleId() {
+        return googleId;
+    }
+
+    public void setGoogleId(String googleId) {
+        this.googleId = googleId;
     }
 
     public String getCompanyName() {
@@ -103,10 +112,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public LocalDate getLastLogin() {
@@ -135,10 +140,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public void setLastLogin(LocalDate lastLogin) {
