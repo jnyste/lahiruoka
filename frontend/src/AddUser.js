@@ -16,23 +16,22 @@ class AddUser extends Component {
             , address: ''
             , phone: ''
             , info: ''
-            , googleId : ''
+            , googleId : localStorage.getItem('userId')
         };
     }
 
     componentDidMount() {
-        /*
+
         if (this.props.match.params.id === 'uusi') {
             this.setState({modifying: false})
         } else {
-            fetch('/api/users/' + this.props.match.params.id)
+            fetch('/api/users/' + localStorage.getItem('userId'))
                 .then((httpResponse) => httpResponse.json())
                 .then((user) => {
-
+                    console.log(user);
                     this.setState({
-                        username: user.companyName
-                        , usertype: user.userType
-                        , password: user.password
+                        companyName: user.companyName
+                        , userType: user.userType
                         , address: user.address
                         , phone: user.phone
                         , info: user.info
@@ -40,7 +39,7 @@ class AddUser extends Component {
                     });
                 });
         }
-        */
+
     }
 
     handleChange(event) {
@@ -80,7 +79,7 @@ class AddUser extends Component {
         }
 
         const newUser = {
-            googleId: "moik"
+            googleId: this.state.googleId
             , userType: userType
             , companyName: this.state.companyName
             , address: this.state.address
