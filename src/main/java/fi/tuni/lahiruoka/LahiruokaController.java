@@ -46,16 +46,16 @@ public class LahiruokaController {
         tagRepository.save(perunaTag);
         tagRepository.save(vihannesTag);
 
-        User userHenkilo = new User("googleId1", UserType.FARM, "henkilo", "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
+        User userHenkilo = new User("googleId1", UserType.FARM, "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
         userHenkilo.addProducts(p, k);
         userRepository.save(userHenkilo);
 
-        User user2 = new User("googleId2", UserType.FARM, "ukkeli", "Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13));
+        User user2 = new User("googleId2", UserType.FARM, "Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13));
         user2.addProducts(pe);
         userRepository.save(user2);
 
-        userRepository.save(new User("googleId3", UserType.KITCHEN, "keitto", "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,03,13)));
-        userRepository.save(new User("googleId4", UserType.KITCHEN, "paraskokki", "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,03,13)));
+        userRepository.save(new User("googleId3", UserType.KITCHEN, "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,03,13)));
+        userRepository.save(new User("googleId4", UserType.KITCHEN, "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,03,13)));
         
         productRepository.save(p);
         productRepository.save(k);
