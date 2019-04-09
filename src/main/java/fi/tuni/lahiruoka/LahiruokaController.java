@@ -1,5 +1,7 @@
 package fi.tuni.lahiruoka;
 
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -87,6 +89,95 @@ public class LahiruokaController {
             }
 
             productRepository.save(product);
+        }
+    }
+
+    @PutMapping("/api/products/{productId}")
+    public void modifyProduct(@PathVariable int productId, @RequestBody ObjectNode updatedProduct) {
+        Optional<Product> productOpt = productRepository.findById(productId);
+
+        String name = updatedProduct.get("name").asText();
+        double price = updatedProduct.get("price").asDouble();
+        double amount = updatedProduct.get("amount").asDouble();;
+        LocalDate availableFrom = LocalDate.parse(updatedProduct.get("availableFrom").asText());
+        LocalDate availableTo = LocalDate.parse(updatedProduct.get("availableTo").asText());;
+        String info = updatedProduct.get("info").asText();
+
+        ArrayNode tagArray = (ArrayNode) updatedProduct.get("tags");
+        LinkedList<String> tags = new LinkedList<>();
+
+        for (int i = 0; i < tagArray.size(); i++) {
+            tags.add(tagArray.get(i).asText());
+        }
+
+        if (productOpt.isPresent()) {
+            Product product = productOpt.get();
+
+            product.setName(name);
+            product.setPrice(price);
+            product.setAmount(amount);
+            product.setAvailableFrom(availableFrom);
+            product.setAvailableTo(availableTo);
+            product.setInfo(info);
+
+            updateProductTags(product, tags);
+
+            productRepository.save(product);
+        }
+    }
+
+    public void updateProductTags(Product product, List<String> tags) {
+        LinkedList<Tag> tagsToBeRemoved = new LinkedList<>();
+
+        for (Tag t : product.getTags()) {
+            if (t.getProducts().size() > 1) {
+                t.getProducts().remove(product);
+            } else {
+                tagsToBeRemoved.add(t);
+            }
+        }
+
+        if (tagsToBeRemoved.size() > 0) {
+            for (Tag t : tagsToBeRemoved) {
+                product.getTags().remove(t);
+            }
+
+            tagRepository.deleteAll(tagsToBeRemoved);
+        }
+
+        saveTagsForProduct(product.getProduct_id(), tags);
+    }
+
+    @PutMapping("/api/user/{userId}")
+    public void modifyUser(@PathVariable int userId, @RequestBody ObjectNode updatedUser) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        String companyName = updatedUser.get("companyName").asText();
+        String address = updatedUser.get("address").asText();
+        String phone = updatedUser.get("phone").asText();
+        String info = updatedUser.get("info").asText();
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            user.setCompanyName(companyName);
+            user.setAddress(address);
+            user.setPhone(phone);
+            user.setInfo(info);
+
+            userRepository.save(user);
+        }
+    }
+
+    @PostMapping("/api/products/{productId}/farm")
+    public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+        Optional<User> farmOptional = getFarmerById(farmId);
+
+        if (productOptional.isPresent() && farmOptional.isPresent()) {
+            farmOptional.get().addProducts(productOptional.get());
+            userRepository.save(farmOptional.get());
+            productRepository.save(productOptional.get());
         }
     }
 

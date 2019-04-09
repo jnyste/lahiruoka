@@ -5,7 +5,7 @@ import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
 import UserProfile from './UserProfile';
 import AddProduct from './AddProduct';
-import AddUser from './AddUser';
+import Login from './Login';
 
 function Index() {
   return <FarmCarousel />;
@@ -24,10 +24,13 @@ function ShoppingCart() {
 }
 
 function AddNewProduct() {
-    return <AddProduct/>;
+  return <Login/>;
 }
 
 function Wrapper() {
+  if (localStorage.getItem('loggedin') === null) {
+    localStorage.setItem('loggedin', 'false');
+  }
   return (
     <Router>
       <div>
