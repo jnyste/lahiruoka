@@ -71,7 +71,7 @@ public class LahiruokaController {
     public int saveProduct(@RequestBody Product product) {
         product.getTags().clear();
         productRepository.save(product);
-        return product.getProduct_id();
+        return product.getProductId();
     }
 
     @PostMapping("/api/products/{productId}/tag")
@@ -234,7 +234,7 @@ public class LahiruokaController {
             tagRepository.deleteAll(tagsToBeRemoved);
         }
 
-        saveTagsForProduct(product.getProduct_id(), tags);
+        saveTagsForProduct(product.getProductId(), tags);
     }
 
     @PutMapping("/api/user/{userId}")
@@ -297,7 +297,7 @@ public class LahiruokaController {
                 Set<Product> products = user.getProducts();
 
                 for (Product product : products) {
-                    removeProductById(product.getProduct_id());
+                    removeProductById(product.getProductId());
                 }
             } else {
                 // productien poistaminen tilauksesta, en voi vielä tehdä, kun tilausten backend ei ole valmis

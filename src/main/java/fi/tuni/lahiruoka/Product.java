@@ -14,7 +14,7 @@ public class Product {
     @Id
     @GeneratedValue(generator="product_seq")
     @SequenceGenerator(name="product_seq",sequenceName="PRODUCT_SEQ", allocationSize=1)
-    int product_id;
+    int productId;
 
     @Column(nullable = false)
     String name;
@@ -53,12 +53,12 @@ public class Product {
         this.info = info;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -128,7 +128,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "product_id=" + product_id +
+                "productId=" + productId +
                 ", tags='" + tags.toString() + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
