@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 // Example class.
 @RestController
@@ -133,7 +130,7 @@ public class LahiruokaController {
 
     @GetMapping("/api/products")
     public Iterable<Product> products() {
-        return productRepository.findAll();
+        return productRepository.findAllByOrderByProductIdDesc();
     }
 
     @GetMapping("/api/products/{productId}")
@@ -165,6 +162,8 @@ public class LahiruokaController {
             return new LinkedList<Product>();
         }
     }
+
+    // GetMappings for searches
 
     @GetMapping("/api/products/tag/{tagName}")
     public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
