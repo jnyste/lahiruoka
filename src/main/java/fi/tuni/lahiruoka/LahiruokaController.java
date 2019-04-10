@@ -187,6 +187,36 @@ public class LahiruokaController {
         return productRepository.findProductsByNameContainingIgnoreCase(containsWord);
     }
 
+    @GetMapping("/api/products/info/{containsWord}")
+    public Iterable<Product> getProductsByInfoContaining(@PathVariable String containsWord) {
+        return productRepository.findProductsByInfoContainingIgnoreCase(containsWord);
+    }
+
+    @GetMapping("/api/search/{keyWord}")
+    public Iterable<Product> getProductsSearchAll(@PathVariable String keyWord) {
+        Iterable<Product> productsByTag = getProductsByTag(keyWord);
+        Iterable<Product> productsByName = getProductsByNameContaining(keyWord);
+        Iterable<Product> productsByInfo = getProductsByInfoContaining(keyWord);
+        HashSet<Product> products = new HashSet<>();
+
+        for (Product p : productsByTag) {
+            products.add(p);
+        }
+
+        for (Product p : productsByName) {
+            products.add(p);
+        }
+
+        for (Product p : productsByInfo) {
+            products.add(p);
+        }
+
+        List<Product> sortedList = new LinkedList<>(products);
+        Collections.sort(sortedList, compareByIdDesc);
+
+        return sortedList;
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // ---------------------------------------------------PUT MAPPING---------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
