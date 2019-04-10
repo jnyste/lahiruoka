@@ -143,6 +143,21 @@ public class LahiruokaController {
         return productRepository.findById(productId);
     }
 
+    @GetMapping("/api/farm/{farmerId}")
+    public Optional<User> getFarmerById(@PathVariable int farmerId) {
+        Optional<User> userOptional = userRepository.findById(farmerId);
+
+        if (userOptional.isPresent()) {
+            if (userOptional.get().getUserType() == UserType.FARM) {
+                return userOptional;
+            } else {
+                return Optional.empty();
+            }
+        }
+
+        return userOptional;
+    }
+
     @GetMapping("/api/farm/{farmerId}/products")
     public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
         Optional<User> u = userRepository.findById(farmerId);
@@ -230,10 +245,26 @@ public class LahiruokaController {
             @Override
             public int compare(Product o1, Product o2) {
                 if (o2.getPrice() - o1.getPrice() > 0) {
-
+                    return -1;
                 } else {
-
+                    return 1;
                 }
+            }
+        });
+
+        if (!ascending) {
+            Collections.reverse(products);
+        }
+
+        return products;
+    }
+
+    @GetMapping("/api/search/{keyWord}/sortByPriceAsc/{ascending}")
+    public Iterable<Product> getProductsSearchSortByPriceAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
+        List<Product> products = getProductsSearchAll(keyWord);
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
                 return o1.getAvailableTo().compareTo(o2.getAvailableTo());
             }
         });
