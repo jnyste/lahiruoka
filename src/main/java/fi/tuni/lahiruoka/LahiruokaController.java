@@ -11,12 +11,6 @@ import java.util.*;
 // Example class.
 @RestController
 public class LahiruokaController {
-    static Comparator<Product> compareByIdDesc = new Comparator<Product>() {
-        @Override
-        public int compare(Product o1, Product o2) {
-            return o2.getProductId() - o1.getProductId();
-        }
-    };
 
     @Autowired
     ProductRepository productRepository;
@@ -193,7 +187,7 @@ public class LahiruokaController {
     }
 
     @GetMapping("/api/search/{keyWord}")
-    public Iterable<Product> getProductsSearchAll(@PathVariable String keyWord) {
+    public List<Product> getProductsSearchAll(@PathVariable String keyWord) {
         Iterable<Product> productsByTag = getProductsByTag(keyWord);
         Iterable<Product> productsByName = getProductsByNameContaining(keyWord);
         Iterable<Product> productsByInfo = getProductsByInfoContaining(keyWord);
@@ -212,9 +206,48 @@ public class LahiruokaController {
         }
 
         List<Product> sortedList = new LinkedList<>(products);
-        Collections.sort(sortedList, compareByIdDesc);
+        Collections.sort(sortedList, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o2.getProductId() - o1.getProductId();
+            }
+        });
 
         return sortedList;
+    }
+
+    @GetMapping("/api/search/{keyWord}/sortByName/{ascending}")
+    public Iterable<Product> getProductsSearchSortByNameAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
+        List<Product> products = getProductsSearchAll(keyWord);
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+        if (!ascending) {
+            Collections.reverse(products);
+        }
+
+        return products;
+    }
+
+    @GetMapping("/api/search/{keyWord}/sortByAvailableTo/{ascending}")
+    public Iterable<Product> getProductsSearchSortByAvailableToAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
+        List<Product> products = getProductsSearchAll(keyWord);
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o1.getAvailableTo().compareTo(o2.getAvailableTo());
+            }
+        });
+
+        if (!ascending) {
+            Collections.reverse(products);
+        }
+
+        return products;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
