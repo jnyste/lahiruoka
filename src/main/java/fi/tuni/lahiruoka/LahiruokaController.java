@@ -61,6 +61,11 @@ public class LahiruokaController {
         productRepository.save(pe);
     }
 
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------POST MAPPINGS--------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
     @PostMapping(value = "/api/products")
     public int saveProduct(@RequestBody Product product) {
         product.getTags().clear();
@@ -90,6 +95,90 @@ public class LahiruokaController {
             productRepository.save(product);
         }
     }
+
+    @PostMapping("/api/products/{productId}/farm")
+    public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+        Optional<User> farmOptional = getFarmerById(farmId);
+
+        if (productOptional.isPresent() && farmOptional.isPresent()) {
+            farmOptional.get().addProducts(productOptional.get());
+            userRepository.save(farmOptional.get());
+            productRepository.save(productOptional.get());
+        }
+    }
+
+    @PostMapping("/api/users")
+    public int saveUser(@RequestBody User user) {
+        user.getProducts().clear();
+        user.setLastLogin(LocalDate.now());
+        userRepository.save(user);
+        return user.getId();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------GET MAPPING---------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/api/users")
+    public Iterable<User> hello() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/api/users/{googleId}")
+    public Optional<User> findUserByGoogleId(@PathVariable String googleId) {
+        return userRepository.findUserByGoogleId(googleId);
+    }
+
+    @GetMapping("/api/products")
+    public Iterable<Product> products() {
+        return productRepository.findAll();
+    }
+
+    @GetMapping("/api/products/{productId}")
+    public Optional<Product> getProductById(@PathVariable int productId) {
+        return productRepository.findById(productId);
+    }
+
+    @GetMapping("/api/farm/{farmerId}")
+    public Optional<User> getFarmerById(@PathVariable int farmerId) {
+        Optional<User> userOptional = userRepository.findById(farmerId);
+
+        if (userOptional.isPresent()) {
+            if (userOptional.get().getUserType() == UserType.FARM) {
+                return userOptional;
+            } else {
+                return Optional.empty();
+            }
+        }
+
+        return userOptional;
+    }
+
+    @GetMapping("/api/farm/{farmerId}/products")
+    public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
+        Optional<User> u = userRepository.findById(farmerId);
+        if(u.isPresent()) {
+            return u.get().getProducts();
+        } else {
+            return new LinkedList<Product>();
+        }
+    }
+
+    @GetMapping("/api/products/tag/{tagName}")
+    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
+        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
+
+        if (tagOptional.isPresent()) {
+            return tagOptional.get().getProducts();
+        } else {
+            return new LinkedList<Product>();
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------PUT MAPPING---------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     @PutMapping("/api/products/{productId}")
     public void modifyProduct(@PathVariable int productId, @RequestBody ObjectNode updatedProduct) {
@@ -168,81 +257,9 @@ public class LahiruokaController {
         }
     }
 
-    @PostMapping("/api/products/{productId}/farm")
-    public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
-        Optional<Product> productOptional = productRepository.findById(productId);
-        Optional<User> farmOptional = getFarmerById(farmId);
-
-        if (productOptional.isPresent() && farmOptional.isPresent()) {
-            farmOptional.get().addProducts(productOptional.get());
-            userRepository.save(farmOptional.get());
-            productRepository.save(productOptional.get());
-        }
-    }
-
-    @PostMapping("/api/users")
-    public int saveUser(@RequestBody User user) {
-        user.getProducts().clear();
-        user.setLastLogin(LocalDate.now());
-        userRepository.save(user);
-        return user.getId();
-    }
-
-    @GetMapping("/api/users")
-    public Iterable<User> hello() {
-        return userRepository.findAll();
-    }
-
-    @GetMapping("/api/users/{googleId}")
-    public Optional<User> findUserByGoogleId(@PathVariable String googleId) {
-        return userRepository.findUserByGoogleId(googleId);
-    }
-
-    @GetMapping("/api/products")
-    public Iterable<Product> products() {
-        return productRepository.findAll();
-    }
-
-    @GetMapping("/api/products/{productId}")
-    public Optional<Product> getProductById(@PathVariable int productId) {
-        return productRepository.findById(productId);
-    }
-
-    @GetMapping("/api/farm/{farmerId}")
-    public Optional<User> getFarmerById(@PathVariable int farmerId) {
-        Optional<User> userOptional = userRepository.findById(farmerId);
-
-        if (userOptional.isPresent()) {
-            if (userOptional.get().getUserType() == UserType.FARM) {
-                return userOptional;
-            } else {
-                return Optional.empty();
-            }
-        }
-
-        return userOptional;
-    }
-
-    @GetMapping("/api/farm/{farmerId}/products")
-    public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
-        Optional<User> u = userRepository.findById(farmerId);
-        if(u.isPresent()) {
-            return u.get().getProducts();
-        } else {
-            return new LinkedList<Product>();
-        }
-    }
-
-    @GetMapping("/api/products/tag/{tagName}")
-    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
-        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
-
-        if (tagOptional.isPresent()) {
-            return tagOptional.get().getProducts();
-        } else {
-            return new LinkedList<Product>();
-        }
-    }
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------DELETE MAPPING--------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     @DeleteMapping("/api/products/{productId}")
     public void removeProductById(@PathVariable int productId) {
