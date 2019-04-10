@@ -11,6 +11,12 @@ import java.util.*;
 // Example class.
 @RestController
 public class LahiruokaController {
+    static Comparator<Product> compareByIdDesc = new Comparator<Product>() {
+        @Override
+        public int compare(Product o1, Product o2) {
+            return o2.getProductId() - o1.getProductId();
+        }
+    };
 
     @Autowired
     ProductRepository productRepository;
@@ -177,7 +183,7 @@ public class LahiruokaController {
     }
 
     @GetMapping("/api/products/name/{containsWord}")
-    public Iterable<Product> getProductsByTitleContaining(@PathVariable String containsWord) {
+    public Iterable<Product> getProductsByNameContaining(@PathVariable String containsWord) {
         return productRepository.findProductsByNameContainingIgnoreCase(containsWord);
     }
 
