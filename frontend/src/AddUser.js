@@ -9,7 +9,6 @@ class AddUser extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.postNewUser = this.postNewUser.bind(this);
-
         this.state = {
             userType: '2'
             , companyName: ''
@@ -21,8 +20,7 @@ class AddUser extends Component {
     }
 
     componentDidMount() {
-
-        if (this.props.match.params.id === 'uusi') {
+        if (this.props.match.params.gid === 'muokkaa') {
             this.setState({modifying: false})
         } else {
             fetch('/api/users/' + localStorage.getItem('userId'))
@@ -39,7 +37,6 @@ class AddUser extends Component {
                     });
                 });
         }
-
     }
 
     handleChange(event) {
@@ -87,8 +84,6 @@ class AddUser extends Component {
             , info: this.state.info
         };
 
-        console.log(newUser);
-
         await fetch('/api/users', {
             method: 'POST',
             headers: {
@@ -98,7 +93,7 @@ class AddUser extends Component {
             body: JSON.stringify(newUser)
         }).then(() => {
             console.log("Should be posted");
-            this.props.history.push("/profiili/");
+            this.props.history.push("/profiili/oma");
         })
     }
 
