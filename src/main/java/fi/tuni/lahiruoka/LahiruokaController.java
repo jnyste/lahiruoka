@@ -128,6 +128,11 @@ public class LahiruokaController {
         return userRepository.findUserByGoogleId(googleId);
     }
 
+    @GetMapping("/api/users/id/{googleId}")
+    public Optional<User> findUserById(@PathVariable int id) {
+        return userRepository.findById(id);
+    }
+
     @GetMapping("/api/products")
     public Iterable<Product> products() {
         return productRepository.findAllByOrderByProductIdDesc();
@@ -136,21 +141,6 @@ public class LahiruokaController {
     @GetMapping("/api/products/{productId}")
     public Optional<Product> getProductById(@PathVariable int productId) {
         return productRepository.findById(productId);
-    }
-
-    @GetMapping("/api/farm/{farmerId}")
-    public Optional<User> getFarmerById(@PathVariable int farmerId) {
-        Optional<User> userOptional = userRepository.findById(farmerId);
-
-        if (userOptional.isPresent()) {
-            if (userOptional.get().getUserType() == UserType.FARM) {
-                return userOptional;
-            } else {
-                return Optional.empty();
-            }
-        }
-
-        return userOptional;
     }
 
     @GetMapping("/api/farm/{farmerId}/products")
@@ -216,7 +206,7 @@ public class LahiruokaController {
         return sortedList;
     }
 
-    @GetMapping("/api/search/{keyWord}/sortByName/{ascending}")
+    @GetMapping("/api/search/{keyWord}/sortByNameAsc/{ascending}")
     public Iterable<Product> getProductsSearchSortByNameAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
         List<Product> products = getProductsSearchAll(keyWord);
         Collections.sort(products, new Comparator<Product>() {
@@ -233,12 +223,17 @@ public class LahiruokaController {
         return products;
     }
 
-    @GetMapping("/api/search/{keyWord}/sortByAvailableTo/{ascending}")
+    @GetMapping("/api/search/{keyWord}/sortByAvailableToAsc/{ascending}")
     public Iterable<Product> getProductsSearchSortByAvailableToAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
         List<Product> products = getProductsSearchAll(keyWord);
         Collections.sort(products, new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
+                if (o2.getPrice() - o1.getPrice() > 0) {
+
+                } else {
+
+                }
                 return o1.getAvailableTo().compareTo(o2.getAvailableTo());
             }
         });
