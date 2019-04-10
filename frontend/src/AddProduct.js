@@ -132,13 +132,13 @@ class AddProduct extends Component {
                               'Accept': 'application/json',
                               'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify(1),
+                            body: JSON.stringify(localStorage.getItem('farmId')),
                          }).then(() => {
                             console.log("farm added to " + value);
                         })
                   )
               }
-        }).finally(() => this.props.history.push("/profiili/"))
+        }).finally(() => this.props.history.push("/profiili/oma"))
     }
 
     render() {

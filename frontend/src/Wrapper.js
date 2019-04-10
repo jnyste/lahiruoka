@@ -12,10 +12,6 @@ function Index() {
   return <FarmCarousel />;
 }
 
-function Profile() {
-  return <UserProfile/>;
-}
-
 function Products() {
   return <ProductPage/>;
 }
@@ -44,7 +40,7 @@ function Wrapper() {
         <Route path="/" exact component={Index} />
         <Route path="/tuotteet/" component={Products} />
         <Route path="/ostoskori/" component={ShoppingCart} />
-        <Route exact path="/profiili/oma" component={Profile} />
+        <Route exact path="/profiili/:id" component={UserProfile} />
         <Route path="/tuotelisays/:id" component={AddProduct} />
         <Route path="/profiili/oma/:gid" component={AddUser} />
         <Route path="/login/" component={Login} />
