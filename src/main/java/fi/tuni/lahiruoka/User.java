@@ -22,9 +22,6 @@ public class User {
     String googleId;
 
     @Column(nullable = false)
-    String username;
-
-    @Column(nullable = false)
     LocalDate lastLogin;
 
     @Column(nullable = false)
@@ -55,10 +52,9 @@ public class User {
      */
     public User(){}
 
-    public User(String googleId, UserType userType, String username, String companyName, String address, String phone, String info, LocalDate lastLogin) {
+    public User(String googleId, UserType userType, String companyName, String address, String phone, String info, LocalDate lastLogin) {
         this.googleId = googleId;
         this.userType = userType;
-        this.username = username;
         this.companyName = companyName;
         this.address = address;
         this.phone = phone;
@@ -78,7 +74,6 @@ public class User {
                 ", googleId=" + googleId +
                 ", company name=" + companyName +
                 ", user type=" + userType +
-                ", username='" + username + '\'' +
                 ", lastLogin=" + lastLogin +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
@@ -110,10 +105,6 @@ public class User {
         return this.userType;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public LocalDate getLastLogin() {
         return lastLogin;
     }
@@ -136,10 +127,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setLastLogin(LocalDate lastLogin) {

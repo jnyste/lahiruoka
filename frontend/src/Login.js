@@ -1,23 +1,36 @@
 import React, {Component} from "react";
-import GoogleLogin from 'react-google-login';
-import { GoogleLogout } from 'react-google-login';
+import {withRouter} from "react-router-dom";
+import GoogleLogin, { GoogleLogout } from 'react-google-login';
 
 class Login extends Component {
 
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
+        this.firstTimeUser = this.firstTimeUser.bind(this);
+        this.continuingUser = this.continuingUser.bind(this);
         var loggedin = false;
         if(localStorage.getItem('loggedin') === 'true') {
             loggedin = true;
         }
-        this.state = {loggedin: loggedin};
+        this.state = {loggedin: loggedin
+                    , firstTime: false};
     }
 
     logout() {
         console.log('Logged out');
         this.setState({loggedin: false});
         localStorage.setItem('loggedin', 'false');
+        localStorage.setItem('userId', 'none');
+        this.props.history.push("/");
+    }
+
+    firstTimeUser() {
+        this.props.history.push("/profiili/oma/muokkaa");
+    }
+
+    continuingUser() {
+        this.props.history.push("/profiili/oma");
     }
 
     render() {
@@ -28,11 +41,18 @@ class Login extends Component {
                 console.log('Login failed');
             } else {
                 this.setState({loggedin: true});
+                let userId = response.profileObj.googleId;
                 localStorage.setItem('loggedin', 'true');
-                console.log(response);
+                localStorage.setItem('userId', userId);
+                fetch('/api/users/' + userId).then((httpResponse) => httpResponse.json()).then((user) => {
+                    if(user === null) {
+                        this.firstTimeUser();
+                    } else {
+                        this.continuingUser();
+                    }
+                });
             }
-
-        }
+        };
 
         return (
             <div className="App">
@@ -64,4 +84,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

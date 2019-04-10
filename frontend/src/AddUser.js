@@ -9,30 +9,27 @@ class AddUser extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.postNewUser = this.postNewUser.bind(this);
-
         this.state = {
-            name: ''
-            , usertype: ''
-            , username: ''
-            , password: ''
+            userType: '2'
+            , companyName: ''
             , address: ''
             , phone: ''
             , info: ''
+            , googleId : localStorage.getItem('userId')
         };
     }
+
     componentDidMount() {
-        if (this.props.match.params.id === 'uusi') {
+        if (this.props.match.params.gid === 'muokkaa') {
             this.setState({modifying: false})
         } else {
-            fetch('/api/users/' + this.props.match.params.id)
+            fetch('/api/users/' + localStorage.getItem('userId'))
                 .then((httpResponse) => httpResponse.json())
                 .then((user) => {
-
+                    console.log(user);
                     this.setState({
-                        name: user.companyName
-                        , usertype: user.userType
-                        , username: user.username
-                        , password: user.password
+                        companyName: user.companyName
+                        , userType: user.userType
                         , address: user.address
                         , phone: user.phone
                         , info: user.info
@@ -44,8 +41,8 @@ class AddUser extends Component {
 
     handleChange(event) {
         const target = event.target;
-        const value = target.value;
-        const name = target.name;
+        let value = target.value;
+        let name = target.name;
 
         this.setState({
             [name]: value
@@ -54,42 +51,40 @@ class AddUser extends Component {
     }
 
     handleSubmit(event) {
-        const name = this.state.name;
-        const usertype = this.state.usertype;
-        const username = this.state.username;
-        const password = this.state.password;
+        const userType = this.state.userType;
+        const companyName = this.state.companyName;
         const address = this.state.address;
         const phone = this.state.phone;
-        const info = this.state.info;
 
-        /*
-        if (availableFrom > availableTo) {
-            alert('Tarkista "Saatavilla"-päivämäärät!');
+        if (userType === '2' || companyName.length <= 0 || address.length <= 0 || phone.length <= 0) {
+            alert('Täytä kaikki tähdellä merkityt kentät!');
         } else {
-            if (name.length <= 0 || price.length <= 0 || amount.length <= 0 || availableFrom.length <= 0 || availableTo.length <= 0) {
-                alert('Täytä kaikki tähdellä merkityt kentät!');
-            } else {
-                this.postNewProduct();
-            }
+            this.postNewUser();
         }
-        */
 
         event.preventDefault();
     }
 
     async postNewUser() {
 
+        let userType;
+
+        if (this.state.userType === "0") {
+            userType = 0;
+        } else {
+            userType = 1;
+        }
+
         const newUser = {
-            name: this.state.name
-            , usertype: this.state.usertype
-            , username: this.state.username
-            , password: this.state.password
+            googleId: this.state.googleId
+            , userType: userType
+            , companyName: this.state.companyName
             , address: this.state.address
             , phone: this.state.phone
             , info: this.state.info
         };
 
-        await fetch('/api/users/', {
+        await fetch('/api/users', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -98,7 +93,7 @@ class AddUser extends Component {
             body: JSON.stringify(newUser)
         }).then(() => {
             console.log("Should be posted");
-            this.props.history.push("/profiili/");
+            this.props.history.push("/profiili/oma");
         })
     }
 
@@ -109,36 +104,26 @@ class AddUser extends Component {
                 <p>Tähdellä merkityt kohdat ovat pakollisia.</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group required">
-                        <label htmlFor="exampleUserTypee">Käyttäjätyyppi:</label>
+                        <label htmlFor="exampleUserType">Käyttäjätyyppi:</label>
                         <br/>
                         <small>Lähiruokatuottaja voi lisätä tuotteita myyntiin, keittiö on ostajaosapuoli.</small>
                         <br/>
-                        <input type="radio" name="usertype" value="farm"/> Lähiruokatuottaja
-                            <input type="radio" name="usertype" value="kitchen"/> Keittiö<br/>
+                        <input type="radio" name="userType" onChange={this.handleChange} value="1" checked={this.state.userType === '1'} /> Lähiruokatuottaja
+                        <input type="radio" name="userType" onChange={this.handleChange} value="0" checked={this.state.userType === '0'}/> Keittiö<br/>
                     </div>
                     <div className="form-group required">
                         <label htmlFor="exampleUserCompanyName">Tilan / keittiön nimi:</label>
-                        <input type="text" className="form-control" id="exampleUserCompanyName" value={this.state.name} onChange={this.handleChange}
-                               placeholder="Anna tilan/keittiön nimi" name="name" />
+                        <input type="text" className="form-control" id="exampleUserCompanyName" value={this.state.companyName} onChange={this.handleChange}
+                               placeholder="Anna tilan/keittiön nimi" name="companyName" />
                     </div>
-                    <div className="form-group  required">
-                        <label htmlFor="exampleUsername">Käyttäjänimi:</label>
-                        <input type="text" className="form-control" id="exampleUsername" value={this.state.username} onChange={this.handleChange}
-                               placeholder="Anna käyttäjänimi, esim. paraskeittio" name="username"/>
-                    </div>
-                    <div className="form-group  required">
-                        <label htmlFor="examplePassword">Salasana:</label>
-                        <input type="text" className="form-control" id="examplePassword" value={this.state.password} onChange={this.handleChange}
-                               placeholder="Anna salainen sana" name="password"/>
-                    </div>
-                    <div className="form-group  required">
+                    <div className="form-group required">
                         <label htmlFor="exampleAddress">Osoite:</label>
                         <input type="text" className="form-control" id="exampleAddress" value={this.state.address} onChange={this.handleChange}
                                placeholder="Anna osoite, esim Kukkakuja 6, 33330 Mikkeli" name="address"/>
                     </div>
-                    <div className="form-group  required">
+                    <div className="form-group required">
                         <label htmlFor="examplePhone">Puhelinnumero:</label>
-                        <input type="text" className="form-control" id="examplePhone" value={this.state.address} onChange={this.handleChange}
+                        <input type="text" className="form-control" id="examplePhone" value={this.state.phone} onChange={this.handleChange}
                                placeholder="Anna puhelinnumero, esim. 050-5050505" name="phone"/>
                     </div>
                     <div className="form-group">

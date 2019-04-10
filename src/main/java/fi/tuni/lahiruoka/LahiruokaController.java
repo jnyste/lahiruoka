@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 // Example class.
 @RestController
@@ -46,21 +46,26 @@ public class LahiruokaController {
         tagRepository.save(perunaTag);
         tagRepository.save(vihannesTag);
 
-        User userHenkilo = new User("googleId1", UserType.FARM, "henkilo", "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,03,12));
+        User userHenkilo = new User("googleId1", UserType.FARM, "Mikkolan tila", "kukkakuja 450, 33333 Virrat", "049-8573753", "mikkolan tila on niin perinteinen ettei meillä käytetä edes sähköä", LocalDate.of(2019,3,3));
         userHenkilo.addProducts(p, k);
         userRepository.save(userHenkilo);
 
-        User user2 = new User("googleId2", UserType.FARM, "ukkeli", "Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,03,13));
+        User user2 = new User("googleId2", UserType.FARM, "Mummolan tila", "mummotie 444, 45340 riihimäki", "054-6224112", "mummon ruoka on parasta, kaikkihan sen tietää", LocalDate.of(2019,4,3));
         user2.addProducts(pe);
         userRepository.save(user2);
 
-        userRepository.save(new User("googleId3", UserType.KITCHEN, "keitto", "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,03,13)));
-        userRepository.save(new User("googleId4", UserType.KITCHEN, "paraskokki", "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,03,13)));
+        userRepository.save(new User("googleId3", UserType.KITCHEN, "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,3,2)));
+        userRepository.save(new User("googleId4", UserType.KITCHEN, "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,4,7)));
         
         productRepository.save(p);
         productRepository.save(k);
         productRepository.save(pe);
     }
+
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------POST MAPPINGS--------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     @PostMapping(value = "/api/products")
     public int saveProduct(@RequestBody Product product) {
@@ -91,6 +96,90 @@ public class LahiruokaController {
             productRepository.save(product);
         }
     }
+
+    @PostMapping("/api/products/{productId}/farm")
+    public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+        Optional<User> farmOptional = getFarmerById(farmId);
+
+        if (productOptional.isPresent() && farmOptional.isPresent()) {
+            farmOptional.get().addProducts(productOptional.get());
+            userRepository.save(farmOptional.get());
+            productRepository.save(productOptional.get());
+        }
+    }
+
+    @PostMapping("/api/users")
+    public int saveUser(@RequestBody User user) {
+        user.getProducts().clear();
+        user.setLastLogin(LocalDate.now());
+        userRepository.save(user);
+        return user.getId();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------GET MAPPING---------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @GetMapping("/api/users")
+    public Iterable<User> hello() {
+        return userRepository.findAll();
+    }
+
+    @GetMapping("/api/users/{googleId}")
+    public Optional<User> findUserByGoogleId(@PathVariable String googleId) {
+        return userRepository.findUserByGoogleId(googleId);
+    }
+
+    @GetMapping("/api/products")
+    public Iterable<Product> products() {
+        return productRepository.findAll();
+    }
+
+    @GetMapping("/api/products/{productId}")
+    public Optional<Product> getProductById(@PathVariable int productId) {
+        return productRepository.findById(productId);
+    }
+
+    @GetMapping("/api/farm/{farmerId}")
+    public Optional<User> getFarmerById(@PathVariable int farmerId) {
+        Optional<User> userOptional = userRepository.findById(farmerId);
+
+        if (userOptional.isPresent()) {
+            if (userOptional.get().getUserType() == UserType.FARM) {
+                return userOptional;
+            } else {
+                return Optional.empty();
+            }
+        }
+
+        return userOptional;
+    }
+
+    @GetMapping("/api/farm/{farmerId}/products")
+    public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
+        Optional<User> u = userRepository.findById(farmerId);
+        if(u.isPresent()) {
+            return u.get().getProducts();
+        } else {
+            return new LinkedList<Product>();
+        }
+    }
+
+    @GetMapping("/api/products/tag/{tagName}")
+    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
+        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
+
+        if (tagOptional.isPresent()) {
+            return tagOptional.get().getProducts();
+        } else {
+            return new LinkedList<Product>();
+        }
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ---------------------------------------------------PUT MAPPING---------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     @PutMapping("/api/products/{productId}")
     public void modifyProduct(@PathVariable int productId, @RequestBody ObjectNode updatedProduct) {
@@ -169,80 +258,9 @@ public class LahiruokaController {
         }
     }
 
-    @PostMapping("/api/products/{productId}/farm")
-    public void saveFarmToProduct(@PathVariable int productId, @RequestBody int farmId) {
-        Optional<Product> productOptional = productRepository.findById(productId);
-        Optional<User> farmOptional = getFarmerById(farmId);
-
-        if (productOptional.isPresent() && farmOptional.isPresent()) {
-            farmOptional.get().addProducts(productOptional.get());
-            userRepository.save(farmOptional.get());
-            productRepository.save(productOptional.get());
-        }
-    }
-
-    @PostMapping("/api/user")
-    public int saveUser(@RequestBody User user) {
-        user.getProducts().clear();
-        userRepository.save(user);
-        return user.getId();
-    }
-
-    @GetMapping("/api/users")
-    public Iterable<User> hello() {
-        return userRepository.findAll();
-    }
-
-    @GetMapping("/api/users/{googleId}")
-    public Optional<User> findUserByGoogleId(@PathVariable String googleId) {
-        return userRepository.findUserByGoogleId(googleId);
-    }
-
-    @GetMapping("/api/products")
-    public Iterable<Product> products() {
-        return productRepository.findAll();
-    }
-
-    @GetMapping("/api/products/{productId}")
-    public Optional<Product> getProductById(@PathVariable int productId) {
-        return productRepository.findById(productId);
-    }
-
-    @GetMapping("/api/farm/{farmerId}")
-    public Optional<User> getFarmerById(@PathVariable int farmerId) {
-        Optional<User> userOptional = userRepository.findById(farmerId);
-
-        if (userOptional.isPresent()) {
-            if (userOptional.get().getUserType() == UserType.FARM) {
-                return userOptional;
-            } else {
-                return Optional.empty();
-            }
-        }
-
-        return userOptional;
-    }
-
-    @GetMapping("/api/farm/{farmerId}/products")
-    public Iterable<Product> productsByFarmer(@PathVariable int farmerId) {
-        Optional<User> u = userRepository.findById(farmerId);
-        if(u.isPresent()) {
-            return u.get().getProducts();
-        } else {
-            return new LinkedList<Product>();
-        }
-    }
-
-    @GetMapping("/api/products/tag/{tagName}")
-    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
-        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
-
-        if (tagOptional.isPresent()) {
-            return tagOptional.get().getProducts();
-        } else {
-            return new LinkedList<Product>();
-        }
-    }
+    // -----------------------------------------------------------------------------------------------------------------
+    // -------------------------------------------------DELETE MAPPING--------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     @DeleteMapping("/api/products/{productId}")
     public void removeProductById(@PathVariable int productId) {
@@ -266,5 +284,26 @@ public class LahiruokaController {
         }
 
         productRepository.deleteById(productId);
+    }
+
+    @DeleteMapping("/api/users/{userId}")
+    public void removeUserById(@PathVariable int userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            if (user.getUserType().equals(UserType.FARM)) {
+                Set<Product> products = user.getProducts();
+
+                for (Product product : products) {
+                    removeProductById(product.getProduct_id());
+                }
+            } else {
+                // productien poistaminen tilauksesta, en voi vielä tehdä, kun tilausten backend ei ole valmis
+            }
+
+            userRepository.delete(user);
+        }
     }
 }
