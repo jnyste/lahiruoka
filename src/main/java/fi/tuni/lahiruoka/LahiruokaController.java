@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 // Example class.
 @RestController
@@ -283,5 +284,26 @@ public class LahiruokaController {
         }
 
         productRepository.deleteById(productId);
+    }
+
+    @DeleteMapping("/api/users/{userId}")
+    public void removeUserById(@PathVariable int userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            if (user.getUserType().equals(UserType.FARM)) {
+                Set<Product> products = user.getProducts();
+
+                for (Product product : products) {
+                    removeProductById(product.getProduct_id());
+                }
+            } else {
+                // productien poistaminen tilauksesta, en voi vielä tehdä, kun tilausten backend ei ole valmis
+            }
+
+            userRepository.delete(user);
+        }
     }
 }
