@@ -245,10 +245,11 @@ public class LahiruokaController {
             @Override
             public int compare(Product o1, Product o2) {
                 if (o2.getPrice() - o1.getPrice() > 0) {
-                    return -1;
+
                 } else {
-                    return 1;
+
                 }
+                return o1.getAvailableTo().compareTo(o2.getAvailableTo());
             }
         });
 
@@ -265,7 +266,11 @@ public class LahiruokaController {
         Collections.sort(products, new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                return o1.getAvailableTo().compareTo(o2.getAvailableTo());
+                if (o2.getPrice() - o1.getPrice() > 0) {
+                    return -1;
+                } else {
+                    return 1;
+                }
             }
         });
 
