@@ -9,7 +9,6 @@ class AddUser extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.postNewUser = this.postNewUser.bind(this);
-
         this.state = {
             userType: '2'
             , companyName: ''
@@ -21,8 +20,7 @@ class AddUser extends Component {
     }
 
     componentDidMount() {
-
-        if (this.props.match.params.id === 'uusi') {
+        if (this.props.match.params.gid === 'muokkaa') {
             this.setState({modifying: false})
         } else {
             fetch('/api/users/' + localStorage.getItem('userId'))
@@ -39,7 +37,6 @@ class AddUser extends Component {
                     });
                 });
         }
-
     }
 
     handleChange(event) {
@@ -59,10 +56,14 @@ class AddUser extends Component {
         const address = this.state.address;
         const phone = this.state.phone;
 
-        if (userType === '2' || companyName.length <= 0 || address.length <= 0 || phone.length <= 0) {
-            alert('Täytä kaikki tähdellä merkityt kentät!');
+        if (phone.match(/[a-z]/i)) {
+            alert('Tarkista puhelinnumero! Sallitut merkit: 0-9, -+');
         } else {
-            this.postNewUser();
+            if (userType === '2' || companyName.length <= 0 || address.length <= 0 || phone.length <= 0) {
+                alert('Täytä kaikki tähdellä merkityt kentät!');
+            } else {
+                this.postNewUser();
+            }
         }
 
         event.preventDefault();
@@ -87,8 +88,6 @@ class AddUser extends Component {
             , info: this.state.info
         };
 
-        console.log(newUser);
-
         await fetch('/api/users', {
             method: 'POST',
             headers: {
@@ -98,7 +97,7 @@ class AddUser extends Component {
             body: JSON.stringify(newUser)
         }).then(() => {
             console.log("Should be posted");
-            this.props.history.push("/profiili/");
+            this.props.history.push("/profiili/oma");
         })
     }
 

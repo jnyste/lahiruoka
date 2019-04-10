@@ -13,7 +13,7 @@ function Index() {
 }
 
 function Profile() {
-  return <Login/>;
+  return <UserProfile/>;
 }
 
 function Products() {
@@ -21,7 +21,7 @@ function Products() {
 }
 
 function ShoppingCart() {
-  return <UserProfile/>;
+  return <h1>Ostoskori</h1>;
 }
 
 function Wrapper() {
@@ -38,15 +38,16 @@ function Wrapper() {
           <Link to="/tuotteet/">Tuotteet</Link>
           <Link to="/ostoskori/" className="right_float">Ostoskori (0) <span
               className="glyphicon glyphicon-shopping-cart shoppingcart"></span></Link>
-          <Link to="/profiili/" className="right_float">Oma tili</Link>
+          <Link to="/login/" className="right_float">Oma tili</Link>
         </nav>
 
         <Route path="/" exact component={Index} />
         <Route path="/tuotteet/" component={Products} />
         <Route path="/ostoskori/" component={ShoppingCart} />
-        <Route path="/profiili/" component={Profile} />
+        <Route exact path="/profiili/oma" component={Profile} />
         <Route path="/tuotelisays/:id" component={AddProduct} />
-        <Route path="/muokkaaprofiilia/:id" component={AddUser} />
+        <Route path="/profiili/oma/:gid" component={AddUser} />
+        <Route path="/login/" component={Login} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
