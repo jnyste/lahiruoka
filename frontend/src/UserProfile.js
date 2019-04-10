@@ -6,23 +6,42 @@ import {Link} from "react-router-dom";
 
 class UserProfile extends Component {
 
-    state = {productNames: ["Tähän tulee tuotteita"]};
+
+    constructor(props) {
+        super(props);
+        this.fetchProducts = this.fetchProducts.bind(this);
+        console.log('User profile');
+        this.state = {productNames: ["Tähän tulee tuotteita"]
+                    , farm: ''
+                    , address: ''
+                    , phone: ''
+                    , info: ''
+                    , farmId: ''};
+
+    }
 
     componentDidMount() {
-        fetch('/api/users')
-            .then(response => response.json())
-            .then(user => {
-                let farm = user[0];
-                let farmUsername = farm.companyName;
-                let farmAddress = farm.address;
-                let farmPhone = farm.phone;
-                let farmInfo = farm.info;
-                this.setState({farm: farmUsername});
-                this.setState({address: farmAddress});
-                this.setState({phone: farmPhone});
-                this.setState({info: farmInfo});
-            });
-        fetch('/api/farm/1/products')
+        console.log(this.props.match.params.id);
+        if(this.props.match.params.id === 'oma') {
+            fetch('/api/users/' + localStorage.getItem('userId'))
+                .then(response => response.json())
+                .then(user => {
+                    this.setState({ farm: user.companyName
+                                    , address: user.address
+                                    , phone: user.phone
+                                    , info: user.info
+                                    , farmId: user.id
+                                  });
+                    localStorage.setItem('farmId', user.id);
+                }).then(() => this.fetchProducts());
+        }
+
+
+    }
+
+    fetchProducts() {
+        console.log(this.state);
+        fetch('/api/farm/' + this.state.farmId + '/products')
             .then(response => response.json())
             .then(products => {
                 let array = [];
@@ -34,7 +53,6 @@ class UserProfile extends Component {
                 this.setState({productNames: array});
 
             });
-
     }
 
     getProductList() {
