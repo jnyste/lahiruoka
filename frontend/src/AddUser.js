@@ -56,7 +56,7 @@ class AddUser extends Component {
         const address = this.state.address;
         const phone = this.state.phone;
 
-        if (phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+        if (phone.match(/[a-z]/i)) {
             alert('Tarkista puhelinnumero! Sallitut merkit: 0-9, -+');
         } else {
             if (userType === '2' || companyName.length <= 0 || address.length <= 0 || phone.length <= 0) {
