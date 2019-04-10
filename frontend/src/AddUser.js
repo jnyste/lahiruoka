@@ -56,10 +56,14 @@ class AddUser extends Component {
         const address = this.state.address;
         const phone = this.state.phone;
 
-        if (userType === '2' || companyName.length <= 0 || address.length <= 0 || phone.length <= 0) {
-            alert('Täytä kaikki tähdellä merkityt kentät!');
+        if (phone.match(/[a-z]/i)) {
+            alert('Tarkista puhelinnumero! Sallitut merkit: 0-9, -+');
         } else {
-            this.postNewUser();
+            if (userType === '2' || companyName.length <= 0 || address.length <= 0 || phone.length <= 0) {
+                alert('Täytä kaikki tähdellä merkityt kentät!');
+            } else {
+                this.postNewUser();
+            }
         }
 
         event.preventDefault();
