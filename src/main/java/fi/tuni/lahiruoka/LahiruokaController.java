@@ -176,6 +176,11 @@ public class LahiruokaController {
         }
     }
 
+    @GetMapping("/api/products/name/{containsWord}")
+    public Iterable<Product> getProductsByTitleContaining(@PathVariable String containsWord) {
+        return productRepository.findProductsByNameContainingIgnoreCase(containsWord);
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // ---------------------------------------------------PUT MAPPING---------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
