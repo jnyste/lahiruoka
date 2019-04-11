@@ -8,7 +8,7 @@ class SearchProducts extends Component {
     constructor(props) {
         super(props);
         console.log(props.match.params.keyWord);
-        this.state = {productList: [], text: 'Lataa...', sort: 'Newest'}
+        this.state = {productList: [], text: [], sort: 'newest'}
         this.listAllProducts = this.listAllProducts.bind(this);
         this.writeText = this.writeText.bind(this);
         this.sort = this.sort.bind(this);
@@ -16,7 +16,6 @@ class SearchProducts extends Component {
 
     componentDidMount() {
         fetch('/api/search/' + this.props.match.params.keyWord).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);
-        this.writeText();
     }
 
     sort(event) {
@@ -25,8 +24,20 @@ class SearchProducts extends Component {
     }
 
     writeText() {
-        this.setState({text: <p><a id="klikattu" href="" onClick={this.sort}>Viimeksi lisätyt - Kilohinta nouseva - Kilohinta laskeva - Saatavilla nouseva - Saatavilla laskeva</a></p>})
+        console.log(this.state.productList);
+        let searchResults = 'Osumia ' + this.state.productList.length + ' kpl';
+        let placeHolder = [searchResults, <br/>]
+        placeHolder.push(<a id="newest" href="" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
+        placeHolder.push(<a id="priceAsc" href="" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
+        placeHolder.push(<a id="priceDesc" href="" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
+        placeHolder.push(<a id="availableAsc" href="" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
+        placeHolder.push(<a id="availableDesc" href="" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
+        placeHolder.push(<a id="nameAsc" href="" onClick={this.sort}>A-Ö</a>, ' | ');
+        placeHolder.push(<a id="nameDesc" href="" onClick={this.sort}>Ö-A</a>);
+        this.setState({text: placeHolder})
     }
+
+    // <a id="klikattu" href="" onClick={this.sort}>Viimeksi lisätyt</a> | Kilohinta nouseva | Kilohinta laskeva | Saatavilla nouseva | Saatavilla laskeva | A-Ö | Ö-A
 
     listAllProducts(jsonObject) {
         let helperArray = [];
@@ -36,6 +47,7 @@ class SearchProducts extends Component {
         }
 
         this.setState({productList: helperArray});
+        this.writeText();
     }
 
     render() {
