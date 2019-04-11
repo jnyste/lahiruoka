@@ -7,6 +7,7 @@ import UserProfile from './UserProfile';
 import AddProduct from './AddProduct';
 import AddUser from './AddUser'
 import Login from './Login';
+import SearchProducts from './SearchProducts'
 
 function Index() {
   return <FarmCarousel />;
@@ -44,6 +45,7 @@ function Wrapper() {
         <Route path="/tuotelisays/:id" component={AddProduct} />
         <Route path="/profiili/oma/:gid" component={AddUser} />
         <Route path="/login/" component={Login} />
+        <Route path="/etsi/:keyWord" component={SearchProducts} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
