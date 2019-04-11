@@ -16,15 +16,14 @@ class SearchProducts extends Component {
 
     componentDidMount() {
         switch (this.state.sort) {
-            case 'newest': console.log('newest');break;
-            case 'priceAsc': console.log('priceAsc');break;
-            case 'priceDesc': console.log('priceDesc');break;
-            case 'availableAsc': console.log('availableAsc');break;
-            case 'availableDesc': console.log('availableDesc');break;
-            case 'nameAsc': console.log('nameAsc');break;
-            case 'nameDesc': console.log('nameDesc');break;
+            case 'newest': fetch('/api/search/' + this.props.match.params.keyWord).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            case 'priceAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByPriceAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            case 'priceDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByPriceAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            case 'availableAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            case 'availableDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            case 'nameAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            case 'nameDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
         }
-        fetch('/api/search/' + this.props.match.params.keyWord).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);
     }
 
     sort(event) {
