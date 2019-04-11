@@ -8,36 +8,54 @@ class SearchProducts extends Component {
     constructor(props) {
         super(props);
         console.log(props.match.params.keyWord);
-        this.state = {productList: [], text: [], sort: 'newest'}
+        this.state = {productList: [], sort: 'newest'}
         this.listAllProducts = this.listAllProducts.bind(this);
         this.writeText = this.writeText.bind(this);
         this.sort = this.sort.bind(this);
     }
 
     componentDidMount() {
+        switch (this.state.sort) {
+            case 'newest': console.log('newest');break;
+            case 'priceAsc': console.log('priceAsc');break;
+            case 'priceDesc': console.log('priceDesc');break;
+            case 'availableAsc': console.log('availableAsc');break;
+            case 'availableDesc': console.log('availableDesc');break;
+            case 'nameAsc': console.log('nameAsc');break;
+            case 'nameDesc': console.log('nameDesc');break;
+        }
         fetch('/api/search/' + this.props.match.params.keyWord).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);
     }
 
     sort(event) {
         event.preventDefault();
-        console.log(event.target.id);
+        this.setState({sort: event.target.id}, this.componentDidMount)
     }
 
-    writeText() {
-        console.log(this.state.productList);
+    writeText(sortedBy) {
         let searchResults = 'Osumia ' + this.state.productList.length + ' kpl';
         let placeHolder = [searchResults, <br/>]
-        placeHolder.push(<a id="newest" href="" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
-        placeHolder.push(<a id="priceAsc" href="" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
-        placeHolder.push(<a id="priceDesc" href="" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
-        placeHolder.push(<a id="availableAsc" href="" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
-        placeHolder.push(<a id="availableDesc" href="" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
-        placeHolder.push(<a id="nameAsc" href="" onClick={this.sort}>A-Ö</a>, ' | ');
-        placeHolder.push(<a id="nameDesc" href="" onClick={this.sort}>Ö-A</a>);
-        this.setState({text: placeHolder})
-    }
 
-    // <a id="klikattu" href="" onClick={this.sort}>Viimeksi lisätyt</a> | Kilohinta nouseva | Kilohinta laskeva | Saatavilla nouseva | Saatavilla laskeva | A-Ö | Ö-A
+        placeHolder.push(<a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
+        placeHolder.push(<a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
+        placeHolder.push(<a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
+        placeHolder.push(<a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
+        placeHolder.push(<a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
+        placeHolder.push(<a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a>, ' | ');
+        placeHolder.push(<a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a>);
+
+        switch (sortedBy) {
+            case 'newest': placeHolder[2] = <b><a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a></b>;break;
+            case 'priceAsc': placeHolder[4] = <b><a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a></b>;break;
+            case 'priceDesc': placeHolder[6] = <b><a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a></b>;break;
+            case 'availableAsc': placeHolder[8] = <b><a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a></b>;break;
+            case 'availableDesc': placeHolder[10] = <b><a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a></b>;break;
+            case 'nameAsc': placeHolder[12] = <b><a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a></b>;break;
+            case 'nameDesc': placeHolder[14] = <b><a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a></b>;break;
+        }
+
+        return placeHolder;
+    }
 
     listAllProducts(jsonObject) {
         let helperArray = [];
@@ -55,7 +73,7 @@ class SearchProducts extends Component {
             <div className="product-list-container">
                 <div className="textContainer">
                     <h3 className="listTitle">Hakutulokset sanalle "{this.props.match.params.keyWord}"</h3>
-                    {this.state.text}
+                    {this.writeText(this.state.sort)}
                 </div>
                 {this.state.productList}
             </div>
