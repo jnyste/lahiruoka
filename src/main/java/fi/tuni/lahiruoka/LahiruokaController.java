@@ -211,12 +211,7 @@ public class LahiruokaController {
         }
 
         List<Product> sortedList = new LinkedList<>(products);
-        Collections.sort(sortedList, new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                return o2.getProductId() - o1.getProductId();
-            }
-        });
+        Collections.sort(sortedList, (o1, o2) -> o2.getProductId() - o1.getProductId());
 
         return sortedList;
     }
@@ -224,12 +219,7 @@ public class LahiruokaController {
     @GetMapping("/api/search/{keyWord}/sortByNameAsc/{ascending}")
     public Iterable<Product> getProductsSearchSortByNameAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
         List<Product> products = getProductsSearchAll(keyWord);
-        Collections.sort(products, new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        Collections.sort(products, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
         if (!ascending) {
             Collections.reverse(products);
@@ -241,16 +231,7 @@ public class LahiruokaController {
     @GetMapping("/api/search/{keyWord}/sortByAvailableToAsc/{ascending}")
     public Iterable<Product> getProductsSearchSortByAvailableToAsc(@PathVariable String keyWord, @PathVariable boolean ascending) {
         List<Product> products = getProductsSearchAll(keyWord);
-        Collections.sort(products, new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                if (o2.getPrice() - o1.getPrice() > 0) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-            }
-        });
+        Collections.sort(products, (o1, o2) -> o1.getAvailableTo().compareTo(o2.getAvailableTo()));
 
         if (!ascending) {
             Collections.reverse(products);
@@ -265,7 +246,11 @@ public class LahiruokaController {
         Collections.sort(products, new Comparator<Product>() {
             @Override
             public int compare(Product o1, Product o2) {
-                return o1.getAvailableTo().compareTo(o2.getAvailableTo());
+                if (o2.getPrice() - o1.getPrice() > 0) {
+                    return -1;
+                } else {
+                    return 1;
+                }
             }
         });
 
