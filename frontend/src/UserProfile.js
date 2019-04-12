@@ -3,6 +3,7 @@ import './css/UserProfile_style.css';
 import pic from './farmer.jpg';
 import {Link} from "react-router-dom";
 import SingleProduct from "./SingleProduct";
+import AddUser from "./AddUser";
 
 
 class UserProfile extends Component {
@@ -16,13 +17,20 @@ class UserProfile extends Component {
                     , address: ''
                     , phone: ''
                     , info: ''
-                    , farmId: ''};
+                    , farmId: ''
+                    , wrongAddress: false};
 
     }
 
     componentDidMount() {
+        let loggedin;
+        if(localStorage.getItem('loggedin') === 'true'){
+            loggedin = true;
+        } else {
+            loggedin = false;
+        }
         let paramsId = '' + this.props.match.params.id;
-        if(paramsId === 'oma') {
+        if(paramsId === 'oma' && loggedin) {
             fetch('/api/users/' + localStorage.getItem('userId'))
                 .then(response => response.json())
                 .then(user => {
@@ -34,6 +42,8 @@ class UserProfile extends Component {
                                   });
                     localStorage.setItem('farmId', user.id);
                 }).then(() => this.fetchProducts());
+        } else if (paramsId === 'oma' && !loggedin) {
+            this.setState({wrongAddress: true});
         } else {
             fetch('/api/users/id/' + paramsId)
                 .then(response => response.json())
@@ -65,20 +75,26 @@ class UserProfile extends Component {
     render() {
         return (
             <div className="profilecontainer">
-                <div className="imagecontainer">
-                    <img src={pic} alt="profile pic"></img>
-                </div>
-                <div className="userInfo">
-                    <h5>{this.state.farm}</h5>
-                    <p>{this.state.info}</p>
-                    <p>{this.state.address}<br/>{this.state.phone}</p>
-                </div>
-                <div className="userproducts">
-                    <h5>Tuotteet</h5>
-                    {this.state.products}
+            {this.state.wrongAddress ?
+                <h1> REEEE </h1>
+                :
+                <div>
+                    <div className="imagecontainer">
+                        <img src={pic} alt="profile pic"></img>
+                    </div>
+                    <div className="userInfo">
+                        <h5>{this.state.farm}</h5>
+                        <p>{this.state.info}</p>
+                        <p>{this.state.address}<br/>{this.state.phone}</p>
+                    </div>
+                    <div className="userproducts">
+                        <h5>Tuotteet</h5>
+                        {this.state.products}
 
-                    <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
+                        <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
+                    </div>
                 </div>
+            }
             </div>
             )
     }
