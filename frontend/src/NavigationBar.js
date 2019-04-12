@@ -10,6 +10,12 @@ class NavigationBar extends Component {
         super();
         this.state = {searchWord: ''};
         this.updateSearchWord = this.updateSearchWord.bind(this);
+        this.isLogged = this.isLogged.bind(this);
+    }
+
+    isLogged() {
+      return localStorage.getItem('loggedin') === "true" ?
+       <NavDropdown.Item href="/profiili/oma/">OMA TILI</NavDropdown.Item> : "";
     }
 
     updateSearchWord(event) {
@@ -28,8 +34,8 @@ class NavigationBar extends Component {
                     </Form>
                     <Nav className="navLinks">
                       <Nav.Link className="navProducts" href="/tuotteet/">TUOTTEET</Nav.Link>
-                      <NavDropdown className="navAccount" title="OMA TILI" id="userDropdown">
-                        <NavDropdown.Item href="/login/">OMA TILI</NavDropdown.Item>
+                      <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center">
+                        {this.isLogged()}
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
                       </NavDropdown>
                       <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown">

@@ -56,11 +56,6 @@ class Login extends Component {
 
         return (
             <div className="App">
-                <h1>LOGIN WITH GööGLE</h1>
-
-                <br />
-                <br />
-
                 {this.state.loggedin ?
                     <GoogleLogout
                         buttonText="Logout"
@@ -76,9 +71,6 @@ class Login extends Component {
                         onFailure={responseGoogle}
                     />
                 }
-
-
-
             </div>
         );
     }
