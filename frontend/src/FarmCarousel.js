@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './css/FarmCarousel_style.css';
 import logo1 from './carrot.jpeg';
-import logo2 from './tomato.jpeg';
+import logo2 from './Perunapelto.jpg';
 import logo3 from './wheat.jpeg';
 import {Link} from "react-router-dom";
 
@@ -9,7 +9,7 @@ class CarouselItem extends Component {
     render() {
         return (
             <div className="carousel-item">
-                <Link to={"/profiili/" + this.props.item.id}><img src={logo3} alt="Vehnä"/></Link>
+                <Link to={"/profiili/" + this.props.item.id}><img src={this.props.item.id % 2 === 0 ? logo2 : logo3} alt="Vehnä"/></Link>
                 <div className="carousel-caption d-none d-md-block">
                     <h3>{this.props.item.companyName}</h3>
                     <p>{this.props.item.info}</p>
