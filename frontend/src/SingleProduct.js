@@ -41,8 +41,8 @@ class SingleProduct extends Component {
     }
 
     updateListener(event) {
-        this.state.amount = Number(event.target.value);
-        this.addListener(event);
+        let amount = Number(event.target.value);
+        this.setState({amount: amount}, () => this.addListener(event));
     }
 
     addListener(event) {
@@ -65,7 +65,7 @@ class SingleProduct extends Component {
                         <h3 className="product title">{this.props.id.name}</h3>
                         <p className="product owner">{this.props.id.farm.companyName}</p>
                         <p className="productAmount">Yhteensä {this.props.id.amount} kg</p>
-                        <p className="productAmount">Saatavilla {this.writeDate(this.props.id.availableTo)} saakka</p>
+                        <p className="productAmount">Saatavilla: {this.writeDate(this.props.id.availableFrom)} - {this.writeDate(this.props.id.availableTo)}</p>
                         <p className="productExtraInfo">Lisätiedot: {this.props.id.info}</p>
                         <p className="tags">{this.state.tags}</p>
                     </div>
