@@ -32,14 +32,14 @@ function Wrapper() {
       <div>
         <NavigationBar />
 
-        <Route path="/" exact component={Index} />
-        <Route path="/tuotteet/" component={Products} />
-        <Route path="/ostoskori/" component={ShoppingCart} />
+        <Route exact path="/" exact component={Index} />
+        <Route exact path="/tuotteet/" component={Products} />
+        <Route exact path="/ostoskori/" component={ShoppingCart} />
         <Route exact path="/profiili/:id" component={UserProfile} />
-        <Route path="/tuotelisays/:id" component={AddProduct} />
-        <Route path="/profiili/oma/:gid" component={AddUser} />
-        <Route path="/login/" component={Login} />
-        <Route path="/etsi/:keyWord" component={SearchProducts} />
+        <Route exact path="/tuotelisays/:id" component={AddProduct} />
+        <Route exact path="/profiili/oma/:gid" component={AddUser} />
+        <Route exact path="/login/" component={Login} />
+        <Route exact path="/etsi/:keyWord" component={SearchProducts} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
