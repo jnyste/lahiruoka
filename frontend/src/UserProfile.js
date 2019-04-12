@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import './css/UserProfile_style.css';
 import pic from './farmer.jpg';
 import {Link} from "react-router-dom";
+import SingleProduct from "./SingleProduct";
 
 
 class UserProfile extends Component {
@@ -10,7 +11,7 @@ class UserProfile extends Component {
         super(props);
         this.fetchProducts = this.fetchProducts.bind(this);
         console.log('User profile');
-        this.state = {productNames: ["Tähän tulee tuotteita"]
+        this.state = {products: ["Tähän tulee tuotteita"]
                     , farm: ''
                     , address: ''
                     , phone: ''
@@ -52,13 +53,11 @@ class UserProfile extends Component {
         fetch('/api/farm/' + this.state.farmId + '/products')
             .then(response => response.json())
             .then(products => {
-                let array = [];
-                for (let i = 0; i < products.length; i++) {
-                    let product = products[i];
-                    let productName = product.name;
-                    array.push(productName);
+                let helperArray = [];
+                for (let product of products) {
+                    helperArray.push(<SingleProduct key={product.product_id} id={product}/>);
                 }
-                this.setState({productNames: array});
+                this.setState({products: helperArray});
 
             });
     }
@@ -86,7 +85,7 @@ class UserProfile extends Component {
                 </div>
                 <div className="userproducts">
                     <h5>Tuotteet</h5>
-                    {this.getProductList()}
+                    {this.state.products}
 
                     <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
                 </div>
