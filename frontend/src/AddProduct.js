@@ -60,6 +60,12 @@ class AddProduct extends Component {
 
     }
 
+    cancelModify = (event) => {
+        console.log('peruutettiin muokkaus');
+        this.props.history.push("/profiili/oma");
+        event.preventDefault();
+    }
+
     handleSubmit(event) {
         const name = this.state.name;
         const price = this.state.price;
@@ -94,15 +100,6 @@ class AddProduct extends Component {
         });
 
         tagArray = filtered;
-
-        const newProduct = {
-            name: this.state.name
-            , price: this.state.price
-            , amount: this.state.amount
-            , availableFrom: this.state.availableFrom
-            , availableTo: this.state.availableTo
-            , info: this.state.info
-        };
 
         if(this.state.modifying) {
             const modifiedProduct = {
@@ -217,6 +214,8 @@ class AddProduct extends Component {
                         <small>Erottele avainsanat pilkulla.</small>
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
+                    <button onClick={this.cancelModify} className="btn btn-primary cancelButton">Peruuta</button>
+                    <button type="delete" className="btn btn-primary deleteButton">Poista</button>
                 </form>
             </div>
         )
