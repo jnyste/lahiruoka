@@ -26,7 +26,7 @@ class Login extends Component {
     }
 
     firstTimeUser() {
-        this.props.history.push("/profiili/oma/muokkaa");
+        this.props.history.push("/profiili/oma/uusi");
     }
 
     continuingUser() {
