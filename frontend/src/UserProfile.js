@@ -17,6 +17,7 @@ class UserProfile extends Component {
                     , phone: ''
                     , info: ''
                     , farmId: ''
+                    , userType: ''
                     , wrongAddress: false};
 
     }
@@ -38,6 +39,7 @@ class UserProfile extends Component {
                                     , phone: user.phone
                                     , info: user.info
                                     , farmId: user.id
+                                    , userType: user.userType
                                   });
                     localStorage.setItem('farmId', user.id);
                 }).then(() => this.fetchProducts());
@@ -52,6 +54,7 @@ class UserProfile extends Component {
                         , phone: user.phone
                         , info: user.info
                         , farmId: user.id
+                        , userType: user.userType
                     });
                 }).then(() => this.fetchProducts());
         }
@@ -72,6 +75,7 @@ class UserProfile extends Component {
     }
 
     render() {
+        console.log('usertype: ', this.state.userType)
         return (
             <div className="profilecontainer">
             {this.state.wrongAddress ?
@@ -86,12 +90,16 @@ class UserProfile extends Component {
                         <p>{this.state.info}</p>
                         <p>{this.state.address}<br/>{this.state.phone}</p>
                     </div>
-                    <div className="userproducts">
-                        <h5>Tuotteet</h5>
-                        {this.state.products}
+                    {this.state.userType === 'KITCHEN' ?
+                        <div></div>
+                        :
+                        <div className="userproducts">
+                            <h5>Tuotteet</h5>
+                            {this.state.products}
 
-                        <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
-                    </div>
+                            <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
+                        </div>
+                    }
                 </div>
             }
             </div>
