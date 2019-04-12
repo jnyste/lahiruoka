@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import './css/UserProfile_style.css';
-import pic from './farmer.jpg';
+import farmPic from './farm.jpg';
+import kitchenPic from './kitchen.jpg';
 import {Link} from "react-router-dom";
 import SingleProduct from "./SingleProduct";
 import ErrorPage from "./ErrorPage";
@@ -83,7 +84,7 @@ class UserProfile extends Component {
                 :
                 <div>
                     <div className="imagecontainer">
-                        <img src={pic} alt="profile pic"></img>
+                        <img src={this.state.userType === 'KITCHEN' ? kitchenPic : farmPic} alt="profile pic"></img>
                     </div>
                     <div className="userInfo">
                         <h5>{this.state.farm}</h5>
