@@ -128,7 +128,7 @@ public class LahiruokaController {
         return userRepository.findUserByGoogleId(googleId);
     }
 
-    @GetMapping("/api/users/id/{googleId}")
+    @GetMapping("/api/users/id/{id}")
     public Optional<User> findUserById(@PathVariable int id) {
         return userRepository.findById(id);
     }
