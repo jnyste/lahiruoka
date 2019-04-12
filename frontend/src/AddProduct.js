@@ -228,7 +228,10 @@ class AddProduct extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
                     <button onClick={this.cancelModify} className="btn btn-primary cancelButton">Peruuta</button>
-                    <button onClick={this.deleteProduct} className="btn btn-primary deleteButton">Poista</button>
+                    {this.state.modifying ? <button onClick={this.deleteProduct} className="btn btn-primary deleteButton">Poista</button>
+                    :
+                    <h1></h1>}
+
                 </form>
             </div>
         )
