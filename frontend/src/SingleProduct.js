@@ -41,8 +41,8 @@ class SingleProduct extends Component {
     }
 
     updateListener(event) {
-        this.state.amount = Number(event.target.value);
-        this.addListener(event);
+        let amount = Number(event.target.value);
+        this.setState({amount: amount}, () => this.addListener(event));
     }
 
     addListener(event) {
