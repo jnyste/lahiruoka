@@ -67,7 +67,7 @@ class UserProfile extends Component {
             .then(products => {
                 let helperArray = [];
                 for (let product of products) {
-                    helperArray.push(<SingleProduct key={product.product_id} id={product}/>);
+                    helperArray.push(<SingleProduct key={product.productId} id={product}/>);
                 }
                 this.setState({products: helperArray});
 
