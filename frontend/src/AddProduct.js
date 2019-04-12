@@ -66,7 +66,7 @@ class AddProduct extends Component {
     }
 
     deleteProduct = (event) => {
-        if (window.confirm("Haluatko varmasti poistaa tuotteen?")) {
+        if (window.confirm("Haluatko varmasti poistaa tuotteen? Tätä toimintoa ei voi peruuttaa!")) {
             fetch('/api/products/' + this.props.match.params.id, {
                 method: 'DELETE',
                 headers: {
