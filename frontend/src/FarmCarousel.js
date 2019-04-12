@@ -9,8 +9,7 @@ class CarouselItem extends Component {
     render() {
         return (
             <div className="carousel-item">
-                <Link to="/profiili"><img src={logo3} alt="Vehnä"/></Link>
-
+                <Link to={"/profiili/" + this.props.item.id}><img src={logo3} alt="Vehnä"/></Link>
                 <div className="carousel-caption d-none d-md-block">
                     <h3>{this.props.item.companyName}</h3>
                     <p>{this.props.item.info}</p>
