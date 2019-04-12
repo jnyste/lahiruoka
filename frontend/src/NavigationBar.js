@@ -32,8 +32,8 @@ class NavigationBar extends Component {
 
     render() {
         return (
-            <Navbar className="header" expand="lg">
-                <Navbar.Brand className="navLogo" style={{float: "left"}} href="/"><img src={logo} className="lahiruokalogo" /></Navbar.Brand>
+            <Navbar className="header mr-auto" expand="lg">
+                <Navbar.Brand className="navLogo" style={{float: "left"}} href="/"><img src={logo} className="lahiruokalogo" style={{paddingLeft:"20px", paddingRight:"20px"}}/></Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                   <Navbar.Collapse className="navCollapse" id="basic-navbar-nav">
                     <Form onSubmit={this.search} className="navForm" inline>
@@ -41,7 +41,9 @@ class NavigationBar extends Component {
                       <Button href={'/etsi/' + this.state.searchWord} type="submit" className="navFormButton" variant="light">Hae</Button>
                     </Form>
                     <Nav className="navLinks">
-                      <Nav.Link className="navProducts" href="/tuotteet/">TUOTTEET</Nav.Link>
+                      <Nav.Link className="navProducts" href="/tuotteet/" style={{paddingLeft:"20px"}}>TUOTTEET</Nav.Link>
+                    </Nav>
+                        <Nav className="ml-auto" style={{paddingRight:"20px"}}>
                       <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center">
                         {this.isLogged()}
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
