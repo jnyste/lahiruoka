@@ -3,8 +3,7 @@ import './css/UserProfile_style.css';
 import pic from './farmer.jpg';
 import {Link} from "react-router-dom";
 import SingleProduct from "./SingleProduct";
-import AddUser from "./AddUser";
-
+import ErrorPage from "./ErrorPage";
 
 class UserProfile extends Component {
 
@@ -76,7 +75,7 @@ class UserProfile extends Component {
         return (
             <div className="profilecontainer">
             {this.state.wrongAddress ?
-                <h1> REEEE </h1>
+                <ErrorPage/>
                 :
                 <div>
                     <div className="imagecontainer">
