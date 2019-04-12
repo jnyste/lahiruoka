@@ -18,6 +18,7 @@ class UserProfile extends Component {
                     , info: ''
                     , farmId: ''
                     , userType: ''
+                    , googleId: ''
                     , wrongAddress: false};
 
     }
@@ -40,6 +41,7 @@ class UserProfile extends Component {
                                     , info: user.info
                                     , farmId: user.id
                                     , userType: user.userType
+                                    , googleId: user.googleId
                                   });
                     localStorage.setItem('farmId', user.id);
                 }).then(() => this.fetchProducts());
@@ -55,6 +57,7 @@ class UserProfile extends Component {
                         , info: user.info
                         , farmId: user.id
                         , userType: user.userType
+                        , googleId: user.googleId
                     });
                 }).then(() => this.fetchProducts());
         }
@@ -89,6 +92,8 @@ class UserProfile extends Component {
                         <h5>{this.state.farm}</h5>
                         <p>{this.state.info}</p>
                         <p>{this.state.address}<br/>{this.state.phone}</p>
+                        {this.state.googleId === localStorage.getItem('userId') ?
+                        <Link to="/profiili/oma/muokkaa">Muokkaa tietoja...</Link> : <h1></h1>}
                     </div>
                     {this.state.userType === 'KITCHEN' ?
                         <div></div>
@@ -96,8 +101,8 @@ class UserProfile extends Component {
                         <div className="userproducts">
                             <h5>Tuotteet</h5>
                             {this.state.products}
-
-                            <Link to="/tuotelisays/uusi">Lisää tuote....</Link>
+                            {this.state.googleId === localStorage.getItem('userId') ?
+                            <Link to="/tuotelisays/uusi">Lisää tuote....</Link> : <h1></h1>}
                         </div>
                     }
                 </div>
