@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import './css/FarmCarousel_style.css';
 import logo1 from './carrot.jpeg';
 import logo2 from './Perunapelto.jpg';
-import logo3 from './wheat.jpeg';
+import logo3 from './tomato.jpeg';
 import {Link} from "react-router-dom";
 
 class CarouselItem extends Component {
