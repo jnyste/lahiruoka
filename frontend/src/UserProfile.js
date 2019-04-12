@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 
 class UserProfile extends Component {
 
-
     constructor(props) {
         super(props);
         this.fetchProducts = this.fetchProducts.bind(this);
@@ -21,8 +20,8 @@ class UserProfile extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id);
-        if(this.props.match.params.id === 'oma') {
+        let paramsId = '' + this.props.match.params.id;
+        if(paramsId === 'oma') {
             fetch('/api/users/' + localStorage.getItem('userId'))
                 .then(response => response.json())
                 .then(user => {
@@ -34,9 +33,18 @@ class UserProfile extends Component {
                                   });
                     localStorage.setItem('farmId', user.id);
                 }).then(() => this.fetchProducts());
+        } else {
+            fetch('/api/users/id/' + paramsId)
+                .then(response => response.json())
+                .then(user => {
+                    this.setState({ farm: user.companyName
+                        , address: user.address
+                        , phone: user.phone
+                        , info: user.info
+                        , farmId: user.id
+                    });
+                }).then(() => this.fetchProducts());
         }
-
-
     }
 
     fetchProducts() {
