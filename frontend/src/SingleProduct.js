@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Collapsible from 'react-collapsible';
+import {Link} from "react-router-dom";
 
 class SingleProduct extends Component {
 
@@ -68,22 +69,27 @@ class SingleProduct extends Component {
                         <p className="productExtraInfo">Lisätiedot: {this.props.id.info}</p>
                         <p className="tags">{this.state.tags}</p>
                     </div>
-                    <div className="order">
-                        <div className="floatTis">
-                            <form>
-                                <input type="text" name="kg" className="kgBox" onChange={this.updateListener}/>
-                            </form>
+
+                    {this.props.id.farm.googleId === localStorage.getItem('userId') ?
+                        <Link to={"/tuotelisays/" + this.props.id.productId} className="modifyLink">Muokkaa tietoja...</Link>
+                        :
+                        <div className="order">
+                            <div className="floatTis">
+                                <form>
+                                    <input type="text" name="kg" className="kgBox" onChange={this.updateListener}/>
+                                </form>
+                            </div>
+                            <div className="floatTis kgText">
+                                <p>Kg</p>
+                            </div>
+                            <div className= "floatTis cart">
+                                <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
+                            </div>
+                            <div className="floatTis total">
+                                <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
+                            </div>
                         </div>
-                        <div className="floatTis kgText">
-                            <p>Kg</p>
-                        </div>
-                        <div className= "floatTis cart">
-                            <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
-                        </div>
-                        <div className="floatTis total">
-                            <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
-                        </div>
-                    </div>
+                    }
                 </Collapsible>
             </div>
         );
