@@ -32,25 +32,31 @@ class SearchProducts extends Component {
     }
 
     writeText(sortedBy) {
-        let searchResults = 'Osumia ' + this.state.productList.length + ' kpl';
-        let placeHolder = [searchResults, <br/>]
+        let placeHolder = []
 
-        placeHolder.push(<a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
-        placeHolder.push(<a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
-        placeHolder.push(<a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
-        placeHolder.push(<a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
-        placeHolder.push(<a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
-        placeHolder.push(<a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a>, ' | ');
-        placeHolder.push(<a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a>);
+        if (this.state.productList.length > 0) {
+            let searchResults = 'Osumia ' + this.state.productList.length + ' kpl';
+            placeHolder.push([searchResults, <br/>])
 
-        switch (sortedBy) {
-            case 'newest': placeHolder[2] = <b><a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a></b>;break;
-            case 'priceAsc': placeHolder[4] = <b><a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a></b>;break;
-            case 'priceDesc': placeHolder[6] = <b><a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a></b>;break;
-            case 'availableAsc': placeHolder[8] = <b><a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a></b>;break;
-            case 'availableDesc': placeHolder[10] = <b><a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a></b>;break;
-            case 'nameAsc': placeHolder[12] = <b><a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a></b>;break;
-            case 'nameDesc': placeHolder[14] = <b><a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a></b>;break;
+            placeHolder.push(<a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
+            placeHolder.push(<a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
+            placeHolder.push(<a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
+            placeHolder.push(<a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
+            placeHolder.push(<a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
+            placeHolder.push(<a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a>, ' | ');
+            placeHolder.push(<a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a>);
+
+            switch (sortedBy) {
+                case 'newest': placeHolder[1] = <b><a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a></b>;break;
+                case 'priceAsc': placeHolder[3] = <b><a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a></b>;break;
+                case 'priceDesc': placeHolder[5] = <b><a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a></b>;break;
+                case 'availableAsc': placeHolder[7] = <b><a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a></b>;break;
+                case 'availableDesc': placeHolder[9] = <b><a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a></b>;break;
+                case 'nameAsc': placeHolder[11] = <b><a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a></b>;break;
+                case 'nameDesc': placeHolder[13] = <b><a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a></b>;break;
+            }
+        } else {
+            placeHolder.push('Ei osumia tälle hakusanalle.');
         }
 
         return placeHolder;
