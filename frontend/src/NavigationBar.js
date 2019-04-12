@@ -1,8 +1,11 @@
 import React, {Component} from "react";
 import './css/frontpage_style.css';
+import logo from './lahiruoka_logo.png';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Form, FormControl } from 'react-bootstrap';
 import { BrowserRouter as Link } from "react-router-dom";
 import Login from './Login';
+import logo2 from "./Perunapelto.jpg";
+import logo3 from "./wheat.jpeg";
 
 class NavigationBar extends Component {
 
@@ -30,7 +33,7 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="header" expand="lg">
-                <Navbar.Brand className="navLogo" style={{float: "left"}} href="/">Sivun logo</Navbar.Brand>
+                <Navbar.Brand className="navLogo" style={{float: "left"}} href="/"><img src={logo} className="lahiruokalogo" /></Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                   <Navbar.Collapse className="navCollapse" id="basic-navbar-nav">
                     <Form onSubmit={this.search} className="navForm" inline>
