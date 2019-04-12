@@ -33,21 +33,21 @@ function Wrapper() {
     <Router>
       <div>
         <Navbar className="header" expand="lg">
-        <Navbar.Brand id="logo" style={{float: "left"}} href="/">Sivun logo</Navbar.Brand>
+        <Navbar.Brand className="navLogo" style={{float: "left"}} href="/">Sivun logo</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Form inline>
+          <Navbar.Collapse className="navCollapse" id="basic-navbar-nav">
+            <Form className="navForm" inline>
               <FormControl type="text" placeholder="Hae tuotetta tai tuottajaa.." className="search" />
-              <Button style={{marginLeft: "3px"}} variant="light">Hae</Button>
+              <Button className="navFormButton" variant="light">Hae</Button>
             </Form>
             <Nav className="navLinks">
-              <Nav.Link href="/tuotteet/">Tuotteet</Nav.Link>
-              <NavDropdown title="Oma tili" id="userDropdown">
-                <NavDropdown.Item href="/login/">Oma tili</NavDropdown.Item>
+              <Nav.Link className="navProducts" href="/tuotteet/">TUOTTEET</Nav.Link>
+              <NavDropdown className="navAccount" title="OMA TILI" id="userDropdown">
+                <NavDropdown.Item href="/login/">OMA TILI</NavDropdown.Item>
                 <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title="Ostoskori (0)" id="shoppingcartDropdown">
-                <NavDropdown.Item href="/ostoskori/" >Ostoskori</NavDropdown.Item>
+              <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown">
+                <NavDropdown.Item href="/ostoskori/" >OSTOSKORI</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
