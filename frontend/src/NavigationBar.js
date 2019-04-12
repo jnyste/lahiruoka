@@ -10,10 +10,15 @@ class NavigationBar extends Component {
         super();
         this.state = {searchWord: ''};
         this.updateSearchWord = this.updateSearchWord.bind(this);
+        this.search = this.search.bind(this);
     }
 
     updateSearchWord(event) {
         this.setState({searchWord: event.target.value});
+    }
+
+    search(event) {
+        event.preventDefault();
     }
 
     render() {
@@ -22,9 +27,9 @@ class NavigationBar extends Component {
                 <Navbar.Brand className="navLogo" style={{float: "left"}} href="/">Sivun logo</Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                   <Navbar.Collapse className="navCollapse" id="basic-navbar-nav">
-                    <Form className="navForm" inline>
+                    <Form onSubmit={this.search} className="navForm" inline>
                       <FormControl onChange={this.updateSearchWord} type="text" placeholder="Hae tuotetta..." className="search" />
-                      <Button href={'/etsi/' + this.state.searchWord} className="navFormButton" variant="light">Hae</Button>
+                      <Button href={'/etsi/' + this.state.searchWord} type="submit" className="navFormButton" variant="light">Hae</Button>
                     </Form>
                     <Nav className="navLinks">
                       <Nav.Link className="navProducts" href="/tuotteet/">TUOTTEET</Nav.Link>
