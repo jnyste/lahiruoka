@@ -122,8 +122,26 @@ class AddUser extends Component {
             }).then(() => {
                 console.log("Should be posted");
                 this.props.history.push("/profiili/oma");
+
             })
         }
+    }
+
+    deleteUser = (event) => {
+        if (window.confirm("Haluatko varmasti poistaa profiilisi? Tätä toimintoa ei voi peruuttaa!")) {
+            fetch('/api/users/' + this.state.userId, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(() => {
+                localStorage.setItem('loggedin', 'false');
+                localStorage.setItem('userId', 'none');
+                this.props.history.push("/");
+            });
+        }
+        event.preventDefault();
     }
 
     render() {
@@ -164,6 +182,9 @@ class AddUser extends Component {
                         <textarea className="form-control" id="exampleInfo" value={this.state.info} onChange={this.handleChange} name="info" rows="3"></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
+                    {this.state.modifying &&
+                        <button onClick={this.deleteUser} className="btn btn-primary deleteButton">Poista profiili</button>
+                    }
                 </form>
             </div>
         )
