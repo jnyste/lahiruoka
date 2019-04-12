@@ -62,16 +62,6 @@ class UserProfile extends Component {
             });
     }
 
-    getProductList() {
-        let productnamesArray = this.state.productNames;
-
-        return (
-            <div>
-            {<List name={productnamesArray}/>}
-            </div>
-        )
-    }
-
     render() {
         return (
             <div className="profilecontainer">
@@ -91,30 +81,6 @@ class UserProfile extends Component {
                 </div>
             </div>
             )
-    }
-}
-
-class List extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        let productNames = [];
-        let namesProps = this.props.name;
-
-        for (let i = 0; i < namesProps.length; i++) {
-            productNames.push(this.props.name[i]);
-        }
-
-        return (
-            <ul>
-                {productNames.map(function(name, index){
-                    return <a href=""><li key={ index }>{name}</li></a>;
-                })}
-            </ul>
-        )
     }
 }
 
