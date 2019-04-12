@@ -20,9 +20,10 @@ class AddUser extends Component {
     }
 
     componentDidMount() {
-        if (this.props.match.params.gid === 'muokkaa') {
+        if (this.props.match.params.gid !== 'muokkaa') {
             this.setState({modifying: false})
         } else {
+            this.setState({modifying: true});
             fetch('/api/users/' + localStorage.getItem('userId'))
                 .then((httpResponse) => httpResponse.json())
                 .then((user) => {
@@ -33,6 +34,7 @@ class AddUser extends Component {
                         , address: user.address
                         , phone: user.phone
                         , info: user.info
+                        , userId: user.id
                         , modifying: true
                     });
                 });
@@ -71,34 +73,57 @@ class AddUser extends Component {
 
     async postNewUser() {
 
-        let userType;
+        if(this.state.modifying) {
+            const modifiedUser = {
+                companyName: this.state.companyName
+                , address: this.state.address
+                , phone: this.state.phone
+                , info: this.state.info
+            };
 
-        if (this.state.userType === "0") {
-            userType = 0;
+            console.log('koitetaan muokata userii...', modifiedUser);
+
+            await fetch('/api/user/' + this.state.userId, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(modifiedUser)
+            }).then(() => {
+                console.log("Should be posted");
+                this.props.history.push("/profiili/oma");
+            })
+
         } else {
-            userType = 1;
+            let userType;
+
+            if (this.state.userType === "0") {
+                userType = 0;
+            } else {
+                userType = 1;
+            }
+            const newUser = {
+                googleId: this.state.googleId
+                , userType: userType
+                , companyName: this.state.companyName
+                , address: this.state.address
+                , phone: this.state.phone
+                , info: this.state.info
+            };
+
+            await fetch('/api/users', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            }).then(() => {
+                console.log("Should be posted");
+                this.props.history.push("/profiili/oma");
+            })
         }
-
-        const newUser = {
-            googleId: this.state.googleId
-            , userType: userType
-            , companyName: this.state.companyName
-            , address: this.state.address
-            , phone: this.state.phone
-            , info: this.state.info
-        };
-
-        await fetch('/api/users', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser)
-        }).then(() => {
-            console.log("Should be posted");
-            this.props.history.push("/profiili/oma");
-        })
     }
 
     render() {
@@ -108,13 +133,17 @@ class AddUser extends Component {
                 <p>Tähdellä merkityt kohdat ovat pakollisia.</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group required">
-                        <label htmlFor="exampleUserType">Käyttäjätyyppi:</label>
-                        <br/>
-                        <small>Lähiruokatuottaja voi lisätä tuotteita myyntiin, keittiö on ostajaosapuoli.</small>
-                        <br/>
-                        <input type="radio" name="userType" onChange={this.handleChange} value="1" checked={this.state.userType === '1'} /> Lähiruokatuottaja
-                        <input type="radio" name="userType" onChange={this.handleChange} value="0" checked={this.state.userType === '0'}/> Keittiö<br/>
-                    </div>
+                        {this.state.modifying ? <h1></h1> :
+                            <div>
+                            <label htmlFor="exampleUserType">Käyttäjätyyppi:</label>
+                            <br/>
+                            <small>Lähiruokatuottaja voi lisätä tuotteita myyntiin, keittiö on ostajaosapuoli.</small>
+                            <br/>
+                            <input type="radio" name="userType" onChange={this.handleChange} value="1" checked={this.state.userType === '1'} /> Lähiruokatuottaja
+                            <input type="radio" name="userType" onChange={this.handleChange} value="0" checked={this.state.userType === '0'}/> Keittiö<br/>
+                            </div>
+                         }
+                            </div>
                     <div className="form-group required">
                         <label htmlFor="exampleUserCompanyName">Tilan / keittiön nimi:</label>
                         <input type="text" className="form-control" id="exampleUserCompanyName" value={this.state.companyName} onChange={this.handleChange}
