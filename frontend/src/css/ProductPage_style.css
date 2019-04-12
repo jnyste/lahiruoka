@@ -73,6 +73,8 @@
 }
 .Collapsible {
     padding: 2px;
+    border-style: solid;
+    border-width: 2px;
 }
 
 .Collapsible__trigger {
@@ -112,4 +114,10 @@
 
 .product-list-container {
     margin-bottom: 50px;
+}
+
+.modifyLink {
+    float: right;
+    margin-right: 7px;
+    margin-bottom: 7px;
 }
