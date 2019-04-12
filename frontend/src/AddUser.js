@@ -133,7 +133,7 @@ class AddUser extends Component {
                 <p>Tähdellä merkityt kohdat ovat pakollisia.</p>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group required">
-                        {this.state.modifying ? <h1></h1> :
+                        {!this.state.modifying &&
                             <div>
                             <label htmlFor="exampleUserType">Käyttäjätyyppi:</label>
                             <br/>

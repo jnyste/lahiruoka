@@ -24,6 +24,7 @@ class AddProduct extends Component {
         if (this.props.match.params.id === 'uusi') {
             this.setState({modifying: false})
         } else {
+            this.setState({modifying: true})
             fetch('/api/products/' + this.props.match.params.id)
                 .then((httpResponse) => httpResponse.json())
                 .then((product) => {
@@ -59,6 +60,24 @@ class AddProduct extends Component {
 
     }
 
+    cancelModify = (event) => {
+        this.props.history.push("/profiili/oma");
+        event.preventDefault();
+    }
+
+    deleteProduct = (event) => {
+        if (window.confirm("Haluatko varmasti poistaa tuotteen?")) {
+            fetch('/api/products/' + this.props.match.params.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(() => this.props.history.push("/profiili/oma"));
+        }
+        event.preventDefault();
+    }
+
     handleSubmit(event) {
         const name = this.state.name;
         const price = this.state.price;
@@ -75,7 +94,6 @@ class AddProduct extends Component {
                 this.postNewProduct();
             }
         }
-
         event.preventDefault();
     }
 
@@ -94,51 +112,64 @@ class AddProduct extends Component {
 
         tagArray = filtered;
 
-        const newProduct = {
-            name: this.state.name
-            , price: this.state.price
-            , amount: this.state.amount
-            , availableFrom: this.state.availableFrom
-            , availableTo: this.state.availableTo
-            , info: this.state.info
-        };
-
-        await fetch('/api/products/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newProduct)
-        }).then((response) => {
-            return response.json();
-        }).then((value) => {
-              console.log(value);
-
-              if (tagArray.length > 0) {
-                  fetch('/api/products/' + value + '/tag', {
+        if(this.state.modifying) {
+            const modifiedProduct = {
+                name: this.state.name
+                , price: this.state.price
+                , amount: this.state.amount
+                , availableFrom: this.state.availableFrom
+                , availableTo: this.state.availableTo
+                , info: this.state.info
+                , tags: tagArray
+            };
+            await fetch('/api/products/' + this.props.match.params.id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(modifiedProduct)
+            }).finally(() => this.props.history.push("/profiili/oma"))
+        } else {
+            const newProduct = {
+                name: this.state.name
+                , price: this.state.price
+                , amount: this.state.amount
+                , availableFrom: this.state.availableFrom
+                , availableTo: this.state.availableTo
+                , info: this.state.info
+            };
+            await fetch('/api/products/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newProduct)
+            }).then((response) => {
+                return response.json();
+            }).then((value) => {
+                  fetch('/api/products/' + value + '/farm', {
                       method: 'POST',
                       headers: {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                       },
-                      body: JSON.stringify(tagArray),
-                  }).then(() => {
-                      console.log("tags added to " + value);
-                  }).then(
-                        fetch('/api/products/' + value + '/farm', {
-                            method: 'POST',
-                            headers: {
-                              'Accept': 'application/json',
-                              'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(localStorage.getItem('farmId')),
-                         }).then(() => {
-                            console.log("farm added to " + value);
-                        })
-                  )
-              }
-        }).finally(() => this.props.history.push("/profiili/oma"))
+                      body: JSON.stringify(localStorage.getItem('farmId')),
+                  })
+
+                if (tagArray.length > 0) {
+                    fetch('/api/products/' + value + '/tag', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(tagArray),
+                    })
+                }
+            }).finally(() => this.props.history.push("/profiili/oma"))
+        }
     }
 
     render() {
@@ -187,6 +218,10 @@ class AddProduct extends Component {
                         <small>Erottele avainsanat pilkulla.</small>
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
+                    <button onClick={this.cancelModify} className="btn btn-primary cancelButton">Peruuta</button>
+                    {this.state.modifying &&
+                        <button onClick={this.deleteProduct} className="btn btn-primary deleteButton">Poista</button>
+                    }
                 </form>
             </div>
         )

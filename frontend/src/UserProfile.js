@@ -11,7 +11,6 @@ class UserProfile extends Component {
     constructor(props) {
         super(props);
         this.fetchProducts = this.fetchProducts.bind(this);
-        console.log('User profile');
         this.state = {products: ["Tähän tulee tuotteita"]
                     , farm: ''
                     , address: ''
@@ -65,7 +64,6 @@ class UserProfile extends Component {
     }
 
     fetchProducts() {
-        console.log(this.state);
         fetch('/api/farm/' + this.state.farmId + '/products')
             .then(response => response.json())
             .then(products => {
@@ -79,7 +77,6 @@ class UserProfile extends Component {
     }
 
     render() {
-        console.log('usertype: ', this.state.userType)
         return (
             <div className="profilecontainer">
             {this.state.wrongAddress ?

@@ -16,3 +16,21 @@ h2 {
     content: '* ';
     display: inline;
 }
+
+.deleteButton {
+    background-color: red;
+    margin: 4px 2px;
+}
+
+.deleteButton:hover{
+    background-color: darkred;
+}
+
+.cancelButton {
+    background-color: grey;
+    margin: 4px 2px;
+}
+
+.cancelButton:hover{
+    background-color: darkgrey;
+}
