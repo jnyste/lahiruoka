@@ -24,6 +24,7 @@ class AddProduct extends Component {
         if (this.props.match.params.id === 'uusi') {
             this.setState({modifying: false})
         } else {
+            this.setState({modifying: true})
             fetch('/api/products/' + this.props.match.params.id)
                 .then((httpResponse) => httpResponse.json())
                 .then((product) => {
@@ -103,43 +104,71 @@ class AddProduct extends Component {
             , info: this.state.info
         };
 
-        await fetch('/api/products/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newProduct)
-        }).then((response) => {
-            return response.json();
-        }).then((value) => {
-              console.log('VALUE??',value);
+        if(this.state.modifying) {
+            const modifiedProduct = {
+                name: this.state.name
+                , price: this.state.price
+                , amount: this.state.amount
+                , availableFrom: this.state.availableFrom
+                , availableTo: this.state.availableTo
+                , info: this.state.info
+                , tags: tagArray
+            };
+            await fetch('/api/products/' + this.props.match.params.id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(modifiedProduct)
+            }).finally(() => this.props.history.push("/profiili/oma"))
+        } else {
+            const newProduct = {
+                name: this.state.name
+                , price: this.state.price
+                , amount: this.state.amount
+                , availableFrom: this.state.availableFrom
+                , availableTo: this.state.availableTo
+                , info: this.state.info
+            };
+            await fetch('/api/products/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newProduct)
+            }).then((response) => {
+                return response.json();
+            }).then((value) => {
+                  console.log('VALUE??',value);
 
-              fetch('/api/products/' + value + '/farm', {
-                  method: 'POST',
-                  headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(localStorage.getItem('farmId')),
-              }).then(() => {
-                  console.log("tags added to " + value);
-              });
+                  fetch('/api/products/' + value + '/farm', {
+                      method: 'POST',
+                      headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(localStorage.getItem('farmId')),
+                  }).then(() => {
+                      console.log("tags added to " + value);
+                  });
 
-            if (tagArray.length > 0) {
-                fetch('/api/products/' + value + '/tag', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(tagArray),
-                }).then(() => {
-                        console.log("farm added to " + value);
-                    }
-                )
-            }
-        }).finally(() => this.props.history.push("/profiili/oma"))
+                if (tagArray.length > 0) {
+                    fetch('/api/products/' + value + '/tag', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(tagArray),
+                    }).then(() => {
+                            console.log("farm added to " + value);
+                        }
+                    )
+                }
+            }).finally(() => this.props.history.push("/profiili/oma"))
+        }
     }
 
     render() {
