@@ -66,6 +66,19 @@ class AddProduct extends Component {
         event.preventDefault();
     }
 
+    deleteProduct = (event) => {
+        if (window.confirm("Haluatko varmasti poistaa tuotteen?")) {
+            fetch('/api/products/' + this.props.match.params.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then(() => this.props.history.push("/profiili/oma"));
+        }
+        event.preventDefault();
+    }
+
     handleSubmit(event) {
         const name = this.state.name;
         const price = this.state.price;
@@ -215,7 +228,7 @@ class AddProduct extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
                     <button onClick={this.cancelModify} className="btn btn-primary cancelButton">Peruuta</button>
-                    <button type="delete" className="btn btn-primary deleteButton">Poista</button>
+                    <button onClick={this.deleteProduct} className="btn btn-primary deleteButton">Poista</button>
                 </form>
             </div>
         )
