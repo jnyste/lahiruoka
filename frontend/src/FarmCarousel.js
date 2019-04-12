@@ -26,11 +26,10 @@ class FarmCarousel extends Component {
     componentDidMount() {
         fetch('/api/users')
             .then(response => response.json())
-            .then(user => {
+            .then(users => {
                 let helperArray = [];
 
-                for (let i = 0; i < 2; i++) {
-                    let obj = user[i];
+                for (let obj of users) {
                     if(obj.userType === 'FARM') {
                         helperArray.push(<CarouselItem key={obj.id} item={obj}/>);
                     }
