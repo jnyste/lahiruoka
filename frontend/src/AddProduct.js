@@ -61,7 +61,6 @@ class AddProduct extends Component {
     }
 
     cancelModify = (event) => {
-        console.log('peruutettiin muokkaus');
         this.props.history.push("/profiili/oma");
         event.preventDefault();
     }
@@ -95,7 +94,6 @@ class AddProduct extends Component {
                 this.postNewProduct();
             }
         }
-
         event.preventDefault();
     }
 
@@ -151,8 +149,6 @@ class AddProduct extends Component {
             }).then((response) => {
                 return response.json();
             }).then((value) => {
-                  console.log('VALUE??',value);
-
                   fetch('/api/products/' + value + '/farm', {
                       method: 'POST',
                       headers: {
@@ -160,9 +156,7 @@ class AddProduct extends Component {
                           'Content-Type': 'application/json'
                       },
                       body: JSON.stringify(localStorage.getItem('farmId')),
-                  }).then(() => {
-                      console.log("tags added to " + value);
-                  });
+                  })
 
                 if (tagArray.length > 0) {
                     fetch('/api/products/' + value + '/tag', {
@@ -172,10 +166,7 @@ class AddProduct extends Component {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(tagArray),
-                    }).then(() => {
-                            console.log("farm added to " + value);
-                        }
-                    )
+                    })
                 }
             }).finally(() => this.props.history.push("/profiili/oma"))
         }
@@ -228,10 +219,9 @@ class AddProduct extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
                     <button onClick={this.cancelModify} className="btn btn-primary cancelButton">Peruuta</button>
-                    {this.state.modifying ? <button onClick={this.deleteProduct} className="btn btn-primary deleteButton">Poista</button>
-                    :
-                    <h1></h1>}
-
+                    {this.state.modifying &&
+                        <button onClick={this.deleteProduct} className="btn btn-primary deleteButton">Poista</button>
+                    }
                 </form>
             </div>
         )
