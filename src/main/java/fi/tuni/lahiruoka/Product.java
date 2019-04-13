@@ -129,6 +129,10 @@ public class Product {
         this.tags = tags;
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
     @Override
     public String toString() {
         return "Product{" +

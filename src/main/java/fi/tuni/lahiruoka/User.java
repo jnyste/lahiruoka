@@ -156,4 +156,8 @@ public class User {
     public Set<Product> getProducts() {
         return products;
     }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
 }
