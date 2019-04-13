@@ -2,6 +2,7 @@ package fi.tuni.lahiruoka;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
@@ -397,6 +398,18 @@ public class LahiruokaController {
     // -----------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------DELETE MAPPING--------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
+
+    @DeleteMapping("/api/orders/{orderId}")
+    public void removeOrderById(@PathVariable int orderId) {
+        Optional<Order> orderOptional = orderRepository.findById(orderId);
+
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+            order.getProduct().getOrders().remove(order);
+            order.getOrderer().getOrders().remove(order);
+            orderRepository.delete(order);
+        }
+    }
 
     @DeleteMapping("/api/products/{productId}")
     public void removeProductById(@PathVariable int productId) {
