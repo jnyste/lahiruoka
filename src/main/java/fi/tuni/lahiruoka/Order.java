@@ -1,12 +1,10 @@
 package fi.tuni.lahiruoka;
 
-import jdk.internal.jline.internal.Nullable;
-
 import javax.persistence.*;
-import javax.validation.constraints.Null;
 import java.time.LocalDate;
 
 @Entity
+@Table(name="order_table")
 public class Order {
     @Id
     @GeneratedValue(generator="order_seq")
@@ -29,6 +27,10 @@ public class Order {
 
     @Column(nullable = false)
     LocalDate dateOfDelivery;
+
+    public Order() {
+        this.dateOfOrder = LocalDate.now();
+    }
 
     public Order(User orderer, Product product, double amount, LocalDate dateOfDelivery) {
         this.orderer = orderer;
