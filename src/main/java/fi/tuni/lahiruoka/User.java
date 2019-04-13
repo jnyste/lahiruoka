@@ -42,6 +42,10 @@ public class User {
     @Column(nullable = false)
     String info = "";
 
+    @OneToMany(mappedBy = "orderer", cascade = CascadeType.ALL)
+    @JsonIgnore
+    Set<Order> orders = new HashSet<>();
+
     @OneToMany(mappedBy="farm", cascade = CascadeType.ALL)
     @JsonIgnore
     Set<Product> products = new HashSet<>();
