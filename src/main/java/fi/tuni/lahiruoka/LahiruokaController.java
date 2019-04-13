@@ -432,6 +432,9 @@ public class LahiruokaController {
             tagRepository.deleteAll(tagsToBeRemoved);
         }
 
+        HashSet<Order> ordersToBeRemoved = new HashSet<>(product.getOrders());
+        ordersToBeRemoved.forEach((order) -> removeOrderById(order.getOrderId()));
+
         productRepository.deleteById(productId);
     }
 
