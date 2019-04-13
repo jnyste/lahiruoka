@@ -184,6 +184,27 @@ public class LahiruokaController {
         }
     }
 
+    @GetMapping("/api/orders")
+    public Iterable<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    @GetMapping("/api/orders/{orderId}")
+    public Optional<Order> getAllOrdersById(@PathVariable int orderId) {
+        return orderRepository.findById(orderId);
+    }
+
+    @GetMapping("/api/users/{id}/orders")
+    public Iterable<Order> getOrderByUserId(@PathVariable int id) {
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isPresent()) {
+            return userOptional.get().getOrders();
+        } else {
+            return new LinkedList<Order>();
+        }
+    }
+
     // GetMappings for searches
 
     @GetMapping("/api/products/tag/{tagName}")
