@@ -452,7 +452,11 @@ public class LahiruokaController {
                     removeProductById(product.getProductId());
                 }
             } else {
-                // productien poistaminen tilauksesta, en voi vielä tehdä, kun tilausten backend ei ole valmis
+                Set<Order> orders = new HashSet<>(user.getOrders());
+
+                for (Order order : orders) {
+                    removeOrderById(order.getOrderId());
+                }
             }
 
             userRepository.delete(user);
