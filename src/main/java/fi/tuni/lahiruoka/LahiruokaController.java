@@ -21,6 +21,9 @@ public class LahiruokaController {
     @Autowired
     TagRepository tagRepository;
 
+    @Autowired
+    OrderRepository orderRepository;
+
     // To see table description, use SHOW COLUMNS from PRODUCT; in h2.
     @PostConstruct
     public void init() {
@@ -51,12 +54,25 @@ public class LahiruokaController {
         user2.addProducts(pe);
         userRepository.save(user2);
 
-        userRepository.save(new User("googleId3", UserType.KITCHEN, "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,3,2)));
-        userRepository.save(new User("googleId4", UserType.KITCHEN, "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,4,7)));
+        User user3 = new User("googleId3", UserType.KITCHEN, "Mummolammin kotihoito", "mummotie 666, 67340 mikkeli", "054-6765112", "mummot voivat hyvin täällä", LocalDate.of(2019,3,2));
+        User user4 = new User("googleId4", UserType.KITCHEN, "Hirsipään keittiö", "maksakuja 1 c 122, 24090 kankaanpää", "054-6223333", "viiden tähden ruokaa, yhden tähden hinnoilla", LocalDate.of(2019,4,7));
+
+        userRepository.save(user3);
+        userRepository.save(user4);
         
         productRepository.save(p);
         productRepository.save(k);
         productRepository.save(pe);
+
+        Order order1 = new Order(user3, p, 10, LocalDate.of(2019, 4, 30));
+        Order order2 = new Order(user3, pe, 4, LocalDate.of(2019, 4, 30));
+        Order order3 = new Order(user4, p, 15, LocalDate.of(2019, 5, 7));
+        Order order4 = new Order(user4, k, 5, LocalDate.of(2019, 5, 7));
+
+        orderRepository.save(order1);
+        orderRepository.save(order2);
+        orderRepository.save(order3);
+        orderRepository.save(order4);
     }
 
 
