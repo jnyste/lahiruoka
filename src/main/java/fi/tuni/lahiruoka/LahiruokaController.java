@@ -130,6 +130,21 @@ public class LahiruokaController {
         return user.getId();
     }
 
+    @PostMapping("/api/users/{userId}/orders")
+    public void saveOrder(@PathVariable int userId, @RequestBody ObjectNode orderInfo) {
+        int productId = orderInfo.get("productId").asInt();
+        double amount = orderInfo.get("amount").asDouble();
+        LocalDate dateOfDelivery = LocalDate.parse(orderInfo.get("dateOfDelivery").asText());
+
+        Optional<User> userOptional = userRepository.findById(userId);
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        if (userOptional.isPresent() && productOptional.isPresent()) {
+            Order order = new Order(userOptional.get(), productOptional.get(), amount, dateOfDelivery);
+            orderRepository.save(order);
+        }
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // ---------------------------------------------------GET MAPPING---------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
