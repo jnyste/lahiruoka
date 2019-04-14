@@ -50,7 +50,7 @@ class NavigationBar extends Component {
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
                       </NavDropdown>
                       <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown" alignRight >
-                        <NavDropdown.Item href="/ostoskori/">{<ShoppingCart/>}</NavDropdown.Item>
+                        <NavDropdown.Item>{<ShoppingCart/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
                   </Navbar.Collapse>
