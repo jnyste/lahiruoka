@@ -28,6 +28,9 @@ public class Order {
     @Column(nullable = false)
     LocalDate dateOfDelivery;
 
+    @Column(nullable = false)
+    boolean confirmed;
+
     public Order() {
         this.dateOfOrder = LocalDate.now();
     }
@@ -38,6 +41,7 @@ public class Order {
         this.amount = amount;
         this.dateOfDelivery = dateOfDelivery;
         this.dateOfOrder = LocalDate.now();
+        this.confirmed = false;
     }
 
     public User getOrderer() {
@@ -78,6 +82,14 @@ public class Order {
 
     public LocalDate getDateOfOrder() {
         return dateOfOrder;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     @Override
