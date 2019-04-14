@@ -395,6 +395,25 @@ public class LahiruokaController {
         }
     }
 
+    @PutMapping("/api/orders/{orderId}")
+    public void modifyOrder(@PathVariable int orderId, @RequestBody ObjectNode updateOrder) {
+        Optional<Order> orderOptional = orderRepository.findById(orderId);
+
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+
+            if (!order.isConfirmed()) {
+                double amount = updateOrder.get("amount").asDouble();
+                LocalDate dateOfDelivery = LocalDate.parse(updateOrder.get("dateOfDelivery").asText());
+
+                order.setAmount(amount);
+                order.setDateOfDelivery(dateOfDelivery);
+
+                orderRepository.save(order);
+            }
+        }
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------DELETE MAPPING--------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
