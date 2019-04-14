@@ -23,7 +23,7 @@ class ShoppingCart extends Component {
 
     loggedinRender() {
         if(localStorage.getItem('userType') === 'KITCHEN') {
-            return (<p>Keittiö.</p>);
+            return (<p>Valittu toimituspäivä: {localStorage.getItem('deliveryDate')} </p> );
         } else if (localStorage.getItem('userType') === 'FARM') {
             return (<p>Sinulle on {this.checkFarmOrders()} tilausta.</p>);
         } else {
