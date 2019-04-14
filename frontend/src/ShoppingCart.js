@@ -20,7 +20,13 @@ class ShoppingCart extends Component {
     }
 
     loggedinRender() {
-        return (<p>Ei tilauksia.</p>);
+        if(localStorage.getItem('userType') === 'KITCHEN') {
+            return (<p>Keittiö.</p>);
+        } else if (localStorage.getItem('userType') === 'FARM') {
+            return (<p>Sinulle ei ole juuri nyt tilauksia.</p>);
+        } else {
+            return (<p>ERROR, kokeile kirjautua ulos ja takaisin sisään.</p>);
+        }
     }
 
     render() {
