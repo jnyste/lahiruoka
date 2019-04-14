@@ -9,11 +9,23 @@ class NavigationBar extends Component {
 
     constructor() {
         super();
-        this.state = {searchWord: ''};
+        this.state = {searchWord: ''
+                    , deliveryDate: ''};
         this.updateSearchWord = this.updateSearchWord.bind(this);
         this.isLogged = this.isLogged.bind(this);
         this.search = this.search.bind(this);
     }
+
+    handleChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+
+    };
 
     isLogged() {
       return localStorage.getItem('loggedin') === "true" ?
@@ -34,14 +46,20 @@ class NavigationBar extends Component {
                 <Navbar.Brand className="navLogo" style={{float: "left"}} href="/"><img src={logo} className="lahiruokalogo" style={{paddingLeft:"20px", paddingRight:"20px"}}/></Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                   <Navbar.Collapse className="navCollapse" id="basic-navbar-nav">
-                    <Form onSubmit={this.search} className="navForm" inline>
+                    <Form onSubmit={this.search} className="navForm" inline  style={{marginBottom:"7px"}}>
                       <FormControl onChange={this.updateSearchWord} type="text" placeholder="Hae tuotetta..." className="search" />
                       <Button href={'/etsi/' + this.state.searchWord} type="submit" className="navFormButton" variant="light">Hae</Button>
                     </Form>
                     <Nav className="navLinks">
-                      <Nav.Link className="navProducts" href="/tuotteet/" style={{paddingLeft:"20px"}}>TUOTTEET</Nav.Link>
+                      <Nav.Link className="navProducts" href="/tuotteet/" style={{paddingLeft:"20px", paddingTop:"0px"}}>TUOTTEET</Nav.Link>
                     </Nav>
-                        <Nav className="ml-auto" style={{paddingRight:"20px"}}>
+                    <Nav className="ml-auto" style={{paddingRight:"20px"}}>
+                        { (localStorage.getItem('loggedin') === "true" && localStorage.getItem('userType') === 'KITCHEN') &&
+                        <div>
+                            <p className="navDateLabelli" style={{paddingTop:"7px"}}>Valitse toimituspäivä:</p>
+                            <input type="date" className="deliveryDate" name="deliveryDate" value={this.state.deliveryDate} onChange={this.handleChange}/>
+                        </div>
+                        }
                       <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center" alignRight >
                         {this.isLogged()}
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
