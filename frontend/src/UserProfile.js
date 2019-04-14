@@ -32,7 +32,7 @@ class UserProfile extends Component {
         }
         let paramsId = '' + this.props.match.params.id;
         if(paramsId === 'oma' && loggedin) {
-            fetch('/api/users/' + localStorage.getItem('userId'))
+            fetch('/api/users/' + localStorage.getItem('googleId'))
                 .then(response => response.json())
                 .then(user => {
                     this.setState({ farm: user.companyName
@@ -90,14 +90,14 @@ class UserProfile extends Component {
                         <h5>{this.state.farm}</h5>
                         <p>{this.state.info}</p>
                         <p>{this.state.address}<br/>{this.state.phone}</p>
-                        {this.state.googleId === localStorage.getItem('userId') &&
+                        {this.state.googleId === localStorage.getItem('googleId') &&
                         <Link to="/profiili/oma/muokkaa">Muokkaa tietoja...</Link>}
                     </div>
                     {this.state.userType === 'FARM' &&
                         <div className="userproducts">
                             <h5>Tuotteet</h5>
                             {this.state.products}
-                            {this.state.googleId === localStorage.getItem('userId') &&
+                            {this.state.googleId === localStorage.getItem('googleId') &&
                             <Link to="/tuotelisays/uusi">Lisää tuote....</Link>}
                         </div>
                     }

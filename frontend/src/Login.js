@@ -21,7 +21,7 @@ class Login extends Component {
         console.log('Logged out');
         this.setState({loggedin: false});
         localStorage.setItem('loggedin', 'false');
-        localStorage.setItem('userId', 'none');
+        localStorage.setItem('googleId', 'none');
         this.props.history.push("/");
     }
 
@@ -41,10 +41,10 @@ class Login extends Component {
                 console.log('Login failed');
             } else {
                 this.setState({loggedin: true});
-                let userId = response.profileObj.googleId;
+                let googleeId = response.profileObj.googleId;
                 localStorage.setItem('loggedin', 'true');
-                localStorage.setItem('userId', userId);
-                fetch('/api/users/' + userId).then((httpResponse) => httpResponse.json()).then((user) => {
+                localStorage.setItem('googleId', googleeId);
+                fetch('/api/users/' + googleeId).then((httpResponse) => httpResponse.json()).then((user) => {
                     if(user === null) {
                         this.firstTimeUser();
                     } else {

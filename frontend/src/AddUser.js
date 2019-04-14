@@ -15,7 +15,7 @@ class AddUser extends Component {
             , address: ''
             , phone: ''
             , info: ''
-            , googleId : localStorage.getItem('userId')
+            , googleId : localStorage.getItem('googleId')
         };
     }
 
@@ -24,7 +24,7 @@ class AddUser extends Component {
             this.setState({modifying: false})
         } else {
             this.setState({modifying: true});
-            fetch('/api/users/' + localStorage.getItem('userId'))
+            fetch('/api/users/' + localStorage.getItem('googleId'))
                 .then((httpResponse) => httpResponse.json())
                 .then((user) => {
                     console.log(user);
@@ -137,7 +137,7 @@ class AddUser extends Component {
                 }
             }).then(() => {
                 localStorage.setItem('loggedin', 'false');
-                localStorage.setItem('userId', 'none');
+                localStorage.setItem('googleId', 'none');
                 this.props.history.push("/");
             });
         }
