@@ -107,7 +107,7 @@ class SingleProduct extends Component {
                         <div className="order">
                             <div className="floatTis">
                                 <form>
-                                    <input type="text" name="kg" className="kgBox" onChange={this.updateListener}/>
+                                    <input type="text" name="kg" value={this.state.amount} className="kgBox" onChange={this.updateListener}/>
                                 </form>
                             </div>
                             <div className="floatTis kgText">
