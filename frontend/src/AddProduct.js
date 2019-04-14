@@ -155,7 +155,7 @@ class AddProduct extends Component {
                           'Accept': 'application/json',
                           'Content-Type': 'application/json'
                       },
-                      body: JSON.stringify(localStorage.getItem('farmId')),
+                      body: JSON.stringify(localStorage.getItem('userId')),
                   })
 
                 if (tagArray.length > 0) {
