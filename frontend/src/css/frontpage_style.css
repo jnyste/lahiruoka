@@ -144,3 +144,16 @@ span {
 .shoppingcart {
     padding-bottom: 4px;
 }
+
+.deliveryDate {
+    height: 40px;
+    width: 150px;
+    margin-right: 20px;
+}
+
+.navDateLabelli{
+    float: left;
+    color: white;
+    padding-right: 10px;
+}
+
