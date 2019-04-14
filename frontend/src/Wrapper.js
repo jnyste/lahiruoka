@@ -1,6 +1,5 @@
 import React from "react";
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Form, FormControl } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import './css/frontpage_style.css';
 import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
@@ -32,7 +31,7 @@ function Wrapper() {
       <div>
         <NavigationBar />
 
-        <Route exact path="/" exact component={Index} />
+        <Route exact path="/" component={Index} />
         <Route exact path="/tuotteet/" component={Products} />
         <Route exact path="/ostoskori/" component={ShoppingCart} />
         <Route exact path="/profiili/:id" component={UserProfile} />
