@@ -46,7 +46,7 @@ class NavigationBar extends Component {
                         {this.isLogged()}
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
                       </NavDropdown>
-                      <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown" alignRight >
+                      <NavDropdown className="navShoppingcart" title="TILAUKSET" id="shoppingcartDropdown" alignRight >
                         <NavDropdown.Item>{<ShoppingCart/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
