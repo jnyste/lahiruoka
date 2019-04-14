@@ -15,14 +15,26 @@ class SearchProducts extends Component {
     }
 
     componentDidMount() {
-        switch (this.state.sort) {
-            case 'newest': fetch('/api/search/' + this.props.match.params.keyWord).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
-            case 'priceAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByPriceAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
-            case 'priceDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByPriceAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
-            case 'availableAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
-            case 'availableDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
-            case 'nameAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
-            case 'nameDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+        if (this.props.match.params.keyWord) {
+            switch (this.state.sort) {
+                case 'newest': fetch('/api/search/' + this.props.match.params.keyWord).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'priceAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByPriceAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'priceDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByPriceAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'availableAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'availableDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'nameAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'nameDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            }
+        } else {
+            switch (this.state.sort) {
+                case 'newest': fetch('/api/products/tag/' + this.props.match.params.tag).then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'priceAsc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByPriceAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'priceDesc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByPriceAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'availableAsc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByAvailableToAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'availableDesc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByAvailableToAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'nameAsc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByNameAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                case 'nameDesc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByNameAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+            }
         }
     }
 
@@ -77,7 +89,7 @@ class SearchProducts extends Component {
         return (
             <div className="product-list-container">
                 <div className="textContainer">
-                    <h3 className="listTitle">Hakutulokset sanalle "{this.props.match.params.keyWord}"</h3>
+                    <h3 className="listTitle">Hakutulokset {this.props.match.params.keyWord ? "sanalle" : "tagille"} "{this.props.match.params.keyWord ? this.props.match.params.keyWord : this.props.match.params.tag}"</h3>
                     {this.writeText(this.state.sort)}
                 </div>
                 {this.state.productList}

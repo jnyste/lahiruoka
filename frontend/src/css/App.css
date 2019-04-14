@@ -19,8 +19,17 @@
   color: red;
 }
 
+.tags span {
+  display: inline;
+  padding-left: 10px;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.Collapsible__contentInner {
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {

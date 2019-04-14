@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 
 class SingleProduct extends Component {
 
-    constructor(properites) {
-        super(properites);
+    constructor(properties) {
+        super(properties);
 
         this.updateListener = this.updateListener.bind(this);
         this.addListener = this.addListener.bind(this);
@@ -57,6 +57,9 @@ class SingleProduct extends Component {
 
 
     render() {
+        if (new Date(this.props.id.availableTo) < Date.now()) {
+            return(null);
+        }
         return (
             <div>
                 <Collapsible trigger={this.props.id.name + ' - ' + this.props.id.farm.companyName + ' - ' + this.props.id.price + ' €/kg'} triggerClassName="producttitletrigger" triggerOpenedClassName="productopenedtrigger" >
@@ -67,7 +70,7 @@ class SingleProduct extends Component {
                         <p className="productAmount">Yhteensä {this.props.id.amount} kg</p>
                         <p className="productAmount">Saatavilla: {this.writeDate(this.props.id.availableFrom)} - {this.writeDate(this.props.id.availableTo)}</p>
                         <p className="productExtraInfo">Lisätiedot: {this.props.id.info}</p>
-                        <p className="tags">{this.state.tags}</p>
+                        <p className="tags">{this.props.id.tags.map(tag => <a href={"/tag/" + tag.name}><span className={"productTag"}>#{tag.name}</span></a>)}</p>
                     </div>
 
                     {this.props.id.farm.googleId === localStorage.getItem('googleId') ?

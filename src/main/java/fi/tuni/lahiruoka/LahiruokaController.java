@@ -236,14 +236,53 @@ public class LahiruokaController {
     // GetMappings for searches
 
     @GetMapping("/api/products/tag/{tagName}")
-    public Iterable<Product> getProductsByTag(@PathVariable String tagName) {
-        Optional<Tag> tagOptional = tagRepository.findByNameIgnoreCase(tagName);
+    public List<Product> getProductsByTag(@PathVariable String tagName) {
+        return productRepository.findByTags_Name(tagName);
+    }
 
-        if (tagOptional.isPresent()) {
-            return tagOptional.get().getProducts();
-        } else {
-            return new LinkedList<Product>();
+    @GetMapping("/api/products/tag/{tagName}/sortByNameAsc/{ascending}")
+    public Iterable<Product> getProductsByTagSortByNameAsc(@PathVariable String tagName, @PathVariable boolean ascending) {
+        List<Product> products = getProductsByTag(tagName);
+        Collections.sort(products, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+
+        if (!ascending) {
+            Collections.reverse(products);
         }
+
+        return products;
+    }
+
+    @GetMapping("/api/products/tag/{tagName}/sortByAvailableToAsc/{ascending}")
+    public Iterable<Product> getProductsByTagSortByAvailableToAsc(@PathVariable String tagName, @PathVariable boolean ascending) {
+        List<Product> products = getProductsByTag(tagName);
+        Collections.sort(products, (o1, o2) -> o1.getAvailableTo().compareTo(o2.getAvailableTo()));
+
+        if (!ascending) {
+            Collections.reverse(products);
+        }
+
+        return products;
+    }
+
+    @GetMapping("/api/products/tag/{tagName}/sortByPriceAsc/{ascending}")
+    public Iterable<Product> getProductsByTagSortByPriceAsc(@PathVariable String tagName, @PathVariable boolean ascending) {
+        List<Product> products = getProductsByTag(tagName);
+        Collections.sort(products, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                if (o2.getPrice() - o1.getPrice() > 0) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
+        if (!ascending) {
+            Collections.reverse(products);
+        }
+
+        return products;
     }
 
     @GetMapping("/api/products/name/{containsWord}")
