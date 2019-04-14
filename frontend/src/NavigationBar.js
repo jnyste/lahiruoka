@@ -29,6 +29,9 @@ class NavigationBar extends Component {
         if(new Date(value) < Date.now()) {
             alert('Et voi valita jo mennyttä päivää!');
             localStorage.setItem('deliveryDate', '');
+            this.setState({
+                deliveryDate: ''
+            });
         } else {
             this.setState({
                 [name]: value
