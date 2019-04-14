@@ -43,7 +43,8 @@ class UserProfile extends Component {
                                     , userType: user.userType
                                     , googleId: user.googleId
                                   });
-                    localStorage.setItem('farmId', user.id);
+                    localStorage.setItem('userId', user.id);
+                    localStorage.setItem('userType', user.userType);
                 }).then(() => this.fetchProducts());
         } else if (paramsId === 'oma' && !loggedin) {
             this.setState({wrongAddress: true});

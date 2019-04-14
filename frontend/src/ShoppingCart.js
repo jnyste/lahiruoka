@@ -4,24 +4,36 @@ class ShoppingCart extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {status: 'loggedout'};
-        this.loggedOutRender = this.loggedOutRender.bind(this);
+        let status = (localStorage.getItem('loggedin') === 'true') ? 'loggedin' : 'loggedout';
+        console.log('status: ' + status);
+        this.state = {status: status};
+        this.loggedoutRender = this.loggedoutRender.bind(this);
+        this.loggedinRender = this.loggedinRender.bind(this);
     }
 
     componentDidMount() {
         console.log(localStorage);
     }
 
-    loggedOutRender() {
-        console.log('loggedout');
+    loggedoutRender() {
         return (<p>Kirjaudu sisään "Oma tili"-valikosta<br />tarkastellaksesi tilauksiasi.</p>);
     }
 
+    loggedinRender() {
+        return (<p>Ei tilauksia.</p>);
+    }
+
     render() {
-        if(this.state.status === 'loggedout') {
+        if(this.state.status === 'loggedin') {
             return (
                 <div>
-                    {this.loggedOutRender()}
+                    {this.loggedinRender()}
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    {this.loggedoutRender()}
                 </div>
             );
         }
