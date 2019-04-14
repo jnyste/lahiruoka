@@ -40,6 +40,7 @@ function Wrapper() {
         <Route exact path="/profiili/oma/:gid" component={AddUser} />
         <Route exact path="/login/" component={Login} />
         <Route exact path="/etsi/:keyWord" component={SearchProducts} />
+        <Route exact path="/tag/:tag" component{SearchProducts} />
 
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
