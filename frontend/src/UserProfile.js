@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import './css/UserProfile_style.css';
-import farmPic from './farm.jpg';
-import kitchenPic from './kitchen.jpg';
+import farmPic from './img/farm.jpg';
+import kitchenPic from './img/kitchen.jpg';
 import {Link} from "react-router-dom";
 import SingleProduct from "./SingleProduct";
 import ErrorPage from "./ErrorPage";

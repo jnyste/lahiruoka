@@ -1,11 +1,11 @@
 import React, {Component} from "react";
 import './css/frontpage_style.css';
-import logo from './lahiruoka_logo.png';
+import logo from './img/lahiruoka_logo.png';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Form, FormControl } from 'react-bootstrap';
 import { BrowserRouter as Link } from "react-router-dom";
 import Login from './Login';
-import logo2 from "./Perunapelto.jpg";
-import logo3 from "./wheat.jpeg";
+import logo2 from "./img/Perunapelto.jpg";
+import logo3 from "./img/wheat.jpeg";
 
 class NavigationBar extends Component {
 
