@@ -93,9 +93,7 @@ class UserProfile extends Component {
                         {this.state.googleId === localStorage.getItem('userId') &&
                         <Link to="/profiili/oma/muokkaa">Muokkaa tietoja...</Link>}
                     </div>
-                    {this.state.userType === 'KITCHEN' ?
-                        <div></div>
-                        :
+                    {this.state.userType === 'FARM' &&
                         <div className="userproducts">
                             <h5>Tuotteet</h5>
                             {this.state.products}
