@@ -77,7 +77,7 @@ class SearchProducts extends Component {
         return (
             <div className="product-list-container">
                 <div className="textContainer">
-                    <h3 className="listTitle">Hakutulokset sanalle "{this.props.match.params.keyWord}"</h3>
+                    <h3 className="listTitle">Hakutulokset {this.props.match.params.keyWord ? "sanalle" : "tagille"} "{this.props.match.params.keyWord ? this.props.match.params.keyWord : this.props.match.params.tag}"</h3>
                     {this.writeText(this.state.sort)}
                 </div>
                 {this.state.productList}
