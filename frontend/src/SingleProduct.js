@@ -70,7 +70,7 @@ class SingleProduct extends Component {
                         <p className="tags">{this.state.tags}</p>
                     </div>
 
-                    {this.props.id.farm.googleId === localStorage.getItem('userId') ?
+                    {this.props.id.farm.googleId === localStorage.getItem('googleId') ?
                         <Link to={"/tuotelisays/" + this.props.id.productId} className="modifyLink">Muokkaa tietoja...</Link>
                         :
                         <div className="order">
