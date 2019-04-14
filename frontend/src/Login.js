@@ -22,6 +22,8 @@ class Login extends Component {
         this.setState({loggedin: false});
         localStorage.setItem('loggedin', 'false');
         localStorage.setItem('googleId', 'none');
+        localStorage.setItem('userId', 'none');
+        localStorage.setItem('userType', 'none');
         this.props.history.push("/");
     }
 
