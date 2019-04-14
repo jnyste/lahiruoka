@@ -19,6 +19,11 @@
   color: red;
 }
 
+.tags span {
+  display: inline;
+  padding-left: 10px;
+}
+
 .App-link {
   color: #61dafb;
 }
