@@ -142,7 +142,12 @@ class AddUser extends Component {
             });
         }
         event.preventDefault();
-    }
+    };
+
+    cancelModify = (event) => {
+        this.props.history.push("/profiili/oma");
+        event.preventDefault();
+    };
 
     render() {
         return (
@@ -182,6 +187,7 @@ class AddUser extends Component {
                         <textarea className="form-control" id="exampleInfo" value={this.state.info} onChange={this.handleChange} name="info" rows="3"></textarea>
                     </div>
                     <button type="submit" className="btn btn-primary">Lisää</button>
+                    <button onClick={this.cancelModify} className="btn btn-primary cancelButton">Peruuta</button>
                     {this.state.modifying &&
                         <button onClick={this.deleteUser} className="btn btn-primary deleteButton">Poista profiili</button>
                     }
