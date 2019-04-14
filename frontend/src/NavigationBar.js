@@ -9,8 +9,12 @@ class NavigationBar extends Component {
 
     constructor() {
         super();
+        let deliveryDate = localStorage.getItem('deliveryDate') === null ? '' : localStorage.getItem('deliveryDate');
+        if(new Date(deliveryDate) < Date.now()) {
+            deliveryDate = '';
+        }
         this.state = {searchWord: ''
-                    , deliveryDate: ''};
+                    , deliveryDate: deliveryDate};
         this.updateSearchWord = this.updateSearchWord.bind(this);
         this.isLogged = this.isLogged.bind(this);
         this.search = this.search.bind(this);
@@ -21,10 +25,16 @@ class NavigationBar extends Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
 
+        if(new Date(value) < Date.now()) {
+            alert('Et voi valita jo mennyttä päivää!');
+            localStorage.setItem('deliveryDate', '');
+        } else {
+            this.setState({
+                [name]: value
+            });
+            localStorage.setItem('deliveryDate', value);
+        }
     };
 
     isLogged() {
