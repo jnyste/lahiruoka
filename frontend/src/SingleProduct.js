@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 class SingleProduct extends Component {
 
-    constructor(properites) {
+    constructor(properties) {
         super(properties);
 
         this.updateListener = this.updateListener.bind(this);
