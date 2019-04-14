@@ -215,7 +215,19 @@ public class LahiruokaController {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isPresent()) {
-            return userOptional.get().getOrders();
+            User user = userOptional.get();
+
+            if (user.getUserType().equals(UserType.KITCHEN)) {
+                return user.getOrders();
+            } else {
+                List<Order> allOrders = new LinkedList<>();
+
+                for (Product product : user.getProducts()) {
+                    allOrders.addAll(orderRepository.findOrdersByProduct(product));
+                }
+
+                return allOrders;
+            }
         } else {
             return new LinkedList<Order>();
         }

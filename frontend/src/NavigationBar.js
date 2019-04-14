@@ -1,11 +1,8 @@
 import React, {Component} from "react";
 import './css/frontpage_style.css';
 import logo from './img/lahiruoka_logo.png';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Button, Form, FormControl } from 'react-bootstrap';
-import { BrowserRouter as Link } from "react-router-dom";
+import { Navbar, Nav, NavDropdown, Button, Form, FormControl } from 'react-bootstrap';
 import Login from './Login';
-import logo2 from "./img/Perunapelto.jpg";
-import logo3 from "./img/wheat.jpeg";
 import ShoppingCart from './ShoppingCart';
 
 class NavigationBar extends Component {
@@ -49,7 +46,7 @@ class NavigationBar extends Component {
                         {this.isLogged()}
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
                       </NavDropdown>
-                      <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown" alignRight >
+                      <NavDropdown className="navShoppingcart" title="TILAUKSET" id="shoppingcartDropdown" alignRight >
                         <NavDropdown.Item>{<ShoppingCart/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
