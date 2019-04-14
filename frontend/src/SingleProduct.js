@@ -10,6 +10,7 @@ class SingleProduct extends Component {
         this.updateListener = this.updateListener.bind(this);
         this.addListener = this.addListener.bind(this);
         this.writeDate = this.writeDate.bind(this);
+        this.addToCart = this.addToCart.bind(this);
 
         let productTags = '';
 
@@ -51,10 +52,37 @@ class SingleProduct extends Component {
         let taxResult = parseFloat(Math.round(result * 1.14 * 1000) / 1000);
         this.setState({total:result});
         this.setState({totalTax:taxResult});
-        
-        event.preventDefault();
+
+        event.persist();
       }
 
+      addToCart(event) {
+        if(localStorage.getItem('deliveryDate') === '' || localStorage.getItem('deliveryDate') === null) {
+            alert('Anna toimituspäivä ylämenusta!');
+        } else if (this.state.amount <= 0) {
+            alert('Anna tilausmäärä!');
+        } else {
+            const newOrder = {
+                productId: this.props.id.productId
+                , amount: this.state.amount
+                , dateOfDelivery: localStorage.getItem('deliveryDate')
+            };
+            fetch('/api/users/' + localStorage.getItem('userId') + '/orders', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newOrder)
+            }).then(() => {
+                console.log("Order posted?");
+                this.setState({amount: 0
+                    , total: 0
+                    , totalTax: 0});
+            });
+            event.persist();
+        }
+      }
 
     render() {
         if (new Date(this.props.id.availableTo) < Date.now()) {
@@ -86,7 +114,7 @@ class SingleProduct extends Component {
                                 <p>Kg</p>
                             </div>
                             <div className= "floatTis cart">
-                                <button name="name" value="value" type="submit">Lisää ostoskoriin</button>
+                                <button name="name" value="value" type="submit" onClick={this.addToCart}>Lisää ostoskoriin</button>
                             </div>
                             <div className="floatTis total">
                                 <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
