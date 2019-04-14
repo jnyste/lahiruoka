@@ -57,6 +57,9 @@ class SingleProduct extends Component {
 
 
     render() {
+        if (new Date(this.props.id.availableTo) < Date.now()) {
+            return(null);
+        }
         return (
             <div>
                 <Collapsible trigger={this.props.id.name + ' - ' + this.props.id.farm.companyName + ' - ' + this.props.id.price + ' €/kg'} triggerClassName="producttitletrigger" triggerOpenedClassName="productopenedtrigger" >
