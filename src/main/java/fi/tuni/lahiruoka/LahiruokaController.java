@@ -33,9 +33,9 @@ public class LahiruokaController {
         Tag perunaTag = new Tag("peruna");
         Tag vihannesTag = new Tag("vihannes");
 
-        Product p = new Product("Porkkana", 2.3, 100, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "todella makea sluuurrrppss");
-        Product k = new Product("Kaali", 3.5, 150, LocalDate.of(2019, 3, 12), LocalDate.of(2019, 4, 6), "rouskuu mukavasti hampaissa");
-        Product pe = new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 12, 24), "herkkuperunaa");
+        Product p = new Product("Porkkana", 2.3, 100, LocalDate.of(2019, 3, 12), LocalDate.of(2025, 4, 6), "todella makea sluuurrrppss");
+        Product k = new Product("Kaali", 3.5, 150, LocalDate.of(2019, 3, 12), LocalDate.of(2025, 4, 6), "rouskuu mukavasti hampaissa");
+        Product pe = new Product("Peruna", 1.3, 50, LocalDate.of(2019, 2, 10), LocalDate.of(2025, 12, 24), "herkkuperunaa");
 
         pe.getTags().add(perunaTag);
         pe.getTags().add(vihannesTag);
