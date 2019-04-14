@@ -6,6 +6,7 @@ import { BrowserRouter as Link } from "react-router-dom";
 import Login from './Login';
 import logo2 from "./img/Perunapelto.jpg";
 import logo3 from "./img/wheat.jpeg";
+import ShoppingCart from './ShoppingCart';
 
 class NavigationBar extends Component {
 
@@ -44,12 +45,12 @@ class NavigationBar extends Component {
                       <Nav.Link className="navProducts" href="/tuotteet/" style={{paddingLeft:"20px"}}>TUOTTEET</Nav.Link>
                     </Nav>
                         <Nav className="ml-auto" style={{paddingRight:"20px"}}>
-                      <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center">
+                      <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center" alignRight >
                         {this.isLogged()}
                         <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
                       </NavDropdown>
-                      <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown">
-                        <NavDropdown.Item href="/ostoskori/" >OSTOSKORI</NavDropdown.Item>
+                      <NavDropdown className="navShoppingcart" title="OSTOSKORI (0)" id="shoppingcartDropdown" alignRight >
+                        <NavDropdown.Item href="/ostoskori/">{<ShoppingCart/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
                   </Navbar.Collapse>
