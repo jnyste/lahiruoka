@@ -78,7 +78,7 @@ class SearchProducts extends Component {
         let helperArray = [];
 
         for (let obj of jsonObject) {
-            helperArray.push(<SingleProduct key={obj.product_id} id={obj}/>);
+            helperArray.push(<SingleProduct key={obj.productId} id={obj}/>);
         }
 
         this.setState({productList: helperArray});
