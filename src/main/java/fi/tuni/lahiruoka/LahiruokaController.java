@@ -453,7 +453,7 @@ public class LahiruokaController {
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
 
-            if (!order.isConfirmed()) {
+            if (!order.isConfirmedByOrderer()) {
                 double amount = updateOrder.get("amount").asDouble();
                 LocalDate dateOfDelivery = LocalDate.parse(updateOrder.get("dateOfDelivery").asText());
 
@@ -473,7 +473,7 @@ public class LahiruokaController {
 
             if (orderOptional.isPresent()) {
                 Order order = orderOptional.get();
-                order.setConfirmed(true);
+                order.setConfirmedByOrderer(true);
                 orderRepository.save(order);
             }
         }
@@ -488,7 +488,7 @@ public class LahiruokaController {
             if (orderOptional.isPresent()) {
                 Order order = orderOptional.get();
 
-                if (order.isConfirmed()) {
+                if (order.isConfirmedByOrderer()) {
                     order.setAcceptedByFarmer(true);
                     orderRepository.save(order);
                 }
