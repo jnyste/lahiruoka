@@ -40,7 +40,17 @@ class ShoppingCart extends Component {
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                orderAmount= orders.length;
+                let helper = 0;
+                if(!orders) {
+                    for (let order of orders) {
+                        if(order.confirmedByOrderer) {
+                            if (!order.declinedByFarmer && !order.acceptedByFarmer) {
+                                helper++;
+                            }
+                        }
+                    }
+                }
+                orderAmount = helper;
             }).finally(() => this.setState({orderAmount: orderAmount, fetching: false}));
     }
 

@@ -6,6 +6,8 @@ class FarmOrders extends Component {
 
     constructor(props) {
         super(props);
+        this.updatePage = this.updatePage.bind(this);
+        this.fetchOrders = this.fetchOrders.bind(this);
         this.state = {
             newOrders: []
             , acceptedOrders: []
@@ -14,28 +16,67 @@ class FarmOrders extends Component {
     }
 
     componentDidMount() {
+        this.fetchOrders();
+    }
+
+    updatePage(event) {
+        console.log('updatePage kutsuttu');
+        if(event.target.name === 'accept') {
+            const acceptedOrder = [event.target.value];
+            fetch('/api/orders/accept', {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(acceptedOrder)
+            }).then(() => {
+                //console.log('accepted done');
+            });
+       } else if (event.target.name === 'decline') {
+            const declined = [event.target.value];
+            fetch('/api/orders/decline', {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(declined)
+            }).then(() => {
+                //console.log('decline done');
+            });
+        }
+        event.persist();
+       this.fetchOrders();
+    }
+
+    fetchOrders() {
+        let newArray = [];
+        let acceptedArray = [];
+        let declinedArray = [];
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                let newArray = [];
-                let acceptedArray = [];
-                let declinedArray = [];
                 for (let order of orders) {
-                    if(order.declinedByFarmer) {
-                        declinedArray.push(<SingleOrder key={order.orderId} order={order}/>);
-                    } else {
-                        if(!order.acceptedByFarmer) {
-                            newArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                    if(order.confirmedByOrderer) {
+                        if(order.declinedByFarmer) {
+                            declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                         } else {
-                            acceptedArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                            if (!order.acceptedByFarmer) {
+                                newArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
+                                                           order={order}/>);
+                            } else {
+                                acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
+                                                                order={order}/>);
+                            }
                         }
                     }
-
                 }
+            }).finally(() =>
                 this.setState({newOrders: newArray
                     , acceptedOrders: acceptedArray
-                    , declinedOrders: declinedArray});
-            });
+                    , declinedOrders: declinedArray}));
+
     }
 
     render() {
