@@ -25,6 +25,7 @@ class Login extends Component {
         localStorage.setItem('userId', 'none');
         localStorage.setItem('userType', 'none');
         this.props.history.push("/");
+        this.props.updateNavbar(false);
         alert("Kirjauduit onnistuneesti ulos palvelusta.");
     }
 
@@ -43,6 +44,7 @@ class Login extends Component {
             if (response.profileObj === undefined) {
                 console.log('Login failed');
             } else {
+                this.props.updateNavbar(true);
                 this.setState({loggedin: true});
                 let googleeId = response.profileObj.googleId;
                 localStorage.setItem('loggedin', 'true');
