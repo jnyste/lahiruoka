@@ -29,7 +29,7 @@ class SingleOrder extends Component {
                     <p>Toimitusosoite: {this.props.order.orderer.address}</p>
                     <p>Puhelinnumero: {this.props.order.orderer.phone}</p>
                     <br/>
-                    <p>Toimituspäivä: {this.props.order.dateOfDelivery}</p>
+                    <p>Toivottu toimituspäivä: {this.props.order.dateOfDelivery}</p>
                     {!this.props.order.acceptedByFarmer &&
                         <div className="orderbutton">
                             <button className="acceptOrderButton" onClick={this.acceptButton}>Hyväksy</button>
