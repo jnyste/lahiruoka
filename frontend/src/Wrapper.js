@@ -45,7 +45,7 @@ function Wrapper() {
           <Route exact path="/tilaukset/" component={OrdersPage} />
           <Route component={ErrorPage} />
         </Switch>
-        <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
+        <div className="footer"><span>Lähiruoka 2019</span></div>
       </div>
     </Router>
   );
