@@ -95,6 +95,16 @@ class SingleProduct extends Component {
         }
     }
 
+    addShoppingForm() {
+        if (localStorage.getItem('userType') === "KITCHEN") {
+            return (<form>
+                <input type="text" name="kg" value={this.state.amount} className="kgBox" onChange={this.updateListener}/>
+                </form>);
+        } else {
+            return "";
+        }
+    }
+
     render() {
         if (new Date(this.props.id.availableTo) < Date.now()) {
             return(null);
@@ -117,9 +127,7 @@ class SingleProduct extends Component {
                         :
                         <div className="order">
                             <div className="floatTis">
-                                <form>
-                                    <input type="text" name="kg" value={this.state.amount} className="kgBox" onChange={this.updateListener}/>
-                                </form>
+                                {this.addShoppingForm()}
                             </div>
                             <div className="floatTis kgText">
                                 <p>Kg</p>
