@@ -1,11 +1,15 @@
 import React, {Component} from "react";
+import './css/OrdersPage_style.css';
+import SingleOrder from "./SingleOrder";
 
 class FarmOrders extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            orders: []
+            newOrders: []
+            , acceptedOrders: []
+            , declinedOrders: []
         }
     }
 
@@ -13,24 +17,43 @@ class FarmOrders extends Component {
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                let helperArray = [];
+                let newArray = [];
+                let acceptedArray = [];
                 for (let order of orders) {
-                    helperArray.push(order);
+                    if(!order.acceptedByFarmer) {
+                        newArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                    } else {
+                        acceptedArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                    }
+
                 }
-                this.setState({orders: helperArray});
+                this.setState({newOrders: newArray
+                    , acceptedOrders: acceptedArray});
             });
     }
 
     render() {
-        let allOrders = this.state.orders;
         return(
-            <div>
-                <h1>Tilaukset sinulle</h1>
-                <ul>
-                {allOrders.map((order) =>
-                    <li key={order.orderId}>{'Tilausnumero: ' + order.orderId +', tuote: ' + order.product.name + ', tilattu määrä: ' + order.amount
-                    + 'kg, tilaaja: ' + order.orderer.companyName + ' osoite: ' + order.orderer.address + ', puhelinnro: ' + order.orderer.phone}</li>)}
-                </ul>
+            <div className="ordercontainer">
+                <h2 className="ordertitle">Hyväksymättömät tilaukset</h2>
+                {this.state.newOrders.length <= 0 ?
+                <p>Ei hyväksyttäviä tilauksia.</p>
+                :
+                this.state.newOrders
+                }
+                <br/>
+                <h2 className="ordertitle">Hyväksytyt tilaukset</h2>
+                {this.state.acceptedOrders.length <= 0 ?
+                    <p>Ei hyväksyttyjä tilauksia.</p>
+                    :
+                    this.state.acceptedOrders
+                }
+                <h2 className="ordertitle">Kieltäydytyt tilaukset</h2>
+                {this.state.declinedOrders.length <= 0 ?
+                    <p>Ei kieltäydyttyjä tilauksia.</p>
+                    :
+                    this.state.declinedOrders
+                }
             </div>
         )
     }

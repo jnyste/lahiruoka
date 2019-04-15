@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 // Example class.
@@ -65,10 +66,10 @@ public class LahiruokaController {
         productRepository.save(k);
         productRepository.save(pe);
 
-        Order order1 = new Order(user3, p, 10, LocalDate.of(2019, 4, 30));
-        Order order2 = new Order(user3, pe, 4, LocalDate.of(2019, 4, 30));
-        Order order3 = new Order(user4, p, 15, LocalDate.of(2019, 5, 7));
-        Order order4 = new Order(user4, k, 5, LocalDate.of(2019, 5, 7));
+        Order order1 = new Order(user3, p, 10, LocalDate.of(2019, 4, 30), LocalTime.of(7,0));
+        Order order2 = new Order(user3, pe, 4, LocalDate.of(2019, 4, 30), LocalTime.of(6,0));
+        Order order3 = new Order(user4, p, 15, LocalDate.of(2019, 5, 7), LocalTime.of(8,30));
+        Order order4 = new Order(user4, k, 5, LocalDate.of(2019, 5, 7), LocalTime.of(7,0));
 
         orderRepository.save(order1);
         orderRepository.save(order2);
@@ -136,12 +137,13 @@ public class LahiruokaController {
         int productId = orderInfo.get("productId").asInt();
         double amount = orderInfo.get("amount").asDouble();
         LocalDate dateOfDelivery = LocalDate.parse(orderInfo.get("dateOfDelivery").asText());
+        LocalTime timeOfDelivery = LocalTime.parse(orderInfo.get("timeOfDelivery").asText());
 
         Optional<User> userOptional = userRepository.findById(userId);
         Optional<Product> productOptional = productRepository.findById(productId);
 
         if (userOptional.isPresent() && productOptional.isPresent()) {
-            Order order = new Order(userOptional.get(), productOptional.get(), amount, dateOfDelivery);
+            Order order = new Order(userOptional.get(), productOptional.get(), amount, dateOfDelivery, timeOfDelivery);
             orderRepository.save(order);
         }
     }
@@ -456,9 +458,11 @@ public class LahiruokaController {
             if (!order.isConfirmedByOrderer()) {
                 double amount = updateOrder.get("amount").asDouble();
                 LocalDate dateOfDelivery = LocalDate.parse(updateOrder.get("dateOfDelivery").asText());
+                LocalTime timeOfDelivery = LocalTime.parse(updateOrder.get("timeOfDelivery").asText());
 
                 order.setAmount(amount);
                 order.setDateOfDelivery(dateOfDelivery);
+                order.setTimeOfDelivery(timeOfDelivery);
 
                 orderRepository.save(order);
             }
@@ -488,8 +492,25 @@ public class LahiruokaController {
             if (orderOptional.isPresent()) {
                 Order order = orderOptional.get();
 
-                if (order.isConfirmedByOrderer()) {
+                if (order.isConfirmedByOrderer() && !order.isDeclinedByFarmer()) {
                     order.setAcceptedByFarmer(true);
+                    orderRepository.save(order);
+                }
+            }
+        }
+    }
+
+    @PutMapping("/api/orders/decline")
+    public void declineOrders(@RequestBody ArrayNode orderIds) {
+        for (int i = 0; i < orderIds.size(); i++) {
+            int orderId = orderIds.get(i).asInt();
+            Optional<Order> orderOptional = orderRepository.findById(orderId);
+
+            if (orderOptional.isPresent()) {
+                Order order = orderOptional.get();
+
+                if (order.isConfirmedByOrderer() && !order.isAcceptedByFarmer()) {
+                    order.setDeclinedByFarmer(true);
                     orderRepository.save(order);
                 }
             }
