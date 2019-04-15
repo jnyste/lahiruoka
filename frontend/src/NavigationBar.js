@@ -53,6 +53,7 @@ class NavigationBar extends Component {
        const name = target.name;
 
        this.setState({[name]: value});
+       localStorage.setItem('deliveryTime', value)
    };
 
     isLogged() {
