@@ -60,6 +60,8 @@ class SingleProduct extends Component {
     addToCart(event) {
         if(localStorage.getItem('deliveryDate') === '' || localStorage.getItem('deliveryDate') === null) {
             alert('Anna toimituspäivä ylämenusta!');
+        } else if (localStorage.getItem('deliveryTime') === '' || localStorage.getItem('deliveryTime') === null) {
+            alert('Anna toimitusaika ylämenusta!');
         } else if (this.state.amount <= 0) {
             alert('Anna tilausmäärä!');
         } else {
@@ -67,7 +69,7 @@ class SingleProduct extends Component {
                 productId: this.props.id.productId
                 , amount: this.state.amount
                 , dateOfDelivery: localStorage.getItem('deliveryDate')
-                , timeOfDelivery: "07:00"
+                , timeOfDelivery: localStorage.getItem('deliveryTime')
             };
             fetch('/api/users/' + localStorage.getItem('userId') + '/orders', {
                 method: 'POST',

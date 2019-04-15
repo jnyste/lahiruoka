@@ -2,12 +2,8 @@ import React, {Component} from "react";
 import './css/OrdersPage_style.css';
 
 class SingleOrder extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
-        console.log('PROSIT singleordris: ',this.props)
         return (
             <div className="singleordercontainer">
                 <div className="ordertext">

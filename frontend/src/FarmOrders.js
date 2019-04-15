@@ -22,7 +22,6 @@ class FarmOrders extends Component {
     updatePage(event) {
         console.log('updatePage kutsuttu');
         if(event.target.name === 'accept') {
-            console.log('jee hyväksytty', event.target.value);
             const acceptedOrder = [event.target.value];
             fetch('/api/orders/accept', {
                 method: 'PUT',
@@ -32,7 +31,7 @@ class FarmOrders extends Component {
                 },
                 body: JSON.stringify(acceptedOrder)
             }).then(() => {
-                console.log('hyväksytty done');
+                //console.log('accepted done');
             });
        } else if (event.target.name === 'decline') {
             const declined = [event.target.value];
@@ -44,7 +43,7 @@ class FarmOrders extends Component {
                 },
                 body: JSON.stringify(declined)
             }).then(() => {
-                console.log('hyväksytty done');
+                //console.log('decline done');
             });
         }
         event.persist();
@@ -58,22 +57,15 @@ class FarmOrders extends Component {
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                console.log('ORDERIT FARMERILLA ',orders);
                 for (let order of orders) {
-                    console.log('YKS ORDER FARMERILLA ', order);
                     if(order.confirmedByOrderer) {
-                        console.log('on hyväksytty')
                         if(order.declinedByFarmer) {
-                            console.log('order declined');
                             declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                         } else {
-                            console.log('ei oo declinetty');
                             if (!order.acceptedByFarmer) {
-                                console.log('ei oo acceptattu viel');
                                 newArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
                                                            order={order}/>);
                             } else {
-                                console.log('on acceptattu');
                                 acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
                                                                 order={order}/>);
                             }
