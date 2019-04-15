@@ -32,12 +32,22 @@ class FarmOrders extends Component {
                 },
                 body: JSON.stringify(acceptedOrder)
             }).then(() => {
-                console.log('propsit: ',this.props);
+                console.log('hyväksytty done');
             });
-            event.persist();
        } else if (event.target.name === 'decline') {
-            console.log('roskiin maailma');
+            const declined = [event.target.value];
+            fetch('/api/orders/decline', {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(declined)
+            }).then(() => {
+                console.log('hyväksytty done');
+            });
         }
+        event.persist();
        this.fetchOrders();
     }
 
@@ -48,22 +58,27 @@ class FarmOrders extends Component {
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                console.log(orders);
+                console.log('ORDERIT FARMERILLA ',orders);
                 for (let order of orders) {
-                    if(order.declinedByFarmer) {
-                        console.log('order declined');
-                        declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
-                    } else {
-                        console.log('ei oo declinetty');
-                        if(!order.acceptedByFarmer) {
-                            console.log('ei oo acceptattu viel');
-                            newArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                    console.log('YKS ORDER FARMERILLA ', order);
+                    if(order.confirmedByOrderer) {
+                        console.log('on hyväksytty')
+                        if(order.declinedByFarmer) {
+                            console.log('order declined');
+                            declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                         } else {
-                            console.log('on acceptattu');
-                            acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                            console.log('ei oo declinetty');
+                            if (!order.acceptedByFarmer) {
+                                console.log('ei oo acceptattu viel');
+                                newArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
+                                                           order={order}/>);
+                            } else {
+                                console.log('on acceptattu');
+                                acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
+                                                                order={order}/>);
+                            }
                         }
                     }
-
                 }
             }).finally(() =>
                 this.setState({newOrders: newArray
