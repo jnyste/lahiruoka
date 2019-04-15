@@ -38,10 +38,14 @@ public class Order {
     @Column(nullable = false)
     boolean acceptedByFarmer;
 
+    @Column(nullable = false)
+    boolean declinedByFarmer;
+
     public Order() {
         this.dateOfOrder = LocalDate.now();
         this.confirmedByOrderer = false;
         this.acceptedByFarmer = false;
+        this.declinedByFarmer = false;
     }
 
     public Order(User orderer, Product product, double amount, LocalDate dateOfDelivery, LocalTime timeOfDelivery) {
@@ -53,6 +57,7 @@ public class Order {
         this.dateOfOrder = LocalDate.now();
         this.confirmedByOrderer = false;
         this.acceptedByFarmer = false;
+        this.declinedByFarmer = false;
     }
 
     public User getOrderer() {
@@ -119,6 +124,14 @@ public class Order {
         this.acceptedByFarmer = acceptedByFarmer;
     }
 
+    public boolean isDeclinedByFarmer() {
+        return declinedByFarmer;
+    }
+
+    public void setDeclinedByFarmer(boolean declinedByFarmer) {
+        this.declinedByFarmer = declinedByFarmer;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -131,6 +144,7 @@ public class Order {
                 ", timeOfDelivery=" + timeOfDelivery +
                 ", confirmedByOrderer=" + confirmedByOrderer +
                 ", acceptedByFarmer=" + acceptedByFarmer +
+                ", declinedByFarmer=" + declinedByFarmer +
                 '}';
     }
 }
