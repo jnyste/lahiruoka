@@ -40,7 +40,6 @@ class Login extends Component {
     render() {
 
         const responseGoogle = (response) => {
-            console.log(response.profileObj);
             if (response.profileObj === undefined) {
                 console.log('Login failed');
             } else {
@@ -53,6 +52,8 @@ class Login extends Component {
                     if(user === null) {
                         this.firstTimeUser();
                     } else {
+                        localStorage.setItem('userId', user.id);
+                        localStorage.setItem('userType', user.userType);
                         this.continuingUser();
                     }
                 });
