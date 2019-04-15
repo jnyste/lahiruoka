@@ -14,17 +14,22 @@ class NavigationBar extends Component {
             deliveryDate = '';
         }
         this.state = {searchWord: ''
-                    , deliveryDate: deliveryDate};
+                    , deliveryDate: deliveryDate
+                    , loggedin: localStorage.getItem('loggedin')};
         this.updateSearchWord = this.updateSearchWord.bind(this);
         this.isLogged = this.isLogged.bind(this);
         this.search = this.search.bind(this);
+        this.updateNavbar = this.updateNavbar.bind(this);
+    }
+
+    updateNavbar(loginStatus) {
+        this.setState({loggedin: loginStatus});
     }
 
     handleChange = (event) => {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
 
         if(new Date(value) < Date.now()) {
             alert('Et voi valita jo mennyttä päivää!');
@@ -75,10 +80,10 @@ class NavigationBar extends Component {
                         }
                       <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center" alignRight >
                         {this.isLogged()}
-                        <NavDropdown.Item>{<Login/>}</NavDropdown.Item>
+                        <NavDropdown.Item>{<Login updateNavbar={this.updateNavbar}/>}</NavDropdown.Item>
                       </NavDropdown>
                       <NavDropdown className="navShoppingcart" title="TILAUKSET" id="shoppingcartDropdown" alignRight >
-                        <NavDropdown.Item>{<ShoppingCart/>}</NavDropdown.Item>
+                        <NavDropdown.Item>{<ShoppingCart loggedin={this.state.loggedin}/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
                   </Navbar.Collapse>
