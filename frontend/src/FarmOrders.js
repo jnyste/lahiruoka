@@ -35,9 +35,18 @@ class FarmOrders extends Component {
         return(
             <div className="ordercontainer">
                 <h1 className="ordertitle">Hyväksymättömät tilaukset</h1>
-                {this.state.newOrders}
+                {this.state.newOrders.length <= 0 ?
+                <p>Ei hyväksyttäviä tilauksia.</p>
+                :
+                this.state.newOrders
+                }
+                <br/>
                 <h1 className="ordertitle">Hyväksytyt tilaukset</h1>
-                {this.state.acceptedOrders}
+                {this.state.acceptedOrders.length <= 0 ?
+                    <p>Ei hyväksyttyjä tilauksia.</p>
+                    :
+                    this.state.acceptedOrders
+                }
             </div>
         )
     }
