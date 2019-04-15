@@ -11,6 +11,7 @@ class SingleProduct extends Component {
         this.addListener = this.addListener.bind(this);
         this.writeDate = this.writeDate.bind(this);
         this.addToCart = this.addToCart.bind(this);
+        this.addShoppingCartButton = this.addShoppingCartButton.bind(this);
 
         let productTags = '';
 
@@ -54,9 +55,9 @@ class SingleProduct extends Component {
         this.setState({totalTax:taxResult});
 
         event.persist();
-      }
+    }
 
-      addToCart(event) {
+    addToCart(event) {
         if(localStorage.getItem('deliveryDate') === '' || localStorage.getItem('deliveryDate') === null) {
             alert('Anna toimituspäivä ylämenusta!');
         } else if (this.state.amount <= 0) {
@@ -84,7 +85,15 @@ class SingleProduct extends Component {
             });
             event.persist();
         }
-      }
+    }
+
+    addShoppingCartButton() {
+        if (localStorage.getItem('userType') === "KITCHEN") {
+            return (<button name="name" value="value" type="submit" onClick={this.addToCart}>Lisää ostoskoriin</button>);
+        } else {
+            return "";
+        }
+    }
 
     render() {
         if (new Date(this.props.id.availableTo) < Date.now()) {
@@ -116,7 +125,7 @@ class SingleProduct extends Component {
                                 <p>Kg</p>
                             </div>
                             <div className= "floatTis cart">
-                                <button name="name" value="value" type="submit" onClick={this.addToCart}>Lisää ostoskoriin</button>
+                                {this.addShoppingCartButton()}
                             </div>
                             <div className="floatTis total">
                                 <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
