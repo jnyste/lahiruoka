@@ -16,7 +16,7 @@ class SingleOrder extends Component {
                     <p>Toimitusosoite: {this.props.order.orderer.address}</p>
                     <p>Puhelinnumero: {this.props.order.orderer.phone}</p>
                     <br/>
-                    <p>Toivottu toimituspäivä: {this.props.order.dateOfDelivery}</p>
+                    <p>Toivottu toimituspäivä ja -aika: {this.props.order.dateOfDelivery} klo {this.props.order.timeOfDelivery.substring(0,5)}</p>
                     {localStorage.getItem('userType') === 'KITCHEN' ?
                         (!this.props.order.confirmedByOrderer &&
                             <div className="orderbutton">
