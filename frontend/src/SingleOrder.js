@@ -6,11 +6,21 @@ class SingleOrder extends Component {
         super(props);
     }
 
+    acceptButton = (event) => {
+        console.log('jee hyväksytty')
+        event.persist();
+    };
+
+    declineButton = (event) => {
+        console.log('rip no ty')
+        event.persist();
+    };
+
     render() {
         return (
             <div className="singleordercontainer">
                 <div className="ordertext">
-                    <h3>Tilattu tuote: {this.props.order.product.name}</h3>
+                    <h4>Tilattu tuote: {this.props.order.product.name}</h4>
                     <p>Tilauspäivä: {this.props.order.dateOfOrder}</p>
                     <p>Määrä: {this.props.order.amount} kg</p>
                     <p>Hinta: {this.props.order.product.price} €/kg</p>
@@ -22,8 +32,8 @@ class SingleOrder extends Component {
                     <p>Toimituspäivä: {this.props.order.dateOfDelivery}</p>
                     {!this.props.order.acceptedByFarmer &&
                         <div className="orderbutton">
-                            <button className="acceptOrderButton">Hyväksy</button>
-                            <button className="declineOrderButton">Kieltäydy tilauksesta</button>
+                            <button className="acceptOrderButton" onClick={this.acceptButton}>Hyväksy</button>
+                            <button className="declineOrderButton" onClick={this.declineButton}>Kieltäydy tilauksesta</button>
                         </div>
                     }
                 </div>

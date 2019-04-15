@@ -5,7 +5,6 @@ class ShoppingCart extends Component {
     constructor(props) {
         super(props);
         let status = (localStorage.getItem('loggedin') === 'true') ? 'loggedin' : 'loggedout';
-        console.log('status: ' + status);
         this.state = {status: status
                     , orderAmount: 0
                     , fetching: true};
@@ -15,7 +14,6 @@ class ShoppingCart extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.loggedin);
         this.checkFarmOrders();
     }
 
@@ -31,10 +29,9 @@ class ShoppingCart extends Component {
                 setTimeout(this.checkFarmOrders, 60000);
                 this.setState({fetching: true});
             }
-
             return (<p>Sinulle on {orderAmount} tilausta.</p>);
         } else {
-            return (<p>ERROR, kokeile kirjautua ulos ja takaisin sisään.</p>);
+            return (<p>ERROR, kokeile päivittää sivu.</p>);
         }
     }
 
@@ -43,13 +40,12 @@ class ShoppingCart extends Component {
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                console.log('user orders length: ', orders.length);
                 orderAmount= orders.length;
             }).finally(() => this.setState({orderAmount: orderAmount, fetching: false}));
     }
 
     render() {
-        if(this.props.loggedin) {
+        if(localStorage.getItem('loggedin') === 'true') {
             return (
                 <div>
                     {this.loggedinRender(this.state.orderAmount)}

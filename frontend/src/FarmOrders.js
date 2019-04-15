@@ -9,6 +9,7 @@ class FarmOrders extends Component {
         this.state = {
             newOrders: []
             , acceptedOrders: []
+            , declinedOrders: []
         }
     }
 
@@ -34,18 +35,24 @@ class FarmOrders extends Component {
     render() {
         return(
             <div className="ordercontainer">
-                <h1 className="ordertitle">Hyväksymättömät tilaukset</h1>
+                <h2 className="ordertitle">Hyväksymättömät tilaukset</h2>
                 {this.state.newOrders.length <= 0 ?
                 <p>Ei hyväksyttäviä tilauksia.</p>
                 :
                 this.state.newOrders
                 }
                 <br/>
-                <h1 className="ordertitle">Hyväksytyt tilaukset</h1>
+                <h2 className="ordertitle">Hyväksytyt tilaukset</h2>
                 {this.state.acceptedOrders.length <= 0 ?
                     <p>Ei hyväksyttyjä tilauksia.</p>
                     :
                     this.state.acceptedOrders
+                }
+                <h2 className="ordertitle">Kieltäydytyt tilaukset</h2>
+                {this.state.declinedOrders.length <= 0 ?
+                    <p>Ei kieltäydyttyjä tilauksia.</p>
+                    :
+                    this.state.declinedOrders
                 }
             </div>
         )
