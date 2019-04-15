@@ -10,11 +10,13 @@ class NavigationBar extends Component {
     constructor() {
         super();
         let deliveryDate = localStorage.getItem('deliveryDate') === null ? '' : localStorage.getItem('deliveryDate');
+        let deliveryTime = localStorage.getItem('deliveryTime') === null ? '' : localStorage.getItem('deliveryTime');
         if(new Date(deliveryDate) < Date.now()) {
             deliveryDate = '';
         }
         this.state = {searchWord: ''
                     , deliveryDate: deliveryDate
+                    , deliveryTime: deliveryTime
                     , loggedin: localStorage.getItem('loggedin')};
         this.updateSearchWord = this.updateSearchWord.bind(this);
         this.isLogged = this.isLogged.bind(this);
@@ -26,7 +28,7 @@ class NavigationBar extends Component {
         this.setState({loggedin: loginStatus});
     }
 
-    handleChange = (event) => {
+    handleChangeDate = (event) => {
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -44,6 +46,14 @@ class NavigationBar extends Component {
             localStorage.setItem('deliveryDate', value);
         }
     };
+
+    handleChangeTime = (event) => {
+       const target = event.target;
+       const value = target.value;
+       const name = target.name;
+
+       this.setState({[name]: value});
+   };
 
     isLogged() {
       return localStorage.getItem('loggedin') === "true" ?
@@ -74,8 +84,9 @@ class NavigationBar extends Component {
                     <Nav className="ml-auto" style={{paddingRight:"20px"}}>
                         { (localStorage.getItem('loggedin') === "true" && localStorage.getItem('userType') === 'KITCHEN') &&
                         <div>
-                            <p className="navDateLabelli" style={{paddingTop:"7px"}}>Valitse toimituspäivä:</p>
-                            <input type="date" className="deliveryDate" name="deliveryDate" value={this.state.deliveryDate} onChange={this.handleChange}/>
+                            <p className="navDateLabelli" style={{paddingTop:"7px"}}>Valitse toimituspäivä ja aika:</p>
+                            <input type="date" className="deliveryDate" name="deliveryDate" value={this.state.deliveryDate} onChange={this.handleChangeDate} />
+                            <input type="time" className="deliveryTime" name="deliveryTime" value={this.state.deliveryTime} onChange={this.handleChangeTime} />
                         </div>
                         }
                       <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center" alignRight >

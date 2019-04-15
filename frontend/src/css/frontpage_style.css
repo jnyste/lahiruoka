@@ -151,6 +151,12 @@ span {
     margin-right: 20px;
 }
 
+.deliveryTime {
+    height: 40px;
+    width: 80px;
+    margin-right: 20px;
+}
+
 .navDateLabelli{
     float: left;
     color: white;
