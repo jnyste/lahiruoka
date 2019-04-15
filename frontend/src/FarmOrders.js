@@ -19,16 +19,22 @@ class FarmOrders extends Component {
             .then((orders) => {
                 let newArray = [];
                 let acceptedArray = [];
+                let declinedArray = [];
                 for (let order of orders) {
-                    if(!order.acceptedByFarmer) {
-                        newArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                    if(order.declinedByFarmer) {
+                        declinedArray.push(<SingleOrder key={order.orderId} order={order}/>);
                     } else {
-                        acceptedArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                        if(!order.acceptedByFarmer) {
+                            newArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                        } else {
+                            acceptedArray.push(<SingleOrder key={order.orderId} order={order}/>);
+                        }
                     }
 
                 }
                 this.setState({newOrders: newArray
-                    , acceptedOrders: acceptedArray});
+                    , acceptedOrders: acceptedArray
+                    , declinedOrders: declinedArray});
             });
     }
 
@@ -37,9 +43,9 @@ class FarmOrders extends Component {
             <div className="ordercontainer">
                 <h2 className="ordertitle">Hyväksymättömät tilaukset</h2>
                 {this.state.newOrders.length <= 0 ?
-                <p>Ei hyväksyttäviä tilauksia.</p>
-                :
-                this.state.newOrders
+                    <p>Ei hyväksyttäviä tilauksia.</p>
+                    :
+                    this.state.newOrders
                 }
                 <br/>
                 <h2 className="ordertitle">Hyväksytyt tilaukset</h2>
