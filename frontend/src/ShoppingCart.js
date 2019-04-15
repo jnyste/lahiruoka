@@ -14,7 +14,7 @@ class ShoppingCart extends Component {
     }
 
     componentDidMount() {
-        
+        console.log(this.props.loggedin);
     }
 
     loggedoutRender() {
@@ -42,8 +42,7 @@ class ShoppingCart extends Component {
     }
 
     render() {
-
-        if(this.state.status === 'loggedin') {
+        if(this.props.loggedin) {
             this.checkFarmOrders();
             return (
                 <div>
