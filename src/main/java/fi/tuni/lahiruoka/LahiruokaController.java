@@ -492,8 +492,25 @@ public class LahiruokaController {
             if (orderOptional.isPresent()) {
                 Order order = orderOptional.get();
 
-                if (order.isConfirmedByOrderer()) {
+                if (order.isConfirmedByOrderer() && !order.isDeclinedByFarmer()) {
                     order.setAcceptedByFarmer(true);
+                    orderRepository.save(order);
+                }
+            }
+        }
+    }
+
+    @PutMapping("/api/orders/decline")
+    public void declineOrders(@RequestBody ArrayNode orderIds) {
+        for (int i = 0; i < orderIds.size(); i++) {
+            int orderId = orderIds.get(i).asInt();
+            Optional<Order> orderOptional = orderRepository.findById(orderId);
+
+            if (orderOptional.isPresent()) {
+                Order order = orderOptional.get();
+
+                if (order.isConfirmedByOrderer() && !order.isAcceptedByFarmer()) {
+                    order.setDeclinedByFarmer(true);
                     orderRepository.save(order);
                 }
             }
