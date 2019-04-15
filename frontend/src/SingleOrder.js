@@ -20,7 +20,7 @@ class SingleOrder extends Component {
         return (
             <div className="singleordercontainer">
                 <div className="ordertext">
-                    <h3>Tilattu tuote: {this.props.order.product.name}</h3>
+                    <h4>Tilattu tuote: {this.props.order.product.name}</h4>
                     <p>Tilauspäivä: {this.props.order.dateOfOrder}</p>
                     <p>Määrä: {this.props.order.amount} kg</p>
                     <p>Hinta: {this.props.order.product.price} €/kg</p>
