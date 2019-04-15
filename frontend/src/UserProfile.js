@@ -34,18 +34,23 @@ class UserProfile extends Component {
         if(paramsId === 'oma' && loggedin) {
             fetch('/api/users/' + localStorage.getItem('googleId'))
                 .then(response => response.json())
-                .then(user => {
-                    this.setState({ farm: user.companyName
-                                    , address: user.address
-                                    , phone: user.phone
-                                    , info: user.info
-                                    , farmId: user.id
-                                    , userType: user.userType
-                                    , googleId: user.googleId
-                                  });
-                    localStorage.setItem('userId', user.id);
-                    localStorage.setItem('userType', user.userType);
-                }).then(() => this.fetchProducts());
+                .then((user) => {
+                        if (user) {
+                            this.setState({
+                                farm: user.companyName
+                                , address: user.address
+                                , phone: user.phone
+                                , info: user.info
+                                , farmId: user.id
+                                , userType: user.userType
+                                , googleId: user.googleId
+                            });
+                            localStorage.setItem('userId', user.id);
+                            localStorage.setItem('userType', user.userType);
+                        } else {
+                            this.setState({wrongAddress: true});
+                        }
+                }).then(() => {if (!this.state.wrongAddress) this.fetchProducts()});
         } else if (paramsId === 'oma' && !loggedin) {
             this.setState({wrongAddress: true});
         } else {
