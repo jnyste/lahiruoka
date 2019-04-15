@@ -21,11 +21,24 @@ class SingleOrder extends Component {
                     <p>Puhelinnumero: {this.props.order.orderer.phone}</p>
                     <br/>
                     <p>Toivottu toimituspäivä: {this.props.order.dateOfDelivery}</p>
-                    {!this.props.order.acceptedByFarmer &&
-                        <div className="orderbutton">
+                    {localStorage.getItem('userType') === 'KITCHEN' ?
+                        (!this.props.order.confirmedByOrderer &&
+                            <div className="orderbutton">
+                                <button className="acceptOrderButton" onClick={this.props.updateOrders} name="confirm"
+                                        value={this.props.order.orderId}>Lähetä tilaus
+                                </button>
+                                <button className="declineOrderButton" onClick={this.props.updateOrders} name="cancel"
+                                        value={this.props.order.orderId}>Peruuta
+                                </button>
+                            </div>
+                        )
+                        :
+                        (!this.props.order.acceptedByFarmer &&
+                            <div className="orderbutton">
                             <button className="acceptOrderButton" onClick={this.props.updateOrders} name="accept" value={this.props.order.orderId}>Hyväksy</button>
-                            <button className="declineOrderButton" onClick={this.props.updateOrders} name="decline">Kieltäydy tilauksesta</button>
-                        </div>
+                            <button className="declineOrderButton" onClick={this.props.updateOrders} name="decline" value={this.props.order.orderId}>Kieltäydy tilauksesta</button>
+                            </div>
+                        )
                     }
                 </div>
             </div>
