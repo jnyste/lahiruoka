@@ -1,10 +1,14 @@
 .ordercontainer {
     margin-left: 20%;
     margin-right: 20%;
+    margin-bottom: 60px;
 }
 
 .ordertitle {
     text-align: center;
-    padding: 0px !important;
-    margin: 0px !important;
+}
+
+.singleordercontainer {
+    margin-bottom: 5px;
+    border: 3px darkgreen solid;
 }
