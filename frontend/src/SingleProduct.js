@@ -66,6 +66,7 @@ class SingleProduct extends Component {
                 productId: this.props.id.productId
                 , amount: this.state.amount
                 , dateOfDelivery: localStorage.getItem('deliveryDate')
+                , timeOfDelivery: "07:00"
             };
             fetch('/api/users/' + localStorage.getItem('userId') + '/orders', {
                 method: 'POST',
