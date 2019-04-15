@@ -32,7 +32,7 @@ class KitchenOrders extends Component {
                 },
                 body: JSON.stringify(confirmedOrder)
             }).then(() => {
-                console.log('propsit: ',this.props);
+                alert('Tilaus lähetetty tuottajalle! Päivitä sivu, jos tiedot eivät päivittyneet.');
             });
             event.persist();
         } else if (event.target.name === 'cancel') {
@@ -44,7 +44,7 @@ class KitchenOrders extends Component {
                     'Content-Type': 'application/json'
                 }
             }).then(() => {
-                console.log('deletoitu');
+                alert('Tilaus poistettu. Päivitä sivu, jos tiedot eivät päivittyneet.');
             });
         }
         this.fetchOrders();

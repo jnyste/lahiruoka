@@ -31,6 +31,7 @@ class FarmOrders extends Component {
                 },
                 body: JSON.stringify(acceptedOrder)
             }).then(() => {
+                alert('Tilaus hyväksytty. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
                 //console.log('accepted done');
             });
        } else if (event.target.name === 'decline') {
@@ -43,6 +44,7 @@ class FarmOrders extends Component {
                 },
                 body: JSON.stringify(declined)
             }).then(() => {
+                alert('Tilaus peruutettu. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
                 //console.log('decline done');
             });
         }
