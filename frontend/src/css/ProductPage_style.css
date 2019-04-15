@@ -1,0 +1,123 @@
+.product {
+    font-weight: bold;
+}
+
+.tags {
+    color: #7f7b7e;
+}
+
+.productbox {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 10px;
+    border: 5px solid green;
+    overflow: hidden;
+    padding: 0px 5px 0px 5px;
+    background-color: #EFFBEF;
+}
+
+.floatTis {
+    float: left;
+    padding-right: 10px;
+    height: 50px;
+}
+
+.productbox input {
+    height: 26px;
+}
+
+.kgBox {
+    width: 50px;
+    margin-left: 20px;
+}
+
+.kgText {
+    padding-top: 3px;
+}
+
+.total {
+    font-size: 11px;
+    float: right;
+}
+
+.price {
+    float: right;
+}
+
+.productExtraInfo {
+    margin-right: 200px;
+    font-size: 13px;
+}
+
+.productinfo {
+    padding-top: 10px;
+}
+
+.productinfo p {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.product-list-container{
+    margin-top: 10px;
+    margin-left: 20%;
+    margin-right: 20%
+}
+
+.cart {
+    float: right;
+}
+
+.listTitle {
+    text-align: center;
+}
+.Collapsible {
+    padding: 2px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.Collapsible__trigger {
+    padding: 15px;
+    cursor: pointer;
+}
+.producttitletrigger {
+    background: #7ace6b;
+    width: 100%;
+}
+
+.producttitletrigger:hover {
+    background: #aaae3c;
+}
+
+.producttitletrigger:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.productopenedtrigger{
+    content: '\002B';
+     background: #4f9e40;
+     width: 100%;
+ }
+
+.productopenedtrigger:after {
+    content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.product-list-container {
+    margin-bottom: 60px;
+}
+
+.modifyLink {
+    float: right;
+    margin-right: 7px;
+    margin-bottom: 7px;
+}

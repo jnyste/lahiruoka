@@ -1,0 +1,18 @@
+.user-add-form {
+    padding-left: 35%;
+    padding-right: 35%;
+    margin-bottom: 60px;
+}
+
+h2 {
+    margin-top: 15px;
+}
+
+.required label {
+    font-weight: bold;
+}
+.required label:before {
+    color: red;
+    content: '* ';
+    display: inline;
+}

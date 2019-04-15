@@ -1,0 +1,22 @@
+.carousel.slide img {
+    width: 100%;
+}
+.carousel.slide {
+    border: 5px solid green;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.carousel-caption {
+    color: #ffffff;
+    text-shadow: 0 0 3px #000000;
+}
+
+.carouselcontainer h2 {
+    text-align: center;
+}
+
+.carouselcontainer {
+    margin-bottom: 60px;
+}

@@ -2,26 +2,30 @@
 
 body {
 	font-family: Arial;
+    min-width:700px;
 }
 
-nav {
+nav.header {
 	width: 100%;
 	display: block;
 	position: relative;
-	background-color: #ACFA58;
+	background-color: #04B404;
 	top: 0px;
-	height: 50px;
-	padding-left: 20px;
+	height: 52px;
 }
 
-nav a {
-	margin: 20px 20px 20px 0px;
-	color: #9A2EFE;
+.nav.header #logo {
+  color: #FFFFFF;
+}
+
+.nav.header #navLinks{
+	margin: 20px 20px 20px 20px;
+  color: #FFFFFF;
 	text-transform: uppercase;
 	text-decoration: none;
 	display: inline-block;
 	font-weight: bold;
-	font-size: .9em;
+  font-size: .9em;
 }
 
 img.profile_pic { 
@@ -32,6 +36,10 @@ img.profile_pic {
 img.calendar_pic {
 	width: 400px;
 	display:block;
+}
+
+a.right_float {
+    float: right;
 }
 
 .profile_container {
@@ -101,7 +109,7 @@ img.calendar_pic {
   border: none;
 }
 
-.topnav .search-container button {
+.nav.header #formButton {
   float: right;
   padding: 6px;
   margin-top: 8px;
@@ -115,3 +123,43 @@ img.calendar_pic {
 .topnav .search-container button:hover {
   background: #ccc;
 }
+
+.footer {
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  padding-left: 20px;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  background-color: #04B404;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.shoppingcart {
+    padding-bottom: 4px;
+}
+
+.deliveryDate {
+    height: 40px;
+    width: 150px;
+    margin-right: 20px;
+}
+
+.deliveryTime {
+    height: 40px;
+    width: 80px;
+    margin-right: 20px;
+}
+
+.navDateLabelli{
+    float: left;
+    color: white;
+    padding-right: 10px;
+}
+
