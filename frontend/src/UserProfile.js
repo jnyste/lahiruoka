@@ -34,7 +34,7 @@ class UserProfile extends Component {
         if(paramsId === 'oma' && loggedin) {
             fetch('/api/users/' + localStorage.getItem('googleId'))
                 .then(response => response.json())
-                .then(function(user) {
+                .then((user) => {
                         if (user) {
                             this.setState({
                                 farm: user.companyName
@@ -50,7 +50,7 @@ class UserProfile extends Component {
                         } else {
                             this.setState({wrongAddress: true});
                         }
-                }).then(() => this.fetchProducts());
+                }).then(() => {if (!this.state.wrongAddress) this.fetchProducts()});
         } else if (paramsId === 'oma' && !loggedin) {
             this.setState({wrongAddress: true});
         } else {
