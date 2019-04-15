@@ -41,10 +41,12 @@ class ShoppingCart extends Component {
             .then((resp) => resp.json())
             .then((orders) => {
                 let helper = 0;
-                for (let order of orders) {
-                    if(order.confirmedByOrderer) {
-                        if (!order.declinedByFarmer && !order.acceptedByFarmer) {
-                            helper++;
+                if(!orders) {
+                    for (let order of orders) {
+                        if(order.confirmedByOrderer) {
+                            if (!order.declinedByFarmer && !order.acceptedByFarmer) {
+                                helper++;
+                            }
                         }
                     }
                 }
