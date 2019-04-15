@@ -41,7 +41,7 @@ class ShoppingCart extends Component {
             .then((resp) => resp.json())
             .then((orders) => {
                 let helper = 0;
-                if(!orders) {
+                if(orders.length > 0) {
                     for (let order of orders) {
                         if(order.confirmedByOrderer) {
                             if (!order.declinedByFarmer && !order.acceptedByFarmer) {
