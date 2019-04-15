@@ -2,6 +2,7 @@ package fi.tuni.lahiruoka;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name="order_table")
@@ -29,6 +30,9 @@ public class Order {
     LocalDate dateOfDelivery;
 
     @Column(nullable = false)
+    LocalTime timeOfDelivery;
+
+    @Column(nullable = false)
     boolean confirmedByOrderer;
 
     @Column(nullable = false)
@@ -40,11 +44,12 @@ public class Order {
         this.acceptedByFarmer = false;
     }
 
-    public Order(User orderer, Product product, double amount, LocalDate dateOfDelivery) {
+    public Order(User orderer, Product product, double amount, LocalDate dateOfDelivery, LocalTime timeOfDelivery) {
         this.orderer = orderer;
         this.product = product;
         this.amount = amount;
         this.dateOfDelivery = dateOfDelivery;
+        this.timeOfDelivery = timeOfDelivery;
         this.dateOfOrder = LocalDate.now();
         this.confirmedByOrderer = false;
         this.acceptedByFarmer = false;
@@ -82,6 +87,14 @@ public class Order {
         this.dateOfDelivery = dateOfDelivery;
     }
 
+    public LocalTime getTimeOfDelivery() {
+        return timeOfDelivery;
+    }
+
+    public void setTimeOfDelivery(LocalTime timeOfDelivery) {
+        this.timeOfDelivery = timeOfDelivery;
+    }
+
     public int getOrderId() {
         return orderId;
     }
@@ -115,6 +128,7 @@ public class Order {
                 ", amount=" + amount +
                 ", dateOfOrder=" + dateOfOrder +
                 ", dateOfDelivery=" + dateOfDelivery +
+                ", timeOfDelivery=" + timeOfDelivery +
                 ", confirmedByOrderer=" + confirmedByOrderer +
                 ", acceptedByFarmer=" + acceptedByFarmer +
                 '}';
