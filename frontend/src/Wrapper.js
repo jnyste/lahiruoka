@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import './css/frontpage_style.css';
 import FarmCarousel from './FarmCarousel';
 import ProductPage from './ProductPage';
@@ -9,6 +9,8 @@ import AddUser from './AddUser'
 import Login from './Login';
 import SearchProducts from './SearchProducts';
 import NavigationBar from './NavigationBar';
+import OrdersPage from "./OrdersPage";
+import ErrorPage from "./ErrorPage";
 
 function Index() {
   return <FarmCarousel />;
@@ -30,17 +32,19 @@ function Wrapper() {
     <Router>
       <div>
         <NavigationBar />
-
-        <Route exact path="/" component={Index} />
-        <Route exact path="/tuotteet/" component={Products} />
-        <Route exact path="/ostoskori/" component={ShoppingCart} />
-        <Route exact path="/profiili/:id" component={UserProfile} />
-        <Route exact path="/tuotelisays/:id" component={AddProduct} />
-        <Route exact path="/profiili/oma/:gid" component={AddUser} />
-        <Route exact path="/login/" component={Login} />
-        <Route exact path="/etsi/:keyWord" component={SearchProducts} />
-        <Route exact path="/tag/:tag" component={SearchProducts} />
-
+        <Switch>
+          <Route exact path="/" component={Index} />
+          <Route exact path="/tuotteet/" component={Products} />
+          <Route exact path="/ostoskori/" component={ShoppingCart} />
+          <Route exact path="/profiili/:id" component={UserProfile} />
+          <Route exact path="/tuotelisays/:id" component={AddProduct} />
+          <Route exact path="/profiili/oma/:gid" component={AddUser} />
+          <Route exact path="/login/" component={Login} />
+          <Route exact path="/etsi/:keyWord" component={SearchProducts} />
+          <Route exact path="/tag/:tag" component={SearchProducts} />
+          <Route exact path="/tilaukset/" component={OrdersPage} />
+          <Route component={ErrorPage} />
+        </Switch>
         <div className="footer"><span>Tähän mahtuu ainakin kaksi tai kolme riviä tekstiä jos tarpeen.</span></div>
       </div>
     </Router>
