@@ -29,7 +29,7 @@ class SingleOrder extends Component {
                             </div>
                         )
                         :
-                        (!this.props.order.acceptedByFarmer &&
+                        ((!this.props.order.acceptedByFarmer && !this.props.order.declinedByFarmer) &&
                             <div className="orderbutton">
                             <button className="acceptOrderButton" onClick={this.props.updateOrders} name="accept" value={this.props.order.orderId}>Hyväksy</button>
                             <button className="declineOrderButton" onClick={this.props.updateOrders} name="decline" value={this.props.order.orderId}>Kieltäydy tilauksesta</button>
