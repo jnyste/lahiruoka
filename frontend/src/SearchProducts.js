@@ -40,7 +40,7 @@ class SearchProducts extends Component {
 
     sort(event) {
         event.preventDefault();
-        this.setState({sort: event.target.key}, this.componentDidMount)
+        this.setState({sort: event.target.id}, this.componentDidMount)
     }
 
     writeText(sortedBy) {
@@ -50,22 +50,22 @@ class SearchProducts extends Component {
             let searchResults = 'Osumia ' + this.state.productList.length + ' kpl';
             placeHolder.push([searchResults, <br/>])
 
-            placeHolder.push(<a key="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
-            placeHolder.push(<a key="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
-            placeHolder.push(<a key="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
-            placeHolder.push(<a key="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
-            placeHolder.push(<a key="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
-            placeHolder.push(<a key="nameAsc" href="http://" onClick={this.sort}>A-Ö</a>, ' | ');
-            placeHolder.push(<a key="nameDesc" href="http://" onClick={this.sort}>Ö-A</a>);
+            placeHolder.push(<a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a>, ' | ');
+            placeHolder.push(<a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a>, ' | ');
+            placeHolder.push(<a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a>, ' | ');
+            placeHolder.push(<a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a>, ' | ');
+            placeHolder.push(<a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a>, ' | ');
+            placeHolder.push(<a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a>, ' | ');
+            placeHolder.push(<a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a>);
 
             switch (sortedBy) {
-                case 'newest': placeHolder[1] = <b key="1"><a key="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a></b>;break;
-                case 'priceAsc': placeHolder[3] = <b key="2"><a key="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a></b>;break;
-                case 'priceDesc': placeHolder[5] = <b key="3"><a key="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a></b>;break;
-                case 'availableAsc': placeHolder[7] = <b key="4"><a key="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a></b>;break;
-                case 'availableDesc': placeHolder[9] = <b key="5"><a key="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a></b>;break;
-                case 'nameAsc': placeHolder[11] = <b key="6"><a key="nameAsc" href="http://" onClick={this.sort}>A-Ö</a></b>;break;
-                case 'nameDesc': placeHolder[13] = <b key="7"><a key="nameDesc" href="http://" onClick={this.sort}>Ö-A</a></b>;break;
+                case 'newest': placeHolder[1] = <b><a id="newest" href="http://" onClick={this.sort}>Viimeksi lisätyt</a></b>;break;
+                case 'priceAsc': placeHolder[3] = <b><a id="priceAsc" href="http://" onClick={this.sort}>Kilohinta nouseva</a></b>;break;
+                case 'priceDesc': placeHolder[5] = <b><a id="priceDesc" href="http://" onClick={this.sort}>Kilohinta laskeva</a></b>;break;
+                case 'availableAsc': placeHolder[7] = <b><a id="availableAsc" href="http://" onClick={this.sort}>Saatavilla nouseva</a></b>;break;
+                case 'availableDesc': placeHolder[9] = <b><a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a></b>;break;
+                case 'nameAsc': placeHolder[11] = <b><a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a></b>;break;
+                case 'nameDesc': placeHolder[13] = <b><a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a></b>;break;
             }
         } else {
             placeHolder.push('Ei osumia tälle hakusanalle.');
