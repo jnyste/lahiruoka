@@ -83,7 +83,7 @@ class NavigationBar extends Component {
                         <NavDropdown.Item>{<Login updateNavbar={this.updateNavbar}/>}</NavDropdown.Item>
                       </NavDropdown>
                       <NavDropdown className="navShoppingcart" title="TILAUKSET" id="shoppingcartDropdown" alignRight >
-                        <NavDropdown.Item>{<ShoppingCart loggedin={this.state.loggedin}/>}</NavDropdown.Item>
+                        <NavDropdown.Item href="/tilaukset/">{<ShoppingCart loggedin={this.state.loggedin}/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
                   </Navbar.Collapse>
