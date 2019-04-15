@@ -14,39 +14,40 @@ class ShoppingCart extends Component {
     }
 
     componentDidMount() {
-        console.log(localStorage);
+        
     }
 
     loggedoutRender() {
         return (<p>Kirjaudu sisään "Oma tili"-valikosta<br />tarkastellaksesi tilauksiasi.</p>);
     }
 
-    loggedinRender() {
+    loggedinRender(orderAmount) {
         if(localStorage.getItem('userType') === 'KITCHEN') {
             return (<p>Valittu toimituspäivä: {localStorage.getItem('deliveryDate')} </p> );
         } else if (localStorage.getItem('userType') === 'FARM') {
-            return (<p>Sinulle on {this.checkFarmOrders()} tilausta.</p>);
+            return (<p>Sinulle on {orderAmount} tilausta.</p>);
         } else {
             return (<p>ERROR, kokeile kirjautua ulos ja takaisin sisään.</p>);
         }
     }
 
     checkFarmOrders() {
-        let orderAmount = 0;
+        var orderAmount = 0;
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
                 console.log('user orders length: ', orders.length);
                 orderAmount= orders.length;
-            });
-        return orderAmount;
+            }).finally(() => this.setState({orderAmount: orderAmount}));
     }
 
     render() {
+
         if(this.state.status === 'loggedin') {
+            this.checkFarmOrders();
             return (
                 <div>
-                    {this.loggedinRender()}
+                    {this.loggedinRender(this.state.orderAmount)}
                 </div>
             );
         } else {
