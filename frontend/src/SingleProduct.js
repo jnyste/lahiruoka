@@ -99,9 +99,22 @@ class SingleProduct extends Component {
 
     addShoppingForm() {
         if (localStorage.getItem('userType') === "KITCHEN") {
-            return (<form>
-                <input type="text" name="kg" value={this.state.amount} className="kgBox" onChange={this.updateListener}/>
-                </form>);
+            return (<div className="order">
+                <div className="floatTis">
+                    <form>
+                        <input type="text" name="kg" value={this.state.amount} className="kgBox" onChange={this.updateListener}/>
+                    </form>
+                </div>
+                <div className="floatTis kgText">
+                    <p>Kg</p>
+                </div>
+                <div className= "floatTis cart">
+                    {this.addShoppingCartButton()}
+                </div>
+                <div className="floatTis total">
+                    <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
+                </div>
+            </div>)
         } else {
             return "";
         }
@@ -127,19 +140,8 @@ class SingleProduct extends Component {
                     {this.props.id.farm.googleId === localStorage.getItem('googleId') ?
                         <Link to={"/tuotelisays/" + this.props.id.productId} className="modifyLink">Muokkaa tietoja...</Link>
                         :
-                        <div className="order">
-                            <div className="floatTis">
-                                {this.addShoppingForm()}
-                            </div>
-                            <div className="floatTis kgText">
-                                <p>Kg</p>
-                            </div>
-                            <div className= "floatTis cart">
-                                {this.addShoppingCartButton()}
-                            </div>
-                            <div className="floatTis total">
-                                <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
-                            </div>
+                        <div>
+                        {this.addShoppingForm()}
                         </div>
                     }
                 </Collapsible>
