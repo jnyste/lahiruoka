@@ -11,8 +11,8 @@ class SingleOrder extends Component {
             <div className="singleordercontainer">
                 <h3>Tilattu tuote: {this.props.order.product.name}</h3>
                 <p>Tilauspäivä: {this.props.order.dateOfOrder}</p>
-                <p>Hinta: {this.props.order.product.price}</p>
-                <p>Määrä: {this.props.order.amount}</p>
+                <p>Määrä: {this.props.order.amount} kg</p>
+                <p>Hinta: {this.props.order.product.price} €/kg</p>
                 <br/>
                 <p>Tilaaja: {this.props.order.orderer.companyName}</p>
                 <p>Toimitusosoite: {this.props.order.orderer.address}</p>
