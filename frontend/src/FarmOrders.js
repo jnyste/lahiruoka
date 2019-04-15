@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import './css/OrdersPage_style.css';
+import SingleOrder from "./SingleOrder";
 
 class FarmOrders extends Component {
 
@@ -15,22 +17,18 @@ class FarmOrders extends Component {
             .then((orders) => {
                 let helperArray = [];
                 for (let order of orders) {
-                    helperArray.push(order);
+                    helperArray.push(<SingleOrder key={order.orderId} order={order}/>);
                 }
                 this.setState({orders: helperArray});
             });
     }
 
     render() {
-        let allOrders = this.state.orders;
         return(
-            <div>
-                <h1>Tilaukset sinulle</h1>
-                <ul>
-                {allOrders.map((order) =>
-                    <li key={order.orderId}>{'Tilausnumero: ' + order.orderId +', tuote: ' + order.product.name + ', tilattu määrä: ' + order.amount
-                    + 'kg, tilaaja: ' + order.orderer.companyName + ' osoite: ' + order.orderer.address + ', puhelinnro: ' + order.orderer.phone}</li>)}
-                </ul>
+            <div className="ordercontainer">
+                <h1 className="ordertitle">Hyväksymättömät tilaukset</h1>
+                {this.state.orders}
+                <h1 className="ordertitle">Hyväksytyt tilaukset</h1>
             </div>
         )
     }
