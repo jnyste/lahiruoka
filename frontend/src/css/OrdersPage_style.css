@@ -1,0 +1,10 @@
+.ordercontainer {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.ordertitle {
+    text-align: center;
+    padding: 0px !important;
+    margin: 0px !important;
+}
