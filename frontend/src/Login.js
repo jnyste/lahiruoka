@@ -25,6 +25,7 @@ class Login extends Component {
         localStorage.setItem('userId', 'none');
         localStorage.setItem('userType', 'none');
         this.props.history.push("/");
+        alert("Kirjauduit onnistuneesti ulos palvelusta.");
     }
 
     firstTimeUser() {

@@ -479,6 +479,23 @@ public class LahiruokaController {
         }
     }
 
+    @PutMapping("/api/orders/accept")
+    public void acceptOrders(@RequestBody ArrayNode orderIds) {
+        for (int i = 0; i < orderIds.size(); i++) {
+            int orderId = orderIds.get(i).asInt();
+            Optional<Order> orderOptional = orderRepository.findById(orderId);
+
+            if (orderOptional.isPresent()) {
+                Order order = orderOptional.get();
+
+                if (order.isConfirmed()) {
+                    order.setAcceptedByFarmer(true);
+                    orderRepository.save(order);
+                }
+            }
+        }
+    }
+
     // -----------------------------------------------------------------------------------------------------------------
     // -------------------------------------------------DELETE MAPPING--------------------------------------------------
     // -----------------------------------------------------------------------------------------------------------------
