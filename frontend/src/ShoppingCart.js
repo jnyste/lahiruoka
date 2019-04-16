@@ -42,21 +42,23 @@ class ShoppingCart extends Component {
 
     checkFarmOrders() {
         var orderAmount = 0;
-        fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
-            .then((resp) => resp.json())
-            .then((orders) => {
-                let helper = 0;
-                if(orders.length > 0) {
-                    for (let order of orders) {
-                        if(order.confirmedByOrderer) {
-                            if (!order.declinedByFarmer && !order.acceptedByFarmer) {
-                                helper++;
+        if(localStorage.getItem('loggedin') === 'true' && localStorage.getItem('userType') === 'FARM') {
+            fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
+                .then((resp) => resp.json())
+                .then((orders) => {
+                    let helper = 0;
+                    if (orders.length > 0) {
+                        for (let order of orders) {
+                            if (order.confirmedByOrderer) {
+                                if (!order.declinedByFarmer && !order.acceptedByFarmer) {
+                                    helper++;
+                                }
                             }
                         }
                     }
-                }
-                orderAmount = helper;
-            }).finally(() => this.setState({orderAmount: orderAmount, fetching: false}));
+                    orderAmount = helper;
+                }).finally(() => this.setState({orderAmount: orderAmount, fetching: false}));
+        }
     }
 
     render() {
