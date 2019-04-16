@@ -23,6 +23,28 @@ class FarmOrders extends Component {
         console.log('updatePage kutsuttu');
         if(event.target.name === 'accept') {
             const acceptedOrder = [event.target.value];
+
+            let requestedAmount = 0;
+            let availableAmount = 0;
+            let isThereEnough = false;
+
+            fetch('/api/orders/' + acceptedOrder, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then((orderJson) => orderJson.json()).then((orderObject) => {
+                requestedAmount = orderObject.amount;
+                availableAmount = orderObject.product.amount;
+            }).finally(() => {
+                if (requestedAmount > availableAmount) {
+                    alert('Et voi hyväksyä tilausta, koska tilauksen pyytämä määrä on suurempi kuin tuotteen määrä.');
+                } else {
+                    alert('Kaikki ok');
+                }
+            });
+            /*
             fetch('/api/orders/accept', {
                 method: 'PUT',
                 headers: {
@@ -33,7 +55,7 @@ class FarmOrders extends Component {
             }).then(() => {
                 alert('Tilaus hyväksytty. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
                 //console.log('accepted done');
-            });
+            });*/
        } else if (event.target.name === 'decline') {
             const declined = [event.target.value];
             fetch('/api/orders/decline', {
