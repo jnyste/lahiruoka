@@ -8,6 +8,7 @@ class FarmOrders extends Component {
         super(props);
         this.updatePage = this.updatePage.bind(this);
         this.fetchOrders = this.fetchOrders.bind(this);
+        this.acceptOrder = this.acceptOrder.bind(this);
         this.state = {
             newOrders: []
             , acceptedOrders: []
@@ -19,6 +20,29 @@ class FarmOrders extends Component {
         this.fetchOrders();
     }
 
+    acceptOrder(order, productId, requestedAmount) {
+        fetch('/api/orders/accept', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }).then(() => {
+            fetch('/api/products/' + productId + '/amount', {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestedAmount)
+            }).then(() => {
+                alert('Tilaus hyväksytty. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
+                //console.log('accepted done');
+            })
+        });
+    }
+
     updatePage(event) {
         console.log('updatePage kutsuttu');
         if(event.target.name === 'accept') {
@@ -26,7 +50,7 @@ class FarmOrders extends Component {
 
             let requestedAmount = 0;
             let availableAmount = 0;
-            let isThereEnough = false;
+            let productId = 0;
 
             fetch('/api/orders/' + acceptedOrder, {
                 method: 'GET',
@@ -37,25 +61,14 @@ class FarmOrders extends Component {
             }).then((orderJson) => orderJson.json()).then((orderObject) => {
                 requestedAmount = orderObject.amount;
                 availableAmount = orderObject.product.amount;
+                productId = orderObject.product.productId;
             }).finally(() => {
                 if (requestedAmount > availableAmount) {
                     alert('Et voi hyväksyä tilausta, koska tilauksen pyytämä määrä on suurempi kuin tuotteen määrä.');
                 } else {
-                    alert('Kaikki ok');
+                    this.acceptOrder(acceptedOrder, productId, requestedAmount);
                 }
             });
-            /*
-            fetch('/api/orders/accept', {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(acceptedOrder)
-            }).then(() => {
-                alert('Tilaus hyväksytty. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
-                //console.log('accepted done');
-            });*/
        } else if (event.target.name === 'decline') {
             const declined = [event.target.value];
             fetch('/api/orders/decline', {
