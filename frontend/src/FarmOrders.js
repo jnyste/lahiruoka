@@ -97,14 +97,15 @@ class FarmOrders extends Component {
                 for (let order of orders) {
                     if(order.confirmedByOrderer) {
                         if(order.declinedByFarmer) {
-                            declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                            declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
+                                                            order={order} orderType={'Declined'}/>);
                         } else {
                             if (!order.acceptedByFarmer) {
                                 newArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
-                                                           order={order}/>);
+                                                           order={order} orderType={'New'}/>);
                             } else {
                                 acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId}
-                                                                order={order}/>);
+                                                                order={order} orderType={'Accepted'}/>);
                             }
                         }
                     }
@@ -132,7 +133,7 @@ class FarmOrders extends Component {
                     :
                     this.state.acceptedOrders
                 }
-                <h2 className="ordertitle">Kieltäydytyt tilaukset</h2>
+                <h2 className="ordertitle">Hylätyt tilaukset</h2>
                 {this.state.declinedOrders.length <= 0 ?
                     <p>Ei kieltäydyttyjä tilauksia.</p>
                     :

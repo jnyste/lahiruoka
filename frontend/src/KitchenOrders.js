@@ -64,17 +64,17 @@ class KitchenOrders extends Component {
                 for (let order of orders) {
                     if(order.declinedByFarmer) {
                         //console.log('order declined');
-                        declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                        declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order} orderType={'Declined'}/>);
                     } else if(order.acceptedByFarmer) {
-                        acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                        acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order} orderType={'Accepted'}/>);
                     } else {
                         //console.log('ei oo declinetty');
                         if(!order.confirmedByOrderer) {
                             //console.log('ei oo confirmattu viel');
-                            unconfirmedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                            unconfirmedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order} orderType={'Waiting'}/>);
                         } else {
                             //console.log('on confirmattu');
-                            confirmedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
+                            confirmedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order} orderType={'New'}/>);
                         }
                     }
 
@@ -104,6 +104,7 @@ class KitchenOrders extends Component {
                     :
                     this.state.confirmedOrders
                 }
+                <br/>
                 <h2 className="ordertitle">Tuottajan hyväksymät tilaukset</h2>
                 {this.state.acceptedOrders.length <= 0 ?
                     <p>Ei peruutettuja tilauksia.</p>
