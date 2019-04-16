@@ -32,7 +32,7 @@ class ShoppingCart extends Component {
             return (
                 <div>
                     <p style={{textAlign:"center", fontWeight:"bold"}}>Tilaussivu</p>
-                    <p>Sinulle on {orderAmount} uutta tilausta.</p>
+                    <p>Sinulle on {this.state.orderAmount} uutta tilausta.</p>
                 </div>
             );
         } else {
