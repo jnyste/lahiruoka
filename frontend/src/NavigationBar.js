@@ -72,7 +72,7 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="header mr-auto" expand="lg">
-                <Navbar.Brand className="navLogo" style={{float: "left"}} href="/"><img src={logo} className="lahiruokalogo" style={{paddingLeft:"20px", paddingRight:"20px"}}/></Navbar.Brand>
+                <Navbar.Brand className="navLogo" style={{float: "left"}} href="/"><img src={logo} className="lahiruokalogo" alt="Lähiruoka" style={{paddingLeft:"20px", paddingRight:"20px"}}/></Navbar.Brand>
                   <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                   <Navbar.Collapse className="navCollapse" id="basic-navbar-nav">
                     <Form onSubmit={this.search} className="navForm" inline  style={{marginBottom:"7px"}}>
@@ -90,11 +90,11 @@ class NavigationBar extends Component {
                             <input type="time" className="deliveryTime" name="deliveryTime" value={this.state.deliveryTime} onChange={this.handleChangeTime} />
                         </div>
                         }
-                      <NavDropdown className="navAccount" title="OMA TILI" id="dropdown-menu-align-center" alignRight >
+                      <NavDropdown title={"OMA TILI"} id="dropdown-menu-account" alignRight >
                         {this.isLogged()}
                         <NavDropdown.Item>{<Login updateNavbar={this.updateNavbar}/>}</NavDropdown.Item>
                       </NavDropdown>
-                      <NavDropdown className="navShoppingcart" title="TILAUKSET" id="shoppingcartDropdown" alignRight >
+                      <NavDropdown title={"TILAUKSET"} id="shoppingcartDropdown" alignRight >
                         <NavDropdown.Item href="/tilaukset/">{<ShoppingCart loggedin={this.state.loggedin}/>}</NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
