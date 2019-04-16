@@ -65,7 +65,7 @@ class Login extends Component {
             <div className="App">
                 {this.state.loggedin ?
                     <GoogleLogout
-                        buttonText="Logout"
+                        buttonText="KIRJAUDU ULOS"
                         onLogoutSuccess={this.logout}
                         clientId="881986225908-hio6su37v6pit5c8s527krgho65evc5u.apps.googleusercontent.com"
                     >
