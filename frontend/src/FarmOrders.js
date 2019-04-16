@@ -38,6 +38,7 @@ class FarmOrders extends Component {
                 body: JSON.stringify(requestedAmount)
             }).then(() => {
                 alert('Tilaus hyväksytty. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
+                this.fetchOrders();
                 //console.log('accepted done');
             })
         });
@@ -80,11 +81,12 @@ class FarmOrders extends Component {
                 body: JSON.stringify(declined)
             }).then(() => {
                 alert('Tilaus peruutettu. Tieto lähetetty tilaajalle. Päivitä sivu, jos tiedot eivät päivittyneet.');
+                this.fetchOrders();
                 //console.log('decline done');
             });
         }
         event.persist();
-       this.fetchOrders();
+
     }
 
     fetchOrders() {
