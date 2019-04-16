@@ -133,6 +133,7 @@ class FarmOrders extends Component {
                     :
                     this.state.acceptedOrders
                 }
+                <br/>
                 <h2 className="ordertitle">Hylätyt tilaukset</h2>
                 {this.state.declinedOrders.length <= 0 ?
                     <p>Ei kieltäydyttyjä tilauksia.</p>
