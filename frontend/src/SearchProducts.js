@@ -24,6 +24,7 @@ class SearchProducts extends Component {
                 case 'availableDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByAvailableToAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
                 case 'nameAsc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
                 case 'nameDesc': fetch('/api/search/' + this.props.match.params.keyWord + '/sortByNameAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                default: break;
             }
         } else {
             switch (this.state.sort) {
@@ -34,6 +35,7 @@ class SearchProducts extends Component {
                 case 'availableDesc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByAvailableToAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
                 case 'nameAsc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByNameAsc/true').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
                 case 'nameDesc': fetch('/api/products/tag/' + this.props.match.params.tag + '/sortByNameAsc/false').then((httpResponse) => httpResponse.json()).then(this.listAllProducts);break;
+                default: break;
             }
         }
     }
@@ -66,6 +68,7 @@ class SearchProducts extends Component {
                 case 'availableDesc': placeHolder[9] = <b><a id="availableDesc" href="http://" onClick={this.sort}>Saatavilla laskeva</a></b>;break;
                 case 'nameAsc': placeHolder[11] = <b><a id="nameAsc" href="http://" onClick={this.sort}>A-Ö</a></b>;break;
                 case 'nameDesc': placeHolder[13] = <b><a id="nameDesc" href="http://" onClick={this.sort}>Ö-A</a></b>;break;
+                default: break;
             }
         } else {
             placeHolder.push('Ei osumia tälle hakusanalle.');
