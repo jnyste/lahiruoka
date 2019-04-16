@@ -63,7 +63,7 @@ class Login extends Component {
 
         return (
             <div className="App">
-                {this.state.loggedin ?
+                {localStorage.getItem('loggedin') === 'true' ?
                     <GoogleLogout
                         buttonText="KIRJAUDU ULOS"
                         onLogoutSuccess={this.logout}
