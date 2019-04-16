@@ -72,6 +72,7 @@
     content: '\002B';
      background: #6481ef;
      width: 100%;
+     font-weight: bold;
  }
 
 .orderOpenedTriggerNew:after {
@@ -100,12 +101,14 @@
     font-weight: bold;
     float: right;
     margin-left: 5px;
+    font-weight: bold;
 }
 
 .orderOpenedTriggerAccepted {
     content: '\002B';
-     background: #67ce40;
+     background: #51b72a;
      width: 100%;
+     font-weight: bold;
  }
 
 .orderOpenedTriggerAccepted:after {
@@ -140,6 +143,7 @@
     content: '\002B';
      background: #d6412a;
      width: 100%;
+     font-weight: bold;
  }
 
 .orderOpenedTriggerDeclined:after {
@@ -172,6 +176,7 @@
 
 .orderOpenedTriggerWaiting {
     content: '\002B';
+    font-weight: bold;
      background: #848484;
      width: 100%;
  }
