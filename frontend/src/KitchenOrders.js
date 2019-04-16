@@ -20,9 +20,9 @@ class KitchenOrders extends Component {
     }
 
     updatePage(event) {
-        console.log('updatePage kitchen kutsuttu');
+        //console.log('updatePage kitchen kutsuttu');
         if(event.target.name === 'confirm') {
-            console.log('jee confirmattu', event.target.value);
+            //console.log('jee confirmattu', event.target.value);
             const confirmedOrder = [event.target.value];
             fetch('/api/orders/confirm', {
                 method: 'PUT',
@@ -33,10 +33,11 @@ class KitchenOrders extends Component {
                 body: JSON.stringify(confirmedOrder)
             }).then(() => {
                 alert('Tilaus lähetetty tuottajalle! Päivitä sivu, jos tiedot eivät päivittyneet.');
+                this.fetchOrders();
             });
             event.persist();
         } else if (event.target.name === 'cancel') {
-            console.log('canceloitu', event.target.value);
+            //console.log('canceloitu', event.target.value);
             fetch('/api/orders/' + event.target.value, {
                 method: 'DELETE',
                 headers: {
@@ -45,9 +46,10 @@ class KitchenOrders extends Component {
                 }
             }).then(() => {
                 alert('Tilaus poistettu. Päivitä sivu, jos tiedot eivät päivittyneet.');
+                this.fetchOrders();
             });
         }
-        this.fetchOrders();
+        //this.fetchOrders();
     }
 
     fetchOrders() {
@@ -58,20 +60,20 @@ class KitchenOrders extends Component {
         fetch('/api/users/' + localStorage.getItem('userId') + '/orders')
             .then((resp) => resp.json())
             .then((orders) => {
-                console.log(orders);
+                //console.log(orders);
                 for (let order of orders) {
                     if(order.declinedByFarmer) {
-                        console.log('order declined');
+                        //console.log('order declined');
                         declinedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                     } else if(order.acceptedByFarmer) {
                         acceptedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                     } else {
-                        console.log('ei oo declinetty');
+                        //console.log('ei oo declinetty');
                         if(!order.confirmedByOrderer) {
-                            console.log('ei oo confirmattu viel');
+                            //console.log('ei oo confirmattu viel');
                             unconfirmedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                         } else {
-                            console.log('on confirmattu');
+                            //console.log('on confirmattu');
                             confirmedArray.push(<SingleOrder updateOrders={this.updatePage} key={order.orderId} order={order}/>);
                         }
                     }
