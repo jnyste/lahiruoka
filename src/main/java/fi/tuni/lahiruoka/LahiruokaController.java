@@ -405,6 +405,25 @@ public class LahiruokaController {
         }
     }
 
+    @PutMapping("/api/products/{productId}/amount")
+    public boolean removeAmountFromProduct(@PathVariable int productId, @RequestBody double amount) {
+        Optional<Product> productOptional = productRepository.findById(productId);
+
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+
+            if (product.getAmount() > amount) {
+                product.setAmount(product.getAmount() - amount);
+                productRepository.save(product);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     public void updateProductTags(Product product, List<String> tags) {
         LinkedList<Tag> tagsToBeRemoved = new LinkedList<>();
 
