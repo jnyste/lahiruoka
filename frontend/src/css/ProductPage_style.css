@@ -6,6 +6,13 @@
     color: #7f7b7e;
 }
 
+.productTag {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    color: blue;
+}
+
 .productbox {
     margin-left: 20%;
     margin-right: 20%;
