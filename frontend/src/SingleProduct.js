@@ -136,7 +136,7 @@ class SingleProduct extends Component {
                         <p className="productAmount">Yhteensä {this.props.id.amount} kg</p>
                         <p className="productAmount">Saatavilla: {this.writeDate(this.props.id.availableFrom)} - {this.writeDate(this.props.id.availableTo)}</p>
                         <p className="productExtraInfo">Lisätiedot: {this.props.id.info}</p>
-                        <p className="tags">{this.props.id.tags.map((tag) => <a href={"/tag/" + tag.name} key={tag.id}><span className={"productTag"}>#{tag.name}</span></a>)}</p>
+                        <p className="tags">{this.props.id.tags.map((tag) => <a href={"/tag/" + tag.name} key={tag.id}><span className="productTag">#{tag.name}</span></a>)}</p>
                     </div>
 
                     {this.props.id.farm.googleId === localStorage.getItem('googleId') ?
