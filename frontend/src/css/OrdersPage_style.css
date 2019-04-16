@@ -15,37 +15,14 @@
     margin: 10px;
 }
 
-/*  ----    Order outside of classes (for debugging purposes)   ----  */
-
-.orderTitleTrigger {
-    background: #7ace6b;
-    width: 100%;
+.acceptOrderButton {
+    background-color: #8ed65c;
+    border-color: #51b72a;
 }
 
-.orderTitleTrigger:hover {
-    background: #aaae3c;
-}
-
-.orderTitleTrigger:after {
-    content: '\002B';
-    color: white;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-
-.orderOpenedTrigger {
-    content: '\002B';
-     background: #4f9e40;
-     width: 100%;
- }
-
-.orderOpenedTrigger:after {
-    content: "\2212";
-    color: white;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
+.declineOrderButton {
+    background-color: #ed4543;
+    border-color: #d6412a;
 }
 
 /*  ----    New Order  ----  */
