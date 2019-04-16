@@ -45,7 +45,7 @@ function Wrapper() {
           <Route exact path="/tilaukset/" component={OrdersPage} />
           <Route component={ErrorPage} />
         </Switch>
-        <div className="footer"><span>Lähiruoka 2019. Sivu käyttää evästeitä käytön jouhevoittamiseksi. Käyttämällä sivua hyväksyt myös evästeet.</span></div>
+        <div className="footer"><span className="spanFooter">Lähiruoka 2019. Sivu käyttää evästeitä käytön jouhevoittamiseksi. Käyttämällä sivua hyväksyt myös evästeet.</span></div>
       </div>
     </Router>
   );
