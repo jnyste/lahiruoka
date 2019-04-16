@@ -6,21 +6,21 @@ import KitchenOrders from "./KitchenOrders";
 class OrdersPage extends Component {
 
     render() {
-        console.log(localStorage);
+        //console.log(localStorage);
         if(localStorage.getItem('loggedin') === 'true') {
-            console.log('loggedin')
+            //console.log('loggedin')
             if(localStorage.getItem('userType') === 'FARM') {
-                console.log('farmikäyttäjä')
+                //console.log('farmikäyttäjä')
                 return <FarmOrders/>
             } else if(localStorage.getItem('userType') === 'KITCHEN') {
-                console.log('keittiökäyttäjä')
+                //console.log('keittiökäyttäjä')
                 return <KitchenOrders/>
             } else {
-                console.log('login mut error')
+                //console.log('login mut error')
                 return <ErrorPage/>
             }
         } else {
-            console.log('ei ollu kirjauduttu sisää')
+            //console.log('ei ollu kirjauduttu sisää')
             return(
                 <ErrorPage/>
             )
