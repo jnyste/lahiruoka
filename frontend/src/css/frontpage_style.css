@@ -135,10 +135,22 @@ a.right_float {
   background-color: #04B404;
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+}
+
 span {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  color: black;
+}
+
+.spanFooter {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  color: #FFFFFF;
 }
 
 .shoppingcart {
