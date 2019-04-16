@@ -80,7 +80,7 @@ class SingleProduct extends Component {
                 body: JSON.stringify(newOrder)
             }).then(() => {
                 console.log("Order posted?");
-                alert('Tuote lisätty ostoskoriin!');
+                alert('Tuote lisätty tilauslistaan! Pääset tarkastelemaan tilauksiasi oikean yläkulman "tilaukset"-painikkeen alta.');
                 this.setState({amount: 0
                     , total: 0
                     , totalTax: 0});
@@ -91,7 +91,7 @@ class SingleProduct extends Component {
 
     addShoppingCartButton() {
         if (localStorage.getItem('userType') === "KITCHEN") {
-            return (<button name="name" value="value" type="submit" onClick={this.addToCart}>Lisää ostoskoriin</button>);
+            return (<button name="name" value="value" type="submit" onClick={this.addToCart}>Lisää tilauslistaan</button>);
         } else {
             return "";
         }
