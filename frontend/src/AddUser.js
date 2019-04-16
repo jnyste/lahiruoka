@@ -27,7 +27,6 @@ class AddUser extends Component {
             fetch('/api/users/' + localStorage.getItem('googleId'))
                 .then((httpResponse) => httpResponse.json())
                 .then((user) => {
-                    console.log(user);
                     this.setState({
                         companyName: user.companyName
                         , userType: user.userType
@@ -72,7 +71,6 @@ class AddUser extends Component {
     }
 
     postNewUser() {
-
         if(this.state.modifying) {
             const modifiedUser = {
                 companyName: this.state.companyName
@@ -80,8 +78,6 @@ class AddUser extends Component {
                 , phone: this.state.phone
                 , info: this.state.info
             };
-
-            console.log('koitetaan muokata userii...', modifiedUser);
 
             fetch('/api/user/' + this.state.userId, {
                 method: 'PUT',
@@ -91,7 +87,6 @@ class AddUser extends Component {
                 },
                 body: JSON.stringify(modifiedUser)
             }).then(() => {
-                console.log("Should be posted");
                 this.props.history.push("/profiili/oma");
             })
 
@@ -120,7 +115,6 @@ class AddUser extends Component {
                 },
                 body: JSON.stringify(newUser)
             }).then(() => {
-                console.log("Should be posted");
                 this.props.history.push("/profiili/oma");
 
             })
@@ -140,16 +134,7 @@ class AddUser extends Component {
                 localStorage.setItem('googleId', 'none');
                 localStorage.setItem('userId', 'none');
                 localStorage.setItem('userType', 'none');
-                console.log(localStorage)
                 this.props.history.push("/");
-                this.setState({
-                    userType: ''
-                    , companyName: ''
-                    , address: ''
-                    , phone: ''
-                    , info: ''
-                    , googleId : ''
-                });
             });
         }
         event.preventDefault();
@@ -159,6 +144,7 @@ class AddUser extends Component {
         this.props.history.push("/profiili/oma");
         event.preventDefault();
     };
+
 
     render() {
         return (
