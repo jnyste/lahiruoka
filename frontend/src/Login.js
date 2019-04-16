@@ -18,7 +18,7 @@ class Login extends Component {
     }
 
     logout() {
-        console.log('Logged out');
+        //console.log('Logged out');
         this.setState({loggedin: false});
         localStorage.setItem('loggedin', 'false');
         localStorage.setItem('googleId', 'none');
