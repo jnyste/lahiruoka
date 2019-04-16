@@ -128,7 +128,9 @@ class SingleProduct extends Component {
             <div>
                 <Collapsible trigger={this.props.id.name + ' - ' + this.props.id.farm.companyName + ' - ' + this.props.id.price + ' €/kg'} triggerClassName="producttitletrigger" triggerOpenedClassName="productopenedtrigger" >
                     <div className="productinfo">
-                        <h1 className="price">{this.props.id.price} €/kg</h1>
+                        {localStorage.getItem('loggedin') === 'true' &&
+                            <h1 className="price">{this.props.id.price} €/kg</h1>
+                        }
                         <h3 className="product title">{this.props.id.name}</h3>
                         <p className="product owner">{this.props.id.farm.companyName}</p>
                         <p className="productAmount">Yhteensä {this.props.id.amount} kg</p>
