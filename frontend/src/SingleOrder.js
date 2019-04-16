@@ -11,13 +11,13 @@ class SingleOrder extends Component {
                     <div className="ordertext">
                         <h4>Tilattu tuote: {this.props.order.product.name}</h4>
                         <p>Tilauspäivä: {this.props.order.dateOfOrder}</p>
-                        <p>Määrä: {this.props.order.amount} kg</p>
-                        <p>Hinta: {this.props.order.product.price} €/kg</p>
-                        <br/>
-                        <p>Tilaaja: {this.props.order.orderer.companyName}</p>
-                        <p>Toimitusosoite: {this.props.order.orderer.address}</p>
-                        <p>Puhelinnumero: {this.props.order.orderer.phone}</p>
-                        <br/>
+                        <p>Määrä: {this.props.order.amount} kg
+                        <br/>Hinta: {this.props.order.product.price} €/kg</p>
+                        <p>Hinta yhteensä veroton: {Math.round(this.props.order.amount * this.props.order.product.price * 1000)/1000} €
+                        <br/>Hinta yhteensä verollinen (14% ALV): {Math.round(this.props.order.amount * this.props.order.product.price * 1000 * 1.14)/1000} €</p>
+                        <p>Tilaaja: {this.props.order.orderer.companyName}
+                        <br/>Toimitusosoite: {this.props.order.orderer.address}
+                        <br/>Puhelinnumero: {this.props.order.orderer.phone}</p>
                         <p>Toivottu toimituspäivä ja -aika: {this.props.order.dateOfDelivery} klo {this.props.order.timeOfDelivery.substring(0,5)}</p>
                         {localStorage.getItem('userType') === 'KITCHEN' ?
                             (!this.props.order.confirmedByOrderer &&
