@@ -41,7 +41,8 @@ class Login extends Component {
 
         const responseGoogle = (response) => {
             if (response.profileObj === undefined) {
-                console.log('Login failed');
+                alert("Kirjautuminen ei onnistunut. Kokeile myöhemmin uudelleen.");
+                //console.log('Login failed');
             } else {
                 this.props.updateNavbar(true);
                 this.setState({loggedin: true});
@@ -72,7 +73,7 @@ class Login extends Component {
                      :
                     <GoogleLogin
                         clientId="881986225908-hio6su37v6pit5c8s527krgho65evc5u.apps.googleusercontent.com"
-                        buttonText="LOGIN WITH GOOGLE"
+                        buttonText="KIRJAUDU GOOGLE-TILILLÄ"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                     />
