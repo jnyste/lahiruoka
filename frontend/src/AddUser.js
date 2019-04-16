@@ -71,7 +71,7 @@ class AddUser extends Component {
         event.preventDefault();
     }
 
-    async postNewUser() {
+    postNewUser() {
 
         if(this.state.modifying) {
             const modifiedUser = {
@@ -83,7 +83,7 @@ class AddUser extends Component {
 
             console.log('koitetaan muokata userii...', modifiedUser);
 
-            await fetch('/api/user/' + this.state.userId, {
+            fetch('/api/user/' + this.state.userId, {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -112,7 +112,7 @@ class AddUser extends Component {
                 , info: this.state.info
             };
 
-            await fetch('/api/users', {
+            fetch('/api/users', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -138,7 +138,18 @@ class AddUser extends Component {
             }).then(() => {
                 localStorage.setItem('loggedin', 'false');
                 localStorage.setItem('googleId', 'none');
+                localStorage.setItem('userId', 'none');
+                localStorage.setItem('userType', 'none');
+                console.log(localStorage)
                 this.props.history.push("/");
+                this.setState({
+                    userType: ''
+                    , companyName: ''
+                    , address: ''
+                    , phone: ''
+                    , info: ''
+                    , googleId : ''
+                });
             });
         }
         event.preventDefault();
