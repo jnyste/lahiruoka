@@ -7,7 +7,7 @@ class SingleOrder extends Component {
     render() {
         return (
             <div className="singleordercontainer">
-                <Collapsible trigger={"terppa"} triggerClassName={"orderTitleTrigger" + this.props.orderType} triggerOpenedClassName={"orderOpenedTrigger" + this.props.orderType} >
+                <Collapsible trigger={this.props.order.product.name + " - " + this.props.order.amount + " kg - Toimitus: " + this.props.order.dateOfDelivery + " klo " + this.props.order.timeOfDelivery.substring(0,5)} triggerClassName={"orderTitleTrigger" + this.props.orderType} triggerOpenedClassName={"orderOpenedTrigger" + this.props.orderType} >
                     <div className="ordertext">
                         <h4>Tilattu tuote: {this.props.order.product.name}</h4>
                         <p>Tilauspäivä: {this.props.order.dateOfOrder}</p>
