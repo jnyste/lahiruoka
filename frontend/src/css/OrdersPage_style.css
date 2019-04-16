@@ -8,9 +8,178 @@
 
 .singleordercontainer {
     margin-bottom: 5px;
-    border: 3px darkgreen solid;
+    border: 3px black solid;
 }
 
 .ordertext {
     margin: 10px;
+}
+
+/*  ----    Order outside of classes (for debugging purposes)   ----  */
+
+.orderTitleTrigger {
+    background: #7ace6b;
+    width: 100%;
+}
+
+.orderTitleTrigger:hover {
+    background: #aaae3c;
+}
+
+.orderTitleTrigger:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.orderOpenedTrigger {
+    content: '\002B';
+     background: #4f9e40;
+     width: 100%;
+ }
+
+.orderOpenedTrigger:after {
+    content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+/*  ----    New Order  ----  */
+
+.orderTitleTriggerNew {
+    background: #84aff4;
+    width: 100%;
+    font-weight: bold;
+}
+
+.orderTitleTriggerNew:hover {
+    background: #aad7ff;
+}
+
+.orderTitleTriggerNew:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.orderOpenedTriggerNew {
+    content: '\002B';
+     background: #6481ef;
+     width: 100%;
+ }
+
+.orderOpenedTriggerNew:after {
+    content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+/*  ----    Accepted Order  ----  */
+
+.orderTitleTriggerAccepted {
+    background: #8ed65c;
+    width: 100%;
+    font-weight: bold;
+}
+
+.orderTitleTriggerAccepted:hover {
+    background: #bcf47f;
+}
+
+.orderTitleTriggerAccepted:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.orderOpenedTriggerAccepted {
+    content: '\002B';
+     background: #67ce40;
+     width: 100%;
+ }
+
+.orderOpenedTriggerAccepted:after {
+    content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+/*  ----    Declined Order  ----  */
+
+.orderTitleTriggerDeclined {
+    background: #ed4543;
+    width: 100%;
+    font-weight: bold;
+}
+
+.orderTitleTriggerDeclined:hover {
+    background: #ff6877;
+}
+
+.orderTitleTriggerDeclined:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.orderOpenedTriggerDeclined {
+    content: '\002B';
+     background: #d6412a;
+     width: 100%;
+ }
+
+.orderOpenedTriggerDeclined:after {
+    content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+/*  ----    Waiting  ----  */
+
+.orderTitleTriggerWaiting {
+    background: #a8a8a8;
+    width: 100%;
+    font-weight: bold;
+}
+
+.orderTitleTriggerWaiting:hover {
+    background: #cccccc;
+}
+
+.orderTitleTriggerWaiting:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.orderOpenedTriggerWaiting {
+    content: '\002B';
+     background: #848484;
+     width: 100%;
+ }
+
+.orderOpenedTriggerWaiting:after {
+    content: "\2212";
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
 }
