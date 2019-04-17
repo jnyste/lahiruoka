@@ -112,7 +112,7 @@ class SingleProduct extends Component {
                     {this.addShoppingCartButton()}
                 </div>
                 <div className="floatTis total">
-                    <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta: {this.state.totalTax}€</p>
+                    <p>Veroton hinta: {this.state.total}€<br/>Verollinen hinta (ALV 14%): {this.state.totalTax}€</p>
                 </div>
             </div>)
         } else {
