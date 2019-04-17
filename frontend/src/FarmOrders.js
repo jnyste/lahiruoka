@@ -45,7 +45,7 @@ class FarmOrders extends Component {
     }
 
     updatePage(event) {
-        console.log('updatePage kutsuttu');
+        //console.log('updatePage kutsuttu');
         if(event.target.name === 'accept') {
             const acceptedOrder = [event.target.value];
 

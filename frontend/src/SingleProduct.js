@@ -79,7 +79,7 @@ class SingleProduct extends Component {
                 },
                 body: JSON.stringify(newOrder)
             }).then(() => {
-                console.log("Order posted?");
+                //console.log("Order posted?");
                 alert('Tuote lisätty tilauslistaan! Pääset tarkastelemaan tilauksiasi oikean yläkulman "tilaukset"-painikkeen alta.');
                 this.setState({amount: 0
                     , total: 0

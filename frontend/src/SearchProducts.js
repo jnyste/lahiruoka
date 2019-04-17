@@ -7,7 +7,7 @@ class SearchProducts extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props.match.params.keyWord);
+        //console.log(props.match.params.keyWord);
         this.state = {productList: [], sort: 'newest'}
         this.listAllProducts = this.listAllProducts.bind(this);
         this.writeText = this.writeText.bind(this);
