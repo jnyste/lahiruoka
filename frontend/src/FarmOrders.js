@@ -124,21 +124,21 @@ class FarmOrders extends Component {
             <div className="ordercontainer">
                 <h2 className="ordertitle">Hyväksymättömät tilaukset</h2>
                 {this.state.newOrders.length <= 0 ?
-                    <p>Ei hyväksyttäviä tilauksia.</p>
+                    <p className="centerp">Ei hyväksyttäviä tilauksia.</p>
                     :
                     this.state.newOrders
                 }
                 <br/>
                 <h2 className="ordertitle">Hyväksytyt tilaukset</h2>
                 {this.state.acceptedOrders.length <= 0 ?
-                    <p>Ei hyväksyttyjä tilauksia.</p>
+                    <p className="centerp">Ei hyväksyttyjä tilauksia.</p>
                     :
                     this.state.acceptedOrders
                 }
                 <br/>
                 <h2 className="ordertitle">Hylätyt tilaukset</h2>
                 {this.state.declinedOrders.length <= 0 ?
-                    <p>Ei kieltäydyttyjä tilauksia.</p>
+                    <p className="centerp">Ei kieltäydyttyjä tilauksia.</p>
                     :
                     this.state.declinedOrders
                 }

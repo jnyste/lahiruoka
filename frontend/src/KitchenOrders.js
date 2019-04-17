@@ -93,28 +93,28 @@ class KitchenOrders extends Component {
             <div className="ordercontainer">
                 <h2 className="ordertitle">Lähettämättömät tilaukset</h2>
                 {this.state.unconfirmedOrders.length <= 0 ?
-                    <p>Ei lähettämättömiä tilauksia.</p>
+                    <p className="centerp">Ei lähettämättömiä tilauksia.</p>
                     :
                     this.state.unconfirmedOrders
                 }
                 <br/>
                 <h2 className="ordertitle">Lähetetyt tilaukset</h2>
                 {this.state.confirmedOrders.length <= 0 ?
-                    <p>Ei lähetettyjä tilauksia.</p>
+                    <p className="centerp">Ei lähetettyjä tilauksia.</p>
                     :
                     this.state.confirmedOrders
                 }
                 <br/>
                 <h2 className="ordertitle">Tuottajan hyväksymät tilaukset</h2>
                 {this.state.acceptedOrders.length <= 0 ?
-                    <p>Ei peruutettuja tilauksia.</p>
+                    <p className="centerp">Ei peruutettuja tilauksia.</p>
                     :
                     this.state.acceptedOrders
                 }
                 <br/>
                 <h2 className="ordertitle">Tuottajan peruuttamat tilaukset</h2>
                 {this.state.declinedOrders.length <= 0 ?
-                    <p>Ei peruutettuja tilauksia.</p>
+                    <p className="centerp">Ei peruutettuja tilauksia.</p>
                     :
                     this.state.declinedOrders
                 }

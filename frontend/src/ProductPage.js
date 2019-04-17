@@ -28,7 +28,10 @@ class ProductPage extends Component {
         return (
             <div className="product-list-container">
                 <h3 className="listTitle">Tuotteet</h3>
-                {this.state.productList}
+                {this.state.productList.length <= 0 ?
+                <p className="centerp">Sivustolla ei ole tällä hetkellä tuotteita.</p>
+                :
+                this.state.productList}
             </div>
         )
     }
