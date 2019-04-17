@@ -45,6 +45,8 @@
 .total {
     font-size: 11px;
     float: right;
+    font-weight: bold;
+    color:red;
 }
 
 .price {
