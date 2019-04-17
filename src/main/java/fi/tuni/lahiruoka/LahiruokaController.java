@@ -29,6 +29,7 @@ public class LahiruokaController {
     // To see table description, use SHOW COLUMNS from PRODUCT; in h2.
     @PostConstruct
     public void init() {
+        /* Below is all test data needed to try out users, products, orders and tags.
 
         Tag porkkanaTag = new Tag("porkkana");
         Tag perunaTag = new Tag("peruna");
@@ -61,7 +62,7 @@ public class LahiruokaController {
 
         userRepository.save(user3);
         userRepository.save(user4);
-        
+
         productRepository.save(p);
         productRepository.save(k);
         productRepository.save(pe);
@@ -75,6 +76,7 @@ public class LahiruokaController {
         orderRepository.save(order2);
         orderRepository.save(order3);
         orderRepository.save(order4);
+        */
     }
 
 
