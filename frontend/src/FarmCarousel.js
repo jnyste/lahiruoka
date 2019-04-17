@@ -52,7 +52,7 @@ class FarmCarousel extends Component {
                             </Link>
                             <div className="carousel-caption d-none d-md-block">
                                 <h3>Tervetuloa lähiruokasivulle</h3>
-                                <p>On aika siistii et löysit tänne. Tervetuloa!</p>
+                                <p>Meitä löydät alueen parhaat lähiruokatuottajat!</p>
                             </div>
                         </div>
 
